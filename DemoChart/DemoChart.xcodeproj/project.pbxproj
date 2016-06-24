@@ -43,6 +43,7 @@
 		A734B4A21D1CC11900AAB560 /* PieVC.m in Sources */ = {isa = PBXBuildFile; fileRef = A734B4A11D1CC11900AAB560 /* PieVC.m */; };
 		A734B4A51D1CC13800AAB560 /* CycleVC.m in Sources */ = {isa = PBXBuildFile; fileRef = A734B4A41D1CC13800AAB560 /* CycleVC.m */; };
 		A734B4A81D1CC7A200AAB560 /* ScatterVC.m in Sources */ = {isa = PBXBuildFile; fileRef = A734B4A71D1CC7A200AAB560 /* ScatterVC.m */; };
+		A734B4BC1D1D31A100AAB560 /* SYChartHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = A734B4BB1D1D31A100AAB560 /* SYChartHelper.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -138,6 +139,8 @@
 		A734B4A41D1CC13800AAB560 /* CycleVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CycleVC.m; sourceTree = "<group>"; };
 		A734B4A61D1CC7A200AAB560 /* ScatterVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ScatterVC.h; sourceTree = "<group>"; };
 		A734B4A71D1CC7A200AAB560 /* ScatterVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ScatterVC.m; sourceTree = "<group>"; };
+		A734B4BA1D1D31A100AAB560 /* SYChartHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SYChartHelper.h; sourceTree = "<group>"; };
+		A734B4BB1D1D31A100AAB560 /* SYChartHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SYChartHelper.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -301,6 +304,8 @@
 				A70B21171D1BC0E80067B8C2 /* SYChartInfromationView.m */,
 				A70B21191D1BCA4C0067B8C2 /* SYChartLayer.h */,
 				A70B211A1D1BCA4C0067B8C2 /* SYChartLayer.m */,
+				A734B4BA1D1D31A100AAB560 /* SYChartHelper.h */,
+				A734B4BB1D1D31A100AAB560 /* SYChartHelper.m */,
 			);
 			path = SYChart;
 			sourceTree = "<group>";
@@ -446,6 +451,7 @@
 				A701E8751D1A97CF006C4901 /* PNRadarChart.m in Sources */,
 				A701E8761D1A97CF006C4901 /* PNRadarChartDataItem.m in Sources */,
 				A70B21241D1BE4C60067B8C2 /* SYBarVC.m in Sources */,
+				A734B4BC1D1D31A100AAB560 /* SYChartHelper.m in Sources */,
 				A70B211B1D1BCA4C0067B8C2 /* SYChartLayer.m in Sources */,
 				A701E81C1D1A979A006C4901 /* ViewController.m in Sources */,
 				A701E86A1D1A97CF006C4901 /* PNBar.m in Sources */,

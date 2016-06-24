@@ -4,9 +4,11 @@
 //
 //  Created by zhangshaoyu on 16/6/23.
 //  Copyright © 2016年 zhangshaoyu. All rights reserved.
-//
+//  
 
 #import <UIKit/UIKit.h>
+
+#import "SYChartHelper.h"
 
 ////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -129,28 +131,6 @@
 
 CGFloat static const kSYChartLineUndefinedValue = -1.0f;
 
-/// 网格显示类型（网络栅格、水平虚线、水平实线、垂直虚线、垂直实线、默认不显示）
-typedef NS_ENUM(NSInteger, SYChartLineGridsType)
-{
-    /// 网格显示类型-默认不显示）
-    SYChartLineGridsTypeNone = 0,
-    
-    /// 网格显示类型-网络栅格
-    SYChartLineGridsTypeGrid = 1,
-    
-    /// 网格显示类型-水平虚线
-    SYChartLineGridsTypeHorizontalDotted = 2,
-    
-    /// 网格显示类型-水平实线
-    SYChartLineGridsTypeHorizontalSolid = 3,
-    
-    /// 网格显示类型-垂直虚线
-    SYChartLineGridsTypeVerticalDotted = 4,
-    
-    /// 网格显示类型-垂直实线
-    SYChartLineGridsTypeVerticalSolid = 5
-};
-
 @interface SYChartLine : UIView
 
 /// 数据源代理
@@ -192,11 +172,16 @@ typedef NS_ENUM(NSInteger, SYChartLineGridsType)
 
 // 开发中... begin
 
+/// 数据点颜色
+@property (nonatomic, strong) UIColor *dotColor;
+
 /// 曲线样式（是否平滑。默认直角）
 @property (nonatomic, assign) BOOL isSmoothLines;
 /// 曲线类型（虚线，或实线。默认YES，即是实线）
 @property (nonatomic, assign) BOOL isSolidLines;
 
+/// 画线动画时间（默认0.3）
+@property (nonatomic, assign) NSTimeInterval animationTime;
 
 /**
  *
@@ -205,7 +190,7 @@ typedef NS_ENUM(NSInteger, SYChartLineGridsType)
  *  显示X轴水平条数与 numberOfYAxis 个数有关
  *
  */
-@property (nonatomic, assign) SYChartLineGridsType gridsLineType;
+@property (nonatomic, assign) SYChartGridsType gridsType;
 /// 网络线条大小
 @property (nonatomic, assign) CGFloat gridsLineWidth;
 /// 网格线条颜色

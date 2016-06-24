@@ -4,7 +4,7 @@
 //
 //  Created by zhangshaoyu on 16/6/23.
 //  Copyright © 2016年 zhangshaoyu. All rights reserved.
-//
+//  https://github.com/potato512/SYChart
 
 #import "SYChartLine.h"
 #import "SYChartBar.h"
@@ -76,3 +76,28 @@
 
 
 #endif /* SYChart_h */
+
+/*
+ 待完善
+ line曲线
+ 1、line线条样式：虚线，或实线
+ 2、dot颜色
+ 3、line显示动画：是，或否-done
+ 4、line显示动画时间：默认时间，自定义时间-done
+ 5、网格线样式：网络栅格线实线，或网络栅格虚线，或仅水平虚线，或仅水平实线，或仅垂直虚线，或仅垂直实线
+ 6、网格线颜色
+ 7、网格线大小
+ 
+ bar柱状
+ 1、bar边框样式：无，或虚线，或实线
+ 2、bar显示动画：是，或否-done
+ 3、bar显示动画时间：默认时间，或自定义时间-done
+ 4、网格线样式：网络栅格线实线，或网络栅格虚线，或仅水平虚线，或仅水平实线，或仅垂直虚线，或仅垂直实线
+ 5、网格线颜色
+ 6、网格线大小
+ 7、x轴标题对齐异常修改
+ 
+*/
+
+
+

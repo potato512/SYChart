@@ -4,7 +4,7 @@
 //
 //  Created by zhangshaoyu on 16/6/23.
 //  Copyright © 2016年 zhangshaoyu. All rights reserved.
-//
+//  
 
 #import "SYChartLine.h"
 #import "SYChart.h"
@@ -71,7 +71,9 @@ CGFloat static const kSYChartLineUndefinedCachedHeight = -1.0f;
     
     _isSmoothLines = NO;
     
-    _gridsLineType = SYChartLineGridsTypeNone;
+    _animationTime = 0.3;
+    
+    _gridsType = SYChartGridsTypeNone;
     _gridsLineWidth = 0.5;
     _gridsLineColor = [UIColor colorWithWhite:0.5 alpha:0.1];
     
@@ -376,7 +378,8 @@ CGFloat static const kSYChartLineUndefinedCachedHeight = -1.0f;
                 }
             }
             
-            NSTimeInterval delay = animate ? (array.count + 1) * 0.4 : 0.0;
+//            NSTimeInterval delay = animate ? (array.count + 1) * 0.4 : 0.0;
+            NSTimeInterval delay = (animate ? ((array.count + 1) * _animationTime) : 0.0);
             if ([self.delegate respondsToSelector:@selector(lineChartView:hintViewOfDotInLineNumber:index:)])
             {
                 UIView *hintView = [self.delegate lineChartView:self hintViewOfDotInLineNumber:lineNumber index:index];
@@ -432,7 +435,8 @@ CGFloat static const kSYChartLineUndefinedCachedHeight = -1.0f;
             animation.fromValue = @(0.0);
             animation.toValue = @(1.0);
             animation.repeatCount = 1.0;
-            animation.duration = array.count * 0.4;
+//            animation.duration = array.count * 0.4;
+            animation.duration = array.count * _animationTime;
             animation.fillMode = kCAFillModeForwards;
             animation.delegate = self;
             [lineLayer addAnimation:animation forKey:@"animation"];
@@ -442,18 +446,18 @@ CGFloat static const kSYChartLineUndefinedCachedHeight = -1.0f;
 
 - (void)drawChartGridsWithContext:(CGContextRef)context
 {
-//    CGFloat chartYOffset = ((_oppositeY ? SYChart_LINE_CHART_TOP_PADDING : _chartHeight + SYChart_LINE_CHART_TOP_PADDING) - 20.0 ) / 2;
-//    CGFloat unitHeight = _chartHeight / _numberOfYAxis;
-//    CGFloat unitValue = ([self.maxValue floatValue] - [_minValue floatValue]) / _numberOfYAxis;
-//    
-//    for (NSInteger i = 0; i <= _numberOfYAxis; i ++)
-//    {
-//        CGContextSetLineWidth(context, _gridsLineWidth);
-//        CGContextSetStrokeColorWithColor(context, _gridsLineColor.CGColor);
-//        CGContextMoveToPoint(context, SYChart_LINE_CHART_LEFT_PADDING - 1, chartYOffset);
-//        CGContextAddLineToPoint(context, SYChart_LINE_CHART_LEFT_PADDING - 1, chartYOffset);
-//        CGContextStrokePath(context);
-//    }
+    //    CGFloat chartYOffset = ((_oppositeY ? SYChart_LINE_CHART_TOP_PADDING : _chartHeight + SYChart_LINE_CHART_TOP_PADDING) - 20.0 ) / 2;
+    //    CGFloat unitHeight = _chartHeight / _numberOfYAxis;
+    //    CGFloat unitValue = ([self.maxValue floatValue] - [_minValue floatValue]) / _numberOfYAxis;
+    //
+    //    for (NSInteger i = 0; i <= _numberOfYAxis; i ++)
+    //    {
+    //        CGContextSetLineWidth(context, _gridsLineWidth);
+    //        CGContextSetStrokeColorWithColor(context, _gridsLineColor.CGColor);
+    //        CGContextMoveToPoint(context, SYChart_LINE_CHART_LEFT_PADDING - 1, chartYOffset);
+    //        CGContextAddLineToPoint(context, SYChart_LINE_CHART_LEFT_PADDING - 1, chartYOffset);
+    //        CGContextStrokePath(context);
+    //    }
 }
 
 @end

@@ -72,6 +72,8 @@
 //    chartLine.gridsLineType = SYChartLineGridsTypeHorizontalSolid;
 //    chartLine.gridsLineWidth = 1.0;
     
+    chartLine.animationTime = 0.1;
+    
     [chartLine reloadDataWithAnimate:YES];
 }
 

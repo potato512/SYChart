@@ -4,9 +4,11 @@
 //
 //  Created by zhangshaoyu on 16/6/23.
 //  Copyright © 2016年 zhangshaoyu. All rights reserved.
-//
+//  
 
 #import <UIKit/UIKit.h>
+
+#import "SYChartHelper.h"
 
 ////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -27,33 +29,33 @@
 - (NSInteger)barChartView:(SYChartBar *)chartBar numberOfBarsInSection:(NSInteger)section;
 
 /**
- *  <#Description#>
+ *  每个X轴标题对应的每个Y轴的信息
  *
  *  @param chartBar 当前柱状视图 SYChartBar
  *  @param section  当前柱状视图 SYChartBar 的线条索引
- *  @param index    <#index description#>
+ *  @param index    当前曲线视图 SYChartBar 的索引
  *
- *  @return <#return value description#>
+ *  @return 每个X轴标题对应的每个Y轴的信息
  */
 - (id)barChartView:(SYChartBar *)chartBar valueOfBarInSection:(NSInteger)section index:(NSInteger)index;
 
 @optional
 /**
- *  <#Description#>
+ *  总的bar个数
  *
  *  @param chartBar 当前柱状视图 SYChartBar
  *
- *  @return <#return value description#>
+ *  @return 总的bar个数
  */
 - (NSInteger)numberOfSectionsInBarChartView:(SYChartBar *)chartBar;
 
 /**
- *  <#Description#>
+ *  Y轴标题
  *
  *  @param chartBar 当前柱状视图 SYChartBar
  *  @param section  当前柱状视图 SYChartBar 的线条索引
  *
- *  @return <#return value description#>
+ *  @return Y轴标题
  */
 - (NSString *)barChartView:(SYChartBar *)chartBar titleOfBarInSection:(NSInteger)section;
 
@@ -64,48 +66,48 @@
 
 @optional
 /**
- *  <#Description#>
+ *  被点击选中bar
  *
  *  @param chartBar 当前柱状视图 SYChartBar
- *  @param index    <#index description#>
+ *  @param index    当前曲线视图 SYChartBar 的索引
  */
 - (void)barChartView:(SYChartBar *)chartBar didSelectBarAtIndex:(NSUInteger)index;
 
 /**
- *  <#Description#>
+ *  bar的宽度
  *
  *  @param chartBar 当前柱状视图 SYChartBar
  *
- *  @return <#return value description#>
+ *  @return bar的宽度
  */
 - (CGFloat)barWidthInBarChartView:(SYChartBar *)chartBar;
 
 /**
- *  <#Description#>
+ *  每个section之间的bar之间的间距
  *
  *  @param chartBar 当前柱状视图 SYChartBar
  *
- *  @return <#return value description#>
+ *  @return 每个section之间的bar之间的间距
  */
 - (CGFloat)paddingForSectionInBarChartView:(SYChartBar *)chartBar;
 
 /**
- *  <#Description#>
+ *  每个section里的bar之间的间距（section有多个）
  *
  *  @param chartBar 当前柱状视图 SYChartBar
  *
- *  @return <#return value description#>
+ *  @return 每个section里的bar之间的间距（section有多个）
  */
 - (CGFloat)paddingForBarInBarChartView:(SYChartBar *)chartBar;
 
 /**
- *  <#Description#>
+ *  bar的颜色设置
  *
  *  @param chartBar 当前柱状视图 SYChartBar
  *  @param section  当前柱状视图 SYChartBar 的线条索引
- *  @param index    <#index description#>
+ *  @param index    当前曲线视图 SYChartBar 的索引
  *
- *  @return <#return value description#>
+ *  @return bar的颜色设置
  */
 - (UIColor *)barChartView:(SYChartBar *)chartBar colorOfBarInSection:(NSInteger)section index:(NSInteger)index;
 
@@ -120,24 +122,24 @@
 - (NSArray *)barChartView:(SYChartBar *)chartBar selectionColorForBarInSection:(NSUInteger)section;
 
 /**
- *  <#Description#>
+ *  bar顶端信息标题
  *
  *  @param chartBar 当前柱状视图 SYChartBar
  *  @param section  当前柱状视图 SYChartBar 的线条索引
- *  @param index    <#index description#>
+ *  @param index    当前曲线视图 SYChartBar 的索引
  *
- *  @return <#return value description#>
+ *  @return bar顶端信息标题
  */
 - (NSString *)barChartView:(SYChartBar *)chartBar informationOfBarInSection:(NSInteger)section index:(NSInteger)index;
 
 /**
- *  <#Description#>
+ *  bar顶端信息自定义视图
  *
  *  @param chartBar 当前柱状视图 SYChartBar
  *  @param section  当前柱状视图 SYChartBar 的线条索引
- *  @param index    <#index description#>
+ *  @param index    当前曲线视图 SYChartBar 的索引
  *
- *  @return <#return value description#>
+ *  @return bar顶端信息自定义视图
  */
 - (UIView *)barChartView:(SYChartBar *)chartBar hintViewOfBarInSection:(NSInteger)section index:(NSInteger)index;
 
@@ -162,10 +164,38 @@
 @property (nonatomic, strong) UIColor *colorOfYAxis;
 /// y轴文本数据颜色
 @property (nonatomic, strong) UIColor *colorOfYText;
+/// y轴文本文字大小
+@property (nonatomic, assign) CGFloat yFontSize;
+
 /// x轴的颜色
 @property (nonatomic, strong) UIColor *colorOfXAxis;
 /// x轴文本数据颜色
 @property (nonatomic, strong) UIColor *colorOfXText;
+/// x轴文本文字大小
+@property (nonatomic, assign) CGFloat xFontSize;
+
+
+// 开发中... begin
+
+
+/// bar动画时间（默认0.6）
+@property (nonatomic, assign) NSTimeInterval animationTime;
+
+/**
+ *
+ *  网格显示类型（默认不显示）
+ *  样式：网络栅格、水平虚线、水平实线、垂直虚线、垂直实线
+ *  显示X轴水平条数与 numberOfYAxis 个数有关
+ *
+ */
+@property (nonatomic, assign) SYChartGridsType gridsType;
+/// 网络线条大小
+@property (nonatomic, assign) CGFloat gridsLineWidth;
+/// 网格线条颜色
+@property (nonatomic, strong) UIColor *gridsLineColor;
+
+// 开发中... end
+
 
 /**
  *  刷新数据（默认动画模式）

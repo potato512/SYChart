@@ -40,7 +40,10 @@
     }
     
     _titles = @[@"1月", @"2月", @"3月", @"4月", @"5月", @"6月"];
-    _datas = [NSMutableArray arrayWithArray:@[@120, @115.0, @50, @138, @110, @100]];
+    // 单个bar
+//    _datas = [NSMutableArray arrayWithArray:@[@120, @115.0, @50, @138, @110, @100]];
+    // 多个bar
+    _datas = @[@[@120, @115.0], @[@130, @165.0], @[@20, @85.0], @[@80, @95.0], @[@180, @11.0]];
     
     CGFloat originX = 0.0;
     CGFloat widthBarview = ([UIScreen mainScreen].bounds.size.width - originX * 2);
@@ -65,6 +68,9 @@
     chartBar.colorOfXText = [UIColor brownColor];
     chartBar.colorOfYAxis = [UIColor purpleColor];
     chartBar.colorOfYText = [UIColor orangeColor];
+    
+    chartBar.animationTime = 1.2;
+    
     // 刷新数据
 //    [chartBar reloadData];
     [chartBar reloadDataWithAnimate:YES];
@@ -75,13 +81,21 @@
 - (NSInteger)barChartView:(SYChartBar *)chartBar numberOfBarsInSection:(NSInteger)section
 {
     // 每个X轴标题对应的bar个数
-    return 1;
+    // 1个bar
+//    return 1;
+    
+    // 多个bar
+    return [_datas[section] count];
 }
 
 - (id)barChartView:(SYChartBar *)chartBar valueOfBarInSection:(NSInteger)section index:(NSInteger)index
 {
     // 每个X轴标题对应的每个Y轴的信息
-    return _datas[section];
+    // 1个bar
+//    return _datas[section];
+    
+    // 多个bar
+    return _datas[section][index];
 }
 
 - (NSInteger)numberOfSectionsInBarChartView:(SYChartBar *)chartBar
@@ -124,14 +138,15 @@
 
 - (CGFloat)paddingForSectionInBarChartView:(SYChartBar *)chartBar
 {
-    // bar之间的间距
+    // 每个section之间的bar之间的间距
     return 20.0;
 }
 
-//- (CGFloat)paddingForBarInBarChartView:(SYChartBar *)chartBar
-//{
-//    
-//}
+- (CGFloat)paddingForBarInBarChartView:(SYChartBar *)chartBar
+{
+    // 每个section里的bar之间的间距（section有多个）
+    return 5.0;
+}
 
 //- (NSArray *)barChartView:(SYChartBar *)chartBar selectionColorForBarInSection:(NSUInteger)section
 //{
@@ -141,17 +156,39 @@
 - (NSString *)barChartView:(SYChartBar *)chartBar informationOfBarInSection:(NSInteger)section index:(NSInteger)index
 {
     // bar顶端信息标题
+    // 1个bar
+//    if (chartBar.tag == 111)
+//    {
+//        if ([_datas[section] floatValue] >= 130)
+//        {
+//            return @"优秀";
+//        }
+//        else if ([_datas[section] floatValue] >= 110)
+//        {
+//            return @"良好";
+//        }
+//        else if ([_datas[section] floatValue] >= 90)
+//        {
+//            return @"及格";
+//        }
+//        else
+//        {
+//            return @"不及格";
+//        }
+//    }
+    
+    // 多个bar
     if (chartBar.tag == 111)
     {
-        if ([_datas[section] floatValue] >= 130)
+        if ([_datas[section][index] floatValue] >= 130)
         {
             return @"优秀";
         }
-        else if ([_datas[section] floatValue] >= 110)
+        else if ([_datas[section][index] floatValue] >= 110)
         {
             return @"良好";
         }
-        else if ([_datas[section] floatValue] >= 90)
+        else if ([_datas[section][index] floatValue] >= 90)
         {
             return @"及格";
         }
@@ -164,45 +201,20 @@
     return nil;
 }
 
-//- (CGFloat)barWidthInBarChartView:(SYChartBar *)chartBar
+//- (UIView *)barChartView:(SYChartBar *)chartBar hintViewOfBarInSection:(NSInteger)section index:(NSInteger)index
 //{
-//    // bar的宽度
-//    if (chartBar.tag == 111)
-//    {
-//        return 20.0;
-//    }
-//    else
-//    {
-//        return 26;
-//    }
-//}
-
-//- (CGFloat)paddingForSectionInBarChartView:(SYChartBar *)chartBar
-//{
-//    // bar之间的间距
-//    if (chartBar.tag == 111)
-//    {
-//        return 20.0;
-//    }
-//    else
-//    {
-//        return 5.0;
-//    }
-//}
-
-- (UIView *)barChartView:(SYChartBar *)chartBar hintViewOfBarInSection:(NSInteger)section index:(NSInteger)index
-{
-    // bar顶端信息自定义视图
-//    UIView *view = [[UIView alloc] initWithFrame:CGRectMake(0.0, 0.0, 40.0, 20.0)];
-//    view.backgroundColor = [UIColor purpleColor];
+//    // bar顶端信息自定义视图
+////    UIView *view = [[UIView alloc] initWithFrame:CGRectMake(0.0, 0.0, 40.0, 20.0)];
+////    view.backgroundColor = [UIColor purpleColor];
+////
+////    return view;
 //
-//    return view;
-
-    return nil;
-}
+//    return nil;
+//}
 
 - (void)barChartView:(SYChartBar *)chartBar didSelectBarAtIndex:(NSUInteger)index
 {
+    // 被点击选中bar
     NSLog(@"你点击了 %@", @(index));
 }
 

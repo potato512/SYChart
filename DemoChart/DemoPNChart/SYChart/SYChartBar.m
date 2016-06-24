@@ -65,6 +65,15 @@ CGFloat static const kSYChartBarUndefinedCachedHeight = -1.0f;
     _cachedMaxHeight = kSYChartBarUndefinedCachedHeight;
     _cachedMinHeight = kSYChartBarUndefinedCachedHeight;
     
+    _yFontSize = 14.0;
+    _xFontSize = 14.0;
+    
+    _animationTime = 0.6;
+    
+    _gridsType = SYChartGridsTypeNone;
+    _gridsLineWidth = 0.5;
+    _gridsLineColor = [UIColor colorWithWhite:0.5 alpha:0.1];
+    
     _scrollView = [[UIScrollView alloc] initWithFrame:CGRectMake(SYChart_BAR_CHART_LEFT_PADDING, 0, width - SYChart_BAR_CHART_RIGHT_PADDING - SYChart_BAR_CHART_LEFT_PADDING, CGRectGetHeight(self.bounds))];
     _scrollView.backgroundColor = [UIColor clearColor];
     _scrollView.contentInset = UIEdgeInsetsMake(0, 0, 0, 0);
@@ -248,9 +257,10 @@ CGFloat static const kSYChartBarUndefinedCachedHeight = -1.0f;
         UILabel *textLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, chartYOffset - unitHeight * i - 10, SYChart_BAR_CHART_LEFT_PADDING - 2, 20)];
         textLabel.textColor = _colorOfYText;
         textLabel.textAlignment = NSTextAlignmentRight;
-        textLabel.font = [UIFont systemFontOfSize:14];
+        textLabel.font = [UIFont systemFontOfSize:_yFontSize];
         textLabel.numberOfLines = 0;
         textLabel.text = [NSString stringWithFormat:@"%.0f%@", unitValue * i, _unitOfYAxis];
+        
         [self addSubview:textLabel];
     }
 }
@@ -293,13 +303,13 @@ CGFloat static const kSYChartBarUndefinedCachedHeight = -1.0f;
                 animation.fromValue = @(0.0);
                 animation.toValue = @(1.0);
                 animation.repeatCount = 1.0;
-                animation.duration = height/_chartHeight * 0.75;
+                animation.duration = height / _chartHeight * _animationTime;
                 animation.fillMode = kCAFillModeForwards;
                 animation.delegate = self;
                 [shapeLayer addAnimation:animation forKey:@"animation"];
             }
             
-            NSTimeInterval delay = (animate ? 0.75 : 0.0);
+            NSTimeInterval delay = (animate ? _animationTime : 0.0);
             if ([self.delegate respondsToSelector:@selector(barChartView:hintViewOfBarInSection:index:)])
             {
                 UIView *hintView = [self.delegate barChartView:self hintViewOfBarInSection:section index:index];
@@ -338,7 +348,7 @@ CGFloat static const kSYChartBarUndefinedCachedHeight = -1.0f;
             UILabel *textLabel = [[UILabel alloc] initWithFrame:CGRectMake(xSection - _paddingSection / 2, _chartHeight + SYChart_BAR_CHART_TOP_PADDING, xOffset - xSection + _paddingSection, SYChart_BAR_CHART_TEXT_HEIGHT)];
             textLabel.textColor = _colorOfXText;
             textLabel.textAlignment = NSTextAlignmentCenter;
-            textLabel.font = [UIFont systemFontOfSize:14];
+            textLabel.font = [UIFont systemFontOfSize:_xFontSize];
             textLabel.numberOfLines = 0;
             textLabel.text = [self.dataSource barChartView:self titleOfBarInSection:section];
             [_scrollView addSubview:textLabel];
