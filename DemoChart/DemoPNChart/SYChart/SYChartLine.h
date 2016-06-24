@@ -196,6 +196,11 @@ CGFloat static const kSYChartLineUndefinedValue = -1.0f;
 /// 网格线条颜色
 @property (nonatomic, strong) UIColor *gridsLineColor;
 
+/// Y坐标值显示类型（坐标轴左侧、坐标轴右侧；默认坐标轴左侧）
+@property (nonatomic, assign) SYChartYAxisType yAxisType;
+/// Y坐标轴是否显示刻度（默认不显示）
+@property (nonatomic, assign) BOOL showYScale;
+
 // 开发中... end
 
 /**

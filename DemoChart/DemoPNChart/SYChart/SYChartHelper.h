@@ -30,6 +30,16 @@ typedef NS_ENUM(NSInteger, SYChartGridsType)
     SYChartGridsTypeVerticalSolid = 5
 };
 
+/// Y坐标值显示类型（坐标轴左侧、坐标轴右侧；默认坐标轴左侧）
+typedef NS_ENUM(NSInteger, SYChartYAxisType)
+{
+    /// Y坐标值显示类型-坐标轴左侧 默认坐标轴左侧
+    SYChartYAxisTypeLeft = 0,
+    
+    /// Y坐标值显示类型-坐标轴右侧）
+    SYChartYAxisTypeRight = 1
+};
+
 @interface SYChartHelper : NSObject
 
 @end
