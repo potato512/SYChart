@@ -1,0 +1,720 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		A701E8161D1A979A006C4901 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = A701E8151D1A979A006C4901 /* main.m */; };
+		A701E8191D1A979A006C4901 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = A701E8181D1A979A006C4901 /* AppDelegate.m */; };
+		A701E81C1D1A979A006C4901 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A701E81B1D1A979A006C4901 /* ViewController.m */; };
+		A701E81F1D1A979A006C4901 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A701E81D1D1A979A006C4901 /* Main.storyboard */; };
+		A701E8211D1A979A006C4901 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A701E8201D1A979A006C4901 /* Assets.xcassets */; };
+		A701E8241D1A979A006C4901 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A701E8221D1A979A006C4901 /* LaunchScreen.storyboard */; };
+		A701E82F1D1A979A006C4901 /* DemoChartTests.m in Sources */ = {isa = PBXBuildFile; fileRef = A701E82E1D1A979A006C4901 /* DemoChartTests.m */; };
+		A701E83A1D1A979A006C4901 /* DemoChartUITests.m in Sources */ = {isa = PBXBuildFile; fileRef = A701E8391D1A979A006C4901 /* DemoChartUITests.m */; };
+		A701E86A1D1A97CF006C4901 /* PNBar.m in Sources */ = {isa = PBXBuildFile; fileRef = A701E8491D1A97CF006C4901 /* PNBar.m */; };
+		A701E86B1D1A97CF006C4901 /* PNBarChart.m in Sources */ = {isa = PBXBuildFile; fileRef = A701E84B1D1A97CF006C4901 /* PNBarChart.m */; };
+		A701E86C1D1A97CF006C4901 /* PNChartLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = A701E84F1D1A97CF006C4901 /* PNChartLabel.m */; };
+		A701E86D1D1A97CF006C4901 /* PNCircleChart.m in Sources */ = {isa = PBXBuildFile; fileRef = A701E8511D1A97CF006C4901 /* PNCircleChart.m */; };
+		A701E86E1D1A97CF006C4901 /* PNColor.m in Sources */ = {isa = PBXBuildFile; fileRef = A701E8531D1A97CF006C4901 /* PNColor.m */; };
+		A701E86F1D1A97CF006C4901 /* PNGenericChart.m in Sources */ = {isa = PBXBuildFile; fileRef = A701E8551D1A97CF006C4901 /* PNGenericChart.m */; };
+		A701E8701D1A97CF006C4901 /* PNLineChart.m in Sources */ = {isa = PBXBuildFile; fileRef = A701E8571D1A97CF006C4901 /* PNLineChart.m */; };
+		A701E8711D1A97CF006C4901 /* PNLineChartData.m in Sources */ = {isa = PBXBuildFile; fileRef = A701E8591D1A97CF006C4901 /* PNLineChartData.m */; };
+		A701E8721D1A97CF006C4901 /* PNLineChartDataItem.m in Sources */ = {isa = PBXBuildFile; fileRef = A701E85B1D1A97CF006C4901 /* PNLineChartDataItem.m */; };
+		A701E8731D1A97CF006C4901 /* PNPieChart.m in Sources */ = {isa = PBXBuildFile; fileRef = A701E85D1D1A97CF006C4901 /* PNPieChart.m */; };
+		A701E8741D1A97CF006C4901 /* PNPieChartDataItem.m in Sources */ = {isa = PBXBuildFile; fileRef = A701E85F1D1A97CF006C4901 /* PNPieChartDataItem.m */; };
+		A701E8751D1A97CF006C4901 /* PNRadarChart.m in Sources */ = {isa = PBXBuildFile; fileRef = A701E8611D1A97CF006C4901 /* PNRadarChart.m */; };
+		A701E8761D1A97CF006C4901 /* PNRadarChartDataItem.m in Sources */ = {isa = PBXBuildFile; fileRef = A701E8631D1A97CF006C4901 /* PNRadarChartDataItem.m */; };
+		A701E8771D1A97CF006C4901 /* PNScatterChart.m in Sources */ = {isa = PBXBuildFile; fileRef = A701E8651D1A97CF006C4901 /* PNScatterChart.m */; };
+		A701E8781D1A97CF006C4901 /* PNScatterChartData.m in Sources */ = {isa = PBXBuildFile; fileRef = A701E8671D1A97CF006C4901 /* PNScatterChartData.m */; };
+		A701E8791D1A97CF006C4901 /* PNScatterChartDataItem.m in Sources */ = {isa = PBXBuildFile; fileRef = A701E8691D1A97CF006C4901 /* PNScatterChartDataItem.m */; };
+		A701E87C1D1A9898006C4901 /* UICountingLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = A701E87B1D1A9898006C4901 /* UICountingLabel.m */; };
+		A701E87F1D1A99AF006C4901 /* BarVC.m in Sources */ = {isa = PBXBuildFile; fileRef = A701E87E1D1A99AF006C4901 /* BarVC.m */; };
+		A70B21121D1BBF130067B8C2 /* SYChartLine.m in Sources */ = {isa = PBXBuildFile; fileRef = A70B21111D1BBF130067B8C2 /* SYChartLine.m */; };
+		A70B21151D1BBF1F0067B8C2 /* SYChartBar.m in Sources */ = {isa = PBXBuildFile; fileRef = A70B21141D1BBF1F0067B8C2 /* SYChartBar.m */; };
+		A70B21181D1BC0E80067B8C2 /* SYChartInfromationView.m in Sources */ = {isa = PBXBuildFile; fileRef = A70B21171D1BC0E80067B8C2 /* SYChartInfromationView.m */; };
+		A70B211B1D1BCA4C0067B8C2 /* SYChartLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = A70B211A1D1BCA4C0067B8C2 /* SYChartLayer.m */; };
+		A70B21211D1BD1830067B8C2 /* SYLineVC.m in Sources */ = {isa = PBXBuildFile; fileRef = A70B21201D1BD1830067B8C2 /* SYLineVC.m */; };
+		A70B21241D1BE4C60067B8C2 /* SYBarVC.m in Sources */ = {isa = PBXBuildFile; fileRef = A70B21231D1BE4C60067B8C2 /* SYBarVC.m */; };
+		A733AC9E1D1B83B100A5723E /* LineVC.m in Sources */ = {isa = PBXBuildFile; fileRef = A733AC9D1D1B83B100A5723E /* LineVC.m */; };
+		A734B4A21D1CC11900AAB560 /* PieVC.m in Sources */ = {isa = PBXBuildFile; fileRef = A734B4A11D1CC11900AAB560 /* PieVC.m */; };
+		A734B4A51D1CC13800AAB560 /* CycleVC.m in Sources */ = {isa = PBXBuildFile; fileRef = A734B4A41D1CC13800AAB560 /* CycleVC.m */; };
+		A734B4A81D1CC7A200AAB560 /* ScatterVC.m in Sources */ = {isa = PBXBuildFile; fileRef = A734B4A71D1CC7A200AAB560 /* ScatterVC.m */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		A701E82B1D1A979A006C4901 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = A701E8091D1A9799006C4901 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = A701E8101D1A9799006C4901;
+			remoteInfo = DemoPNChart;
+		};
+		A701E8361D1A979A006C4901 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = A701E8091D1A9799006C4901 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = A701E8101D1A9799006C4901;
+			remoteInfo = DemoPNChart;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		A701E8111D1A9799006C4901 /* DemoChart.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = DemoChart.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		A701E8151D1A979A006C4901 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		A701E8171D1A979A006C4901 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
+		A701E8181D1A979A006C4901 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
+		A701E81A1D1A979A006C4901 /* ViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
+		A701E81B1D1A979A006C4901 /* ViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
+		A701E81E1D1A979A006C4901 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		A701E8201D1A979A006C4901 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		A701E8231D1A979A006C4901 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		A701E8251D1A979A006C4901 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		A701E82A1D1A979A006C4901 /* DemoChart.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = DemoChart.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		A701E82E1D1A979A006C4901 /* DemoChartTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DemoChartTests.m; sourceTree = "<group>"; };
+		A701E8301D1A979A006C4901 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		A701E8351D1A979A006C4901 /* DemoChart.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = DemoChart.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		A701E8391D1A979A006C4901 /* DemoChartUITests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DemoChartUITests.m; sourceTree = "<group>"; };
+		A701E83B1D1A979A006C4901 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		A701E8481D1A97CF006C4901 /* PNBar.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PNBar.h; sourceTree = "<group>"; };
+		A701E8491D1A97CF006C4901 /* PNBar.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PNBar.m; sourceTree = "<group>"; };
+		A701E84A1D1A97CF006C4901 /* PNBarChart.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PNBarChart.h; sourceTree = "<group>"; };
+		A701E84B1D1A97CF006C4901 /* PNBarChart.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PNBarChart.m; sourceTree = "<group>"; };
+		A701E84C1D1A97CF006C4901 /* PNChart.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PNChart.h; sourceTree = "<group>"; };
+		A701E84D1D1A97CF006C4901 /* PNChartDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PNChartDelegate.h; sourceTree = "<group>"; };
+		A701E84E1D1A97CF006C4901 /* PNChartLabel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PNChartLabel.h; sourceTree = "<group>"; };
+		A701E84F1D1A97CF006C4901 /* PNChartLabel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PNChartLabel.m; sourceTree = "<group>"; };
+		A701E8501D1A97CF006C4901 /* PNCircleChart.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PNCircleChart.h; sourceTree = "<group>"; };
+		A701E8511D1A97CF006C4901 /* PNCircleChart.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PNCircleChart.m; sourceTree = "<group>"; };
+		A701E8521D1A97CF006C4901 /* PNColor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PNColor.h; sourceTree = "<group>"; };
+		A701E8531D1A97CF006C4901 /* PNColor.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PNColor.m; sourceTree = "<group>"; };
+		A701E8541D1A97CF006C4901 /* PNGenericChart.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PNGenericChart.h; sourceTree = "<group>"; };
+		A701E8551D1A97CF006C4901 /* PNGenericChart.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PNGenericChart.m; sourceTree = "<group>"; };
+		A701E8561D1A97CF006C4901 /* PNLineChart.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PNLineChart.h; sourceTree = "<group>"; };
+		A701E8571D1A97CF006C4901 /* PNLineChart.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PNLineChart.m; sourceTree = "<group>"; };
+		A701E8581D1A97CF006C4901 /* PNLineChartData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PNLineChartData.h; sourceTree = "<group>"; };
+		A701E8591D1A97CF006C4901 /* PNLineChartData.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PNLineChartData.m; sourceTree = "<group>"; };
+		A701E85A1D1A97CF006C4901 /* PNLineChartDataItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PNLineChartDataItem.h; sourceTree = "<group>"; };
+		A701E85B1D1A97CF006C4901 /* PNLineChartDataItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PNLineChartDataItem.m; sourceTree = "<group>"; };
+		A701E85C1D1A97CF006C4901 /* PNPieChart.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PNPieChart.h; sourceTree = "<group>"; };
+		A701E85D1D1A97CF006C4901 /* PNPieChart.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PNPieChart.m; sourceTree = "<group>"; };
+		A701E85E1D1A97CF006C4901 /* PNPieChartDataItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PNPieChartDataItem.h; sourceTree = "<group>"; };
+		A701E85F1D1A97CF006C4901 /* PNPieChartDataItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PNPieChartDataItem.m; sourceTree = "<group>"; };
+		A701E8601D1A97CF006C4901 /* PNRadarChart.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PNRadarChart.h; sourceTree = "<group>"; };
+		A701E8611D1A97CF006C4901 /* PNRadarChart.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PNRadarChart.m; sourceTree = "<group>"; };
+		A701E8621D1A97CF006C4901 /* PNRadarChartDataItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PNRadarChartDataItem.h; sourceTree = "<group>"; };
+		A701E8631D1A97CF006C4901 /* PNRadarChartDataItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PNRadarChartDataItem.m; sourceTree = "<group>"; };
+		A701E8641D1A97CF006C4901 /* PNScatterChart.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PNScatterChart.h; sourceTree = "<group>"; };
+		A701E8651D1A97CF006C4901 /* PNScatterChart.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PNScatterChart.m; sourceTree = "<group>"; };
+		A701E8661D1A97CF006C4901 /* PNScatterChartData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PNScatterChartData.h; sourceTree = "<group>"; };
+		A701E8671D1A97CF006C4901 /* PNScatterChartData.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PNScatterChartData.m; sourceTree = "<group>"; };
+		A701E8681D1A97CF006C4901 /* PNScatterChartDataItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PNScatterChartDataItem.h; sourceTree = "<group>"; };
+		A701E8691D1A97CF006C4901 /* PNScatterChartDataItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PNScatterChartDataItem.m; sourceTree = "<group>"; };
+		A701E87A1D1A9898006C4901 /* UICountingLabel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UICountingLabel.h; sourceTree = "<group>"; };
+		A701E87B1D1A9898006C4901 /* UICountingLabel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UICountingLabel.m; sourceTree = "<group>"; };
+		A701E87D1D1A99AF006C4901 /* BarVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BarVC.h; sourceTree = "<group>"; };
+		A701E87E1D1A99AF006C4901 /* BarVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BarVC.m; sourceTree = "<group>"; };
+		A70B210F1D1BBEE00067B8C2 /* SYChart.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SYChart.h; sourceTree = "<group>"; };
+		A70B21101D1BBF130067B8C2 /* SYChartLine.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SYChartLine.h; sourceTree = "<group>"; };
+		A70B21111D1BBF130067B8C2 /* SYChartLine.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SYChartLine.m; sourceTree = "<group>"; };
+		A70B21131D1BBF1F0067B8C2 /* SYChartBar.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SYChartBar.h; sourceTree = "<group>"; };
+		A70B21141D1BBF1F0067B8C2 /* SYChartBar.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SYChartBar.m; sourceTree = "<group>"; };
+		A70B21161D1BC0E80067B8C2 /* SYChartInfromationView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SYChartInfromationView.h; sourceTree = "<group>"; };
+		A70B21171D1BC0E80067B8C2 /* SYChartInfromationView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SYChartInfromationView.m; sourceTree = "<group>"; };
+		A70B21191D1BCA4C0067B8C2 /* SYChartLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SYChartLayer.h; sourceTree = "<group>"; };
+		A70B211A1D1BCA4C0067B8C2 /* SYChartLayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SYChartLayer.m; sourceTree = "<group>"; };
+		A70B211F1D1BD1830067B8C2 /* SYLineVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SYLineVC.h; sourceTree = "<group>"; };
+		A70B21201D1BD1830067B8C2 /* SYLineVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SYLineVC.m; sourceTree = "<group>"; };
+		A70B21221D1BE4C60067B8C2 /* SYBarVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SYBarVC.h; sourceTree = "<group>"; };
+		A70B21231D1BE4C60067B8C2 /* SYBarVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SYBarVC.m; sourceTree = "<group>"; };
+		A733AC9C1D1B83B100A5723E /* LineVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LineVC.h; sourceTree = "<group>"; };
+		A733AC9D1D1B83B100A5723E /* LineVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LineVC.m; sourceTree = "<group>"; };
+		A734B4A01D1CC11900AAB560 /* PieVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PieVC.h; sourceTree = "<group>"; };
+		A734B4A11D1CC11900AAB560 /* PieVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PieVC.m; sourceTree = "<group>"; };
+		A734B4A31D1CC13800AAB560 /* CycleVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CycleVC.h; sourceTree = "<group>"; };
+		A734B4A41D1CC13800AAB560 /* CycleVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CycleVC.m; sourceTree = "<group>"; };
+		A734B4A61D1CC7A200AAB560 /* ScatterVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ScatterVC.h; sourceTree = "<group>"; };
+		A734B4A71D1CC7A200AAB560 /* ScatterVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ScatterVC.m; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		A701E80E1D1A9799006C4901 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		A701E8271D1A979A006C4901 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		A701E8321D1A979A006C4901 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		A701E8081D1A9799006C4901 = {
+			isa = PBXGroup;
+			children = (
+				A701E8131D1A9799006C4901 /* DemoChart */,
+				A701E82D1D1A979A006C4901 /* DemoChartTests */,
+				A701E8381D1A979A006C4901 /* DemoChartUITests */,
+				A701E8121D1A9799006C4901 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		A701E8121D1A9799006C4901 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				A701E8111D1A9799006C4901 /* DemoChart.app */,
+				A701E82A1D1A979A006C4901 /* DemoChart.xctest */,
+				A701E8351D1A979A006C4901 /* DemoChart.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		A701E8131D1A9799006C4901 /* DemoChart */ = {
+			isa = PBXGroup;
+			children = (
+				A701E8171D1A979A006C4901 /* AppDelegate.h */,
+				A701E8181D1A979A006C4901 /* AppDelegate.m */,
+				A701E81A1D1A979A006C4901 /* ViewController.h */,
+				A701E81B1D1A979A006C4901 /* ViewController.m */,
+				A733AC9C1D1B83B100A5723E /* LineVC.h */,
+				A733AC9D1D1B83B100A5723E /* LineVC.m */,
+				A701E87D1D1A99AF006C4901 /* BarVC.h */,
+				A701E87E1D1A99AF006C4901 /* BarVC.m */,
+				A734B4A01D1CC11900AAB560 /* PieVC.h */,
+				A734B4A11D1CC11900AAB560 /* PieVC.m */,
+				A734B4A31D1CC13800AAB560 /* CycleVC.h */,
+				A734B4A41D1CC13800AAB560 /* CycleVC.m */,
+				A734B4A61D1CC7A200AAB560 /* ScatterVC.h */,
+				A734B4A71D1CC7A200AAB560 /* ScatterVC.m */,
+				A70B211F1D1BD1830067B8C2 /* SYLineVC.h */,
+				A70B21201D1BD1830067B8C2 /* SYLineVC.m */,
+				A70B21221D1BE4C60067B8C2 /* SYBarVC.h */,
+				A70B21231D1BE4C60067B8C2 /* SYBarVC.m */,
+				A70B210E1D1BBEB50067B8C2 /* SYChart */,
+				A701E8471D1A97CF006C4901 /* PNChart */,
+				A701E81D1D1A979A006C4901 /* Main.storyboard */,
+				A701E8201D1A979A006C4901 /* Assets.xcassets */,
+				A701E8221D1A979A006C4901 /* LaunchScreen.storyboard */,
+				A701E8251D1A979A006C4901 /* Info.plist */,
+				A701E8141D1A979A006C4901 /* Supporting Files */,
+			);
+			name = DemoChart;
+			path = DemoPNChart;
+			sourceTree = "<group>";
+		};
+		A701E8141D1A979A006C4901 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				A701E8151D1A979A006C4901 /* main.m */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		A701E82D1D1A979A006C4901 /* DemoChartTests */ = {
+			isa = PBXGroup;
+			children = (
+				A701E82E1D1A979A006C4901 /* DemoChartTests.m */,
+				A701E8301D1A979A006C4901 /* Info.plist */,
+			);
+			name = DemoChartTests;
+			path = DemoPNChartTests;
+			sourceTree = "<group>";
+		};
+		A701E8381D1A979A006C4901 /* DemoChartUITests */ = {
+			isa = PBXGroup;
+			children = (
+				A701E8391D1A979A006C4901 /* DemoChartUITests.m */,
+				A701E83B1D1A979A006C4901 /* Info.plist */,
+			);
+			name = DemoChartUITests;
+			path = DemoPNChartUITests;
+			sourceTree = "<group>";
+		};
+		A701E8471D1A97CF006C4901 /* PNChart */ = {
+			isa = PBXGroup;
+			children = (
+				A701E8481D1A97CF006C4901 /* PNBar.h */,
+				A701E8491D1A97CF006C4901 /* PNBar.m */,
+				A701E84A1D1A97CF006C4901 /* PNBarChart.h */,
+				A701E84B1D1A97CF006C4901 /* PNBarChart.m */,
+				A701E84C1D1A97CF006C4901 /* PNChart.h */,
+				A701E84D1D1A97CF006C4901 /* PNChartDelegate.h */,
+				A701E87A1D1A9898006C4901 /* UICountingLabel.h */,
+				A701E87B1D1A9898006C4901 /* UICountingLabel.m */,
+				A701E84E1D1A97CF006C4901 /* PNChartLabel.h */,
+				A701E84F1D1A97CF006C4901 /* PNChartLabel.m */,
+				A701E8501D1A97CF006C4901 /* PNCircleChart.h */,
+				A701E8511D1A97CF006C4901 /* PNCircleChart.m */,
+				A701E8521D1A97CF006C4901 /* PNColor.h */,
+				A701E8531D1A97CF006C4901 /* PNColor.m */,
+				A701E8541D1A97CF006C4901 /* PNGenericChart.h */,
+				A701E8551D1A97CF006C4901 /* PNGenericChart.m */,
+				A701E8561D1A97CF006C4901 /* PNLineChart.h */,
+				A701E8571D1A97CF006C4901 /* PNLineChart.m */,
+				A701E8581D1A97CF006C4901 /* PNLineChartData.h */,
+				A701E8591D1A97CF006C4901 /* PNLineChartData.m */,
+				A701E85A1D1A97CF006C4901 /* PNLineChartDataItem.h */,
+				A701E85B1D1A97CF006C4901 /* PNLineChartDataItem.m */,
+				A701E85C1D1A97CF006C4901 /* PNPieChart.h */,
+				A701E85D1D1A97CF006C4901 /* PNPieChart.m */,
+				A701E85E1D1A97CF006C4901 /* PNPieChartDataItem.h */,
+				A701E85F1D1A97CF006C4901 /* PNPieChartDataItem.m */,
+				A701E8601D1A97CF006C4901 /* PNRadarChart.h */,
+				A701E8611D1A97CF006C4901 /* PNRadarChart.m */,
+				A701E8621D1A97CF006C4901 /* PNRadarChartDataItem.h */,
+				A701E8631D1A97CF006C4901 /* PNRadarChartDataItem.m */,
+				A701E8641D1A97CF006C4901 /* PNScatterChart.h */,
+				A701E8651D1A97CF006C4901 /* PNScatterChart.m */,
+				A701E8661D1A97CF006C4901 /* PNScatterChartData.h */,
+				A701E8671D1A97CF006C4901 /* PNScatterChartData.m */,
+				A701E8681D1A97CF006C4901 /* PNScatterChartDataItem.h */,
+				A701E8691D1A97CF006C4901 /* PNScatterChartDataItem.m */,
+			);
+			path = PNChart;
+			sourceTree = "<group>";
+		};
+		A70B210E1D1BBEB50067B8C2 /* SYChart */ = {
+			isa = PBXGroup;
+			children = (
+				A70B210F1D1BBEE00067B8C2 /* SYChart.h */,
+				A70B21101D1BBF130067B8C2 /* SYChartLine.h */,
+				A70B21111D1BBF130067B8C2 /* SYChartLine.m */,
+				A70B21131D1BBF1F0067B8C2 /* SYChartBar.h */,
+				A70B21141D1BBF1F0067B8C2 /* SYChartBar.m */,
+				A70B21161D1BC0E80067B8C2 /* SYChartInfromationView.h */,
+				A70B21171D1BC0E80067B8C2 /* SYChartInfromationView.m */,
+				A70B21191D1BCA4C0067B8C2 /* SYChartLayer.h */,
+				A70B211A1D1BCA4C0067B8C2 /* SYChartLayer.m */,
+			);
+			path = SYChart;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		A701E8101D1A9799006C4901 /* DemoChart */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = A701E83E1D1A979A006C4901 /* Build configuration list for PBXNativeTarget "DemoChart" */;
+			buildPhases = (
+				A701E80D1D1A9799006C4901 /* Sources */,
+				A701E80E1D1A9799006C4901 /* Frameworks */,
+				A701E80F1D1A9799006C4901 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = DemoChart;
+			productName = DemoPNChart;
+			productReference = A701E8111D1A9799006C4901 /* DemoChart.app */;
+			productType = "com.apple.product-type.application";
+		};
+		A701E8291D1A979A006C4901 /* DemoChartTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = A701E8411D1A979A006C4901 /* Build configuration list for PBXNativeTarget "DemoChartTests" */;
+			buildPhases = (
+				A701E8261D1A979A006C4901 /* Sources */,
+				A701E8271D1A979A006C4901 /* Frameworks */,
+				A701E8281D1A979A006C4901 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				A701E82C1D1A979A006C4901 /* PBXTargetDependency */,
+			);
+			name = DemoChartTests;
+			productName = DemoPNChartTests;
+			productReference = A701E82A1D1A979A006C4901 /* DemoChart.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+		A701E8341D1A979A006C4901 /* DemoChartUITests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = A701E8441D1A979A006C4901 /* Build configuration list for PBXNativeTarget "DemoChartUITests" */;
+			buildPhases = (
+				A701E8311D1A979A006C4901 /* Sources */,
+				A701E8321D1A979A006C4901 /* Frameworks */,
+				A701E8331D1A979A006C4901 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				A701E8371D1A979A006C4901 /* PBXTargetDependency */,
+			);
+			name = DemoChartUITests;
+			productName = DemoPNChartUITests;
+			productReference = A701E8351D1A979A006C4901 /* DemoChart.xctest */;
+			productType = "com.apple.product-type.bundle.ui-testing";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		A701E8091D1A9799006C4901 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 0720;
+				ORGANIZATIONNAME = zhangshaoyu;
+				TargetAttributes = {
+					A701E8101D1A9799006C4901 = {
+						CreatedOnToolsVersion = 7.2.1;
+						DevelopmentTeam = 5JH8ZFBFJD;
+					};
+					A701E8291D1A979A006C4901 = {
+						CreatedOnToolsVersion = 7.2.1;
+						DevelopmentTeam = 5JH8ZFBFJD;
+						TestTargetID = A701E8101D1A9799006C4901;
+					};
+					A701E8341D1A979A006C4901 = {
+						CreatedOnToolsVersion = 7.2.1;
+						DevelopmentTeam = 5JH8ZFBFJD;
+						TestTargetID = A701E8101D1A9799006C4901;
+					};
+				};
+			};
+			buildConfigurationList = A701E80C1D1A9799006C4901 /* Build configuration list for PBXProject "DemoChart" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = A701E8081D1A9799006C4901;
+			productRefGroup = A701E8121D1A9799006C4901 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				A701E8101D1A9799006C4901 /* DemoChart */,
+				A701E8291D1A979A006C4901 /* DemoChartTests */,
+				A701E8341D1A979A006C4901 /* DemoChartUITests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		A701E80F1D1A9799006C4901 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				A701E8241D1A979A006C4901 /* LaunchScreen.storyboard in Resources */,
+				A701E8211D1A979A006C4901 /* Assets.xcassets in Resources */,
+				A701E81F1D1A979A006C4901 /* Main.storyboard in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		A701E8281D1A979A006C4901 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		A701E8331D1A979A006C4901 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		A701E80D1D1A9799006C4901 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				A701E87F1D1A99AF006C4901 /* BarVC.m in Sources */,
+				A734B4A21D1CC11900AAB560 /* PieVC.m in Sources */,
+				A701E8701D1A97CF006C4901 /* PNLineChart.m in Sources */,
+				A701E86B1D1A97CF006C4901 /* PNBarChart.m in Sources */,
+				A701E86E1D1A97CF006C4901 /* PNColor.m in Sources */,
+				A701E8751D1A97CF006C4901 /* PNRadarChart.m in Sources */,
+				A701E8761D1A97CF006C4901 /* PNRadarChartDataItem.m in Sources */,
+				A70B21241D1BE4C60067B8C2 /* SYBarVC.m in Sources */,
+				A70B211B1D1BCA4C0067B8C2 /* SYChartLayer.m in Sources */,
+				A701E81C1D1A979A006C4901 /* ViewController.m in Sources */,
+				A701E86A1D1A97CF006C4901 /* PNBar.m in Sources */,
+				A701E8781D1A97CF006C4901 /* PNScatterChartData.m in Sources */,
+				A701E8721D1A97CF006C4901 /* PNLineChartDataItem.m in Sources */,
+				A733AC9E1D1B83B100A5723E /* LineVC.m in Sources */,
+				A701E86C1D1A97CF006C4901 /* PNChartLabel.m in Sources */,
+				A734B4A81D1CC7A200AAB560 /* ScatterVC.m in Sources */,
+				A701E8191D1A979A006C4901 /* AppDelegate.m in Sources */,
+				A701E8791D1A97CF006C4901 /* PNScatterChartDataItem.m in Sources */,
+				A701E8741D1A97CF006C4901 /* PNPieChartDataItem.m in Sources */,
+				A701E8161D1A979A006C4901 /* main.m in Sources */,
+				A734B4A51D1CC13800AAB560 /* CycleVC.m in Sources */,
+				A701E8711D1A97CF006C4901 /* PNLineChartData.m in Sources */,
+				A70B21181D1BC0E80067B8C2 /* SYChartInfromationView.m in Sources */,
+				A701E8771D1A97CF006C4901 /* PNScatterChart.m in Sources */,
+				A70B21151D1BBF1F0067B8C2 /* SYChartBar.m in Sources */,
+				A70B21211D1BD1830067B8C2 /* SYLineVC.m in Sources */,
+				A701E86D1D1A97CF006C4901 /* PNCircleChart.m in Sources */,
+				A701E87C1D1A9898006C4901 /* UICountingLabel.m in Sources */,
+				A701E8731D1A97CF006C4901 /* PNPieChart.m in Sources */,
+				A701E86F1D1A97CF006C4901 /* PNGenericChart.m in Sources */,
+				A70B21121D1BBF130067B8C2 /* SYChartLine.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		A701E8261D1A979A006C4901 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				A701E82F1D1A979A006C4901 /* DemoChartTests.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		A701E8311D1A979A006C4901 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				A701E83A1D1A979A006C4901 /* DemoChartUITests.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		A701E82C1D1A979A006C4901 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = A701E8101D1A9799006C4901 /* DemoChart */;
+			targetProxy = A701E82B1D1A979A006C4901 /* PBXContainerItemProxy */;
+		};
+		A701E8371D1A979A006C4901 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = A701E8101D1A9799006C4901 /* DemoChart */;
+			targetProxy = A701E8361D1A979A006C4901 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin PBXVariantGroup section */
+		A701E81D1D1A979A006C4901 /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				A701E81E1D1A979A006C4901 /* Base */,
+			);
+			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
+		A701E8221D1A979A006C4901 /* LaunchScreen.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				A701E8231D1A979A006C4901 /* Base */,
+			);
+			name = LaunchScreen.storyboard;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		A701E83C1D1A979A006C4901 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				MTL_ENABLE_DEBUG_INFO = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+			};
+			name = Debug;
+		};
+		A701E83D1D1A979A006C4901 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				SDKROOT = iphoneos;
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		A701E83F1D1A979A006C4901 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				INFOPLIST_FILE = DemoPNChart/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.zhangshaoyu.DemoChart;
+				PRODUCT_NAME = DemoChart;
+			};
+			name = Debug;
+		};
+		A701E8401D1A979A006C4901 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				INFOPLIST_FILE = DemoPNChart/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.zhangshaoyu.DemoChart;
+				PRODUCT_NAME = DemoChart;
+			};
+			name = Release;
+		};
+		A701E8421D1A979A006C4901 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				INFOPLIST_FILE = DemoPNChartTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.zhangshaoyu.DemoPNChartTests;
+				PRODUCT_NAME = DemoChart;
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/DemoChart.app/DemoChart";
+			};
+			name = Debug;
+		};
+		A701E8431D1A979A006C4901 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				INFOPLIST_FILE = DemoPNChartTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.zhangshaoyu.DemoPNChartTests;
+				PRODUCT_NAME = DemoChart;
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/DemoChart.app/DemoChart";
+			};
+			name = Release;
+		};
+		A701E8451D1A979A006C4901 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				INFOPLIST_FILE = DemoPNChartUITests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.zhangshaoyu.DemoPNChartUITests;
+				PRODUCT_NAME = DemoChart;
+				TEST_TARGET_NAME = DemoPNChart;
+				USES_XCTRUNNER = YES;
+			};
+			name = Debug;
+		};
+		A701E8461D1A979A006C4901 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				INFOPLIST_FILE = DemoPNChartUITests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.zhangshaoyu.DemoPNChartUITests;
+				PRODUCT_NAME = DemoChart;
+				TEST_TARGET_NAME = DemoPNChart;
+				USES_XCTRUNNER = YES;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		A701E80C1D1A9799006C4901 /* Build configuration list for PBXProject "DemoChart" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				A701E83C1D1A979A006C4901 /* Debug */,
+				A701E83D1D1A979A006C4901 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		A701E83E1D1A979A006C4901 /* Build configuration list for PBXNativeTarget "DemoChart" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				A701E83F1D1A979A006C4901 /* Debug */,
+				A701E8401D1A979A006C4901 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		A701E8411D1A979A006C4901 /* Build configuration list for PBXNativeTarget "DemoChartTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				A701E8421D1A979A006C4901 /* Debug */,
+				A701E8431D1A979A006C4901 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		A701E8441D1A979A006C4901 /* Build configuration list for PBXNativeTarget "DemoChartUITests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				A701E8451D1A979A006C4901 /* Debug */,
+				A701E8461D1A979A006C4901 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = A701E8091D1A9799006C4901 /* Project object */;
+}

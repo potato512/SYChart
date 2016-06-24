@@ -1,0 +1,78 @@
+//
+//  SYChart.h
+//  zhangshaoyu
+//
+//  Created by zhangshaoyu on 16/6/23.
+//  Copyright © 2016年 zhangshaoyu. All rights reserved.
+//
+
+#import "SYChartLine.h"
+#import "SYChartBar.h"
+#import "SYChartInfromationView.h"
+#import "SYChartLayer.h"
+
+#ifndef SYChart_h
+#define SYChart_h
+
+#define SYChart_SCREEN_WIDTH    ([UIScreen mainScreen].bounds.size.width)
+#define SYChart_SCREEN_HEIGHT   ([UIScreen mainScreen].bounds.size.height)
+
+// 颜色
+#define SYChartColorRGBA(r,g,b,a)   [UIColor colorWithRed:(r / 255.0f) green:(g / 255.0f) blue:(b / 255.0f) alpha:a]
+#define SYChartColorRGB(r,g,b)      SYChartColorRGBA(r,g,b,1.0f)
+
+#define SYChart_colorGrey          SYChartColorRGB(246.0,246.0,246.0)
+#define SYChart_colorLightBlue     SYChartColorRGB(94.0,147.0,196.0)
+#define SYChart_colorGreen         SYChartColorRGB(77.0,186.0,255.0)
+#define SYChart_colorTitleColor    SYChartColorRGB(0.0,189.0,113.0)
+#define SYChart_colorButtonGrey    SYChartColorRGB(141.0,141.0,141.0)
+#define SYChart_colorLightGreen    SYChartColorRGB(77.0,216.0,122.0)
+#define SYChart_colorFreshGreen    SYChartColorRGB(77.0,196.0,122.0)
+#define SYChart_colorDeepGreen     SYChartColorRGB(77.0,176.0,122.0)
+#define SYChart_colorRed           SYChartColorRGB(245.0,94.0,78.0)
+#define SYChart_colorMauve         SYChartColorRGB(88.0,75.0,103.0)
+#define SYChart_colorBrown         SYChartColorRGB(119.0,107.0,95.0)
+#define SYChart_colorBlue          SYChartColorRGB(82.0,116.0,188.0)
+#define SYChart_colorDarkBlue      SYChartColorRGB(121.0,134.0,142.0)
+#define SYChart_colorYellow        SYChartColorRGB(242.0,197.0,117.0)
+#define SYChart_colorWhite         SYChartColorRGB(255.0,255.0,255.0)
+#define SYChart_colorDeepGrey      SYChartColorRGB(99.0,99.0,99.0)
+#define SYChart_colorPinkGrey      SYChartColorRGB(200.0,193.0,193.0)
+#define SYChart_colorHealYellow    SYChartColorRGB(245.0,242.0,238.0)
+#define SYChart_colorLightGrey     SYChartColorRGB(225.0,225.0,225.0)
+#define SYChart_colorCleanGrey     SYChartColorRGB(251.0,251.0,251.0)
+#define SYChart_colorLightYellow   SYChartColorRGB(241.0,240.0,240.0)
+#define SYChart_colorDarkYellow    SYChartColorRGB(152.0,150.0,159.0)
+#define SYChart_colorPinkDark      SYChartColorRGB(170.0,165.0,165.0)
+#define SYChart_colorCloudWhite    SYChartColorRGB(244.0,244.0,244.0)
+#define SYChart_colorBlack         SYChartColorRGB(45.0,45.0,45.0)
+#define SYChart_colorStarYellow    SYChartColorRGB(252.0,223.0,101.0)
+#define SYChart_colorTwitterColor  SYChartColorRGB(0.0,171.0,243.0)
+#define SYChart_colorWeiboColor    SYChartColorRGB(250.0,0.0,33.0)
+#define SYChart_coloriOSGreenColor SYChartColorRGB(98.0,247.0,77.0)
+
+
+// chartLine
+#define SYChart_LINE_CHART_TOP_PADDING   30
+#define SYChart_LINE_CHART_LEFT_PADDING  40
+#define SYChart_LINE_CHART_RIGHT_PADDING 8
+#define SYChart_LINE_CHART_TEXT_HEIGHT   40
+
+#define SYChart_LINE_WIDTH_DEFAULT 2.0
+
+#define SYChart_DOT_PADDING_DEFAULT 60.0
+#define SYChart_DOT_BEGIN_POSTION   20.0
+
+// chartBar
+#define SYChart_BAR_CHART_TOP_PADDING 30
+#define SYChart_BAR_CHART_LEFT_PADDING 40
+#define SYChart_BAR_CHART_RIGHT_PADDING 8
+#define SYChart_BAR_CHART_TEXT_HEIGHT 40
+
+#define SYChart_BAR_WIDTH_DEFAULT 20.0
+
+#define SYChart_PADDING_SECTION_DEFAULT 10.0
+#define SYChart_PADDING_BAR_DEFAULT 1.0
+
+
+#endif /* SYChart_h */
