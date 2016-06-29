@@ -283,16 +283,16 @@ CGFloat static const kSYChartLineUndefinedCachedHeight = -1.0f;
             CGColorRef color = [self.delegate lineChartView:self lineColorWithLineNumber:lineNumber].CGColor;
             lineLayer.strokeColor = color;
             lineLayer.fillColor = [UIColor clearColor].CGColor;
-            pointLayer.strokeColor = color;
-            pointLayer.fillColor = [UIColor whiteColor].CGColor;
+            pointLayer.strokeColor = (_dotColor ? _dotColor.CGColor : color);
+            pointLayer.fillColor = (_dotColor ? _dotColor.CGColor : [UIColor whiteColor].CGColor);
         }
         else
         {
             CGColorRef color = [UIColor redColor].CGColor;
             lineLayer.strokeColor = color;
             lineLayer.fillColor = [UIColor clearColor].CGColor;
-            pointLayer.strokeColor = color;
-            pointLayer.fillColor = [UIColor whiteColor].CGColor;
+            pointLayer.strokeColor = (_dotColor ? _dotColor.CGColor : color);
+            pointLayer.fillColor = (_dotColor ? _dotColor.CGColor : [UIColor whiteColor].CGColor);
         }
         
         if ([self.delegate respondsToSelector:@selector(lineChartView:lineWidthWithLineNumber:)])
@@ -425,7 +425,8 @@ CGFloat static const kSYChartLineUndefinedCachedHeight = -1.0f;
         }
         lineLayer.path = lineBezierPath.CGPath;
         pointLayer.path = pointBezierPath.CGPath;
-        pointLayer.fillColor = _solidDot ? lineLayer.strokeColor : [UIColor clearColor].CGColor;
+        pointLayer.fillColor = (_solidDot ? (_dotColor ? _dotColor.CGColor : lineLayer.strokeColor) : [UIColor clearColor].CGColor);
+        
         [_scrollView.layer insertSublayer:lineLayer atIndex:(unsigned)lineNumber];
         [_scrollView.layer insertSublayer:pointLayer above:lineLayer];
         

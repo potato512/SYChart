@@ -170,10 +170,10 @@ CGFloat static const kSYChartLineUndefinedValue = -1.0f;
 /// 数据点的半径大小
 @property (nonatomic, assign) CGFloat dotRadius;
 
-// 开发中... begin
-
 /// 数据点颜色
 @property (nonatomic, strong) UIColor *dotColor;
+
+// 开发中... begin
 
 /// 曲线样式（是否平滑。默认直角）
 @property (nonatomic, assign) BOOL isSmoothLines;

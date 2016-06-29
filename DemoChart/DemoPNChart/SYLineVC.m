@@ -50,6 +50,7 @@
     [self.view addSubview:chartLine];
     chartLine.backgroundColor = [UIColor colorWithWhite:0.5 alpha:0.1];
     chartLine.dotRadius = 5;
+    chartLine.dotColor = [UIColor orangeColor];
     chartLine.solidDot = NO;
     chartLine.oppositeY = NO;
     chartLine.dataSource = self;
