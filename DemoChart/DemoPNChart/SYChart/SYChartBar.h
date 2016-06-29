@@ -174,12 +174,12 @@
 /// x轴文本文字大小
 @property (nonatomic, assign) CGFloat xFontSize;
 
+/// bar动画时间（默认0.6）
+@property (nonatomic, assign) NSTimeInterval animationTime;
+
 
 // 开发中... begin
 
-
-/// bar动画时间（默认0.6）
-@property (nonatomic, assign) NSTimeInterval animationTime;
 
 /**
  *

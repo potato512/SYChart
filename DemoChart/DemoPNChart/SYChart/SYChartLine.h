@@ -173,6 +173,10 @@ CGFloat static const kSYChartLineUndefinedValue = -1.0f;
 /// 数据点颜色
 @property (nonatomic, strong) UIColor *dotColor;
 
+/// 画线动画时间（默认0.3）
+@property (nonatomic, assign) NSTimeInterval animationTime;
+
+
 // 开发中... begin
 
 /// 曲线样式（是否平滑。默认直角）
@@ -180,8 +184,6 @@ CGFloat static const kSYChartLineUndefinedValue = -1.0f;
 /// 曲线类型（虚线，或实线。默认YES，即是实线）
 @property (nonatomic, assign) BOOL isSolidLines;
 
-/// 画线动画时间（默认0.3）
-@property (nonatomic, assign) NSTimeInterval animationTime;
 
 /**
  *
