@@ -51,6 +51,7 @@
     lineChart.yLabelFormat = @"%1.1f";
     lineChart.yFixedValueMax = 300.0;
     lineChart.yFixedValueMin = 0.0;
+    lineChart.yLabelNum = 6;
     
     // 可以添加多条折线
     // 曲线1

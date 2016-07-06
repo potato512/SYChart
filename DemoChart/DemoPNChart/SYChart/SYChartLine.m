@@ -10,6 +10,7 @@
 #import "SYChart.h"
 
 CGFloat static const kSYChartLineUndefinedCachedHeight = -1.0f;
+static NSInteger const tagTextLabel = 1000;
 
 @interface SYChartLine ()
 {
@@ -26,9 +27,14 @@ CGFloat static const kSYChartLineUndefinedCachedHeight = -1.0f;
 @property (nonatomic, assign) CGFloat cachedMaxHeight;
 @property (nonatomic, assign) CGFloat cachedMinHeight;
 
+// 刻度递增值
+@property (nonatomic, assign, readonly) CGFloat heightYStep;
+
 @end
 
 @implementation SYChartLine
+
+#pragma mark - init
 
 - (instancetype)initWithCoder:(NSCoder *)coder
 {
@@ -55,8 +61,8 @@ CGFloat static const kSYChartLineUndefinedCachedHeight = -1.0f;
     self.opaque = NO;
     self.backgroundColor = [UIColor clearColor];
     CGFloat width = self.bounds.size.width;
-    _chartHeight = self.bounds.size.height - SYChart_LINE_CHART_TOP_PADDING - SYChart_LINE_CHART_TEXT_HEIGHT;
-    _dotRadius = SYChart_LINE_WIDTH_DEFAULT / 2 * 3;
+    _chartHeight = (self.bounds.size.height - SYChart_LINE_CHART_TOP_PADDING - SYChart_LINE_CHART_TEXT_HEIGHT);
+    _dotRadius = (SYChart_LINE_WIDTH_DEFAULT / 2 * 3);
     
     _minValue = @0;
     
@@ -75,12 +81,12 @@ CGFloat static const kSYChartLineUndefinedCachedHeight = -1.0f;
     
     _gridsType = SYChartGridsTypeNone;
     _gridsLineWidth = 0.5;
-    _gridsLineColor = [UIColor colorWithWhite:0.5 alpha:0.1];
+    _gridsLineColor = [UIColor lightGrayColor];
     
     _cachedMaxHeight = kSYChartLineUndefinedCachedHeight;
     _cachedMinHeight = kSYChartLineUndefinedCachedHeight;
     
-    _scrollView = [[UIScrollView alloc] initWithFrame:CGRectMake(SYChart_LINE_CHART_LEFT_PADDING, 0, width - 2 * SYChart_LINE_CHART_TOP_PADDING, CGRectGetHeight(self.bounds))];
+    _scrollView = [[UIScrollView alloc] initWithFrame:CGRectMake(SYChart_LINE_CHART_LEFT_PADDING, 0.0, (width - SYChart_LINE_CHART_LEFT_PADDING - SYChart_LINE_CHART_RIGHT_PADDING), CGRectGetHeight(self.bounds))];
     _scrollView.backgroundColor = [UIColor clearColor];
     _scrollView.showsHorizontalScrollIndicator = NO;
     _scrollView.showsVerticalScrollIndicator = NO;
@@ -102,31 +108,92 @@ CGFloat static const kSYChartLineUndefinedCachedHeight = -1.0f;
 
 #pragma mark - Draw Coordinate
 
+// 绘制坐标轴
 - (void)drawCoordinateWithContext:(CGContextRef)context
 {
     CGFloat width = self.bounds.size.width;
     
+    // Y坐标轴
     if (!_hideYAxis)
     {
         CGContextSetStrokeColorWithColor(context, _colorOfYAxis.CGColor);
-        CGContextMoveToPoint(context, SYChart_LINE_CHART_LEFT_PADDING - 1, SYChart_LINE_CHART_TOP_PADDING - 1);
-        CGContextAddLineToPoint(context, SYChart_LINE_CHART_LEFT_PADDING - 1, SYChart_LINE_CHART_TOP_PADDING + _chartHeight + 1);
+        CGContextMoveToPoint(context, (SYChart_LINE_CHART_LEFT_PADDING - 1), (SYChart_LINE_CHART_TOP_PADDING - 1 - 10.0));
+        CGContextAddLineToPoint(context, (SYChart_LINE_CHART_LEFT_PADDING - 1), (SYChart_LINE_CHART_TOP_PADDING + _chartHeight + 1));
         CGContextStrokePath(context);
+        
+        // Y坐标轴箭头
+        CGContextSetStrokeColorWithColor(context, _colorOfYAxis.CGColor);
+        CGContextMoveToPoint(context, (SYChart_LINE_CHART_LEFT_PADDING - 1 - 3), (SYChart_LINE_CHART_TOP_PADDING - 1 - 10.0 + 3));
+        CGContextAddLineToPoint(context, (SYChart_LINE_CHART_LEFT_PADDING - 1), (SYChart_LINE_CHART_TOP_PADDING - 1 - 10.0));
+        CGContextAddLineToPoint(context, (SYChart_LINE_CHART_LEFT_PADDING - 1 + 3), (SYChart_LINE_CHART_TOP_PADDING - 1 - 10.0 + 3));
+        CGContextStrokePath(context);
+        
+        // Y坐标轴刻度
+        CGPoint point = CGPointZero;
+        CGContextSetStrokeColorWithColor(context, _colorOfYAxis.CGColor);
+        for (int i = 0; i < _numberOfYAxis; i++)
+        {
+            point.x = (SYChart_LINE_CHART_LEFT_PADDING - 1);
+            point.y = (i * self.heightYStep + SYChart_LINE_CHART_TOP_PADDING);
+            CGContextMoveToPoint(context, point.x, point.y);
+            CGContextAddLineToPoint(context, (SYChart_LINE_CHART_LEFT_PADDING - 1 + 3), point.y);
+            CGContextStrokePath(context);
+        }
     }
     
+    // X坐标轴
     CGContextSetStrokeColorWithColor(context, _colorOfXAxis.CGColor);
-    CGContextMoveToPoint(context, SYChart_LINE_CHART_LEFT_PADDING - 1, SYChart_LINE_CHART_TOP_PADDING + _chartHeight + 1);
-    CGContextAddLineToPoint(context, width - SYChart_LINE_CHART_RIGHT_PADDING + 1, SYChart_LINE_CHART_TOP_PADDING + _chartHeight + 1);
+    CGContextMoveToPoint(context, (SYChart_LINE_CHART_LEFT_PADDING - 1), (SYChart_LINE_CHART_TOP_PADDING + _chartHeight + 1));
+    CGContextAddLineToPoint(context, (width - SYChart_LINE_CHART_RIGHT_PADDING + 1), (SYChart_LINE_CHART_TOP_PADDING + _chartHeight + 1));
     CGContextStrokePath(context);
+    
+    // X坐标轴箭头
+    CGContextSetStrokeColorWithColor(context, _colorOfXAxis.CGColor);
+    CGContextMoveToPoint(context, (width - SYChart_LINE_CHART_RIGHT_PADDING + 1 - 3), (SYChart_LINE_CHART_TOP_PADDING + _chartHeight + 1 - 3));
+    CGContextAddLineToPoint(context, (width - SYChart_LINE_CHART_RIGHT_PADDING + 1), (SYChart_LINE_CHART_TOP_PADDING + _chartHeight + 1));
+    CGContextAddLineToPoint(context, (width - SYChart_LINE_CHART_RIGHT_PADDING + 1 - 3), (SYChart_LINE_CHART_TOP_PADDING + _chartHeight + 1 + 3));
+    CGContextStrokePath(context);
+    
+    // X坐标轴刻度 在数据刷新方法" - (void)reloadDataWithAnimate:(BOOL)animate "中处理
 }
 
-#pragma mark - Height
+// 绘制网络（注意：只绘制水平线，垂直线在数据刷新方法" - (void)reloadDataWithAnimate:(BOOL)animate "中处理）
+- (void)drawChartGridsWithContext:(CGContextRef)context
+{
+    CGPoint point;
+    
+    if (SYChartGridsTypeGridDotted == _gridsType || SYChartGridsTypeGridSolid == _gridsType || SYChartGridsTypeHorizontalDotted == _gridsType || SYChartGridsTypeHorizontalSolid == _gridsType)
+    {
+        CGContextSetStrokeColorWithColor(context, _gridsLineColor.CGColor);
+        
+        for (NSUInteger i = 0; i < _numberOfYAxis; i++)
+        {
+            point.x = (SYChart_LINE_CHART_LEFT_PADDING - 1);
+            point.y = (i * self.heightYStep + SYChart_LINE_CHART_TOP_PADDING);
+            
+            CGContextMoveToPoint(context, point.x, point.y);
+            CGContextSetLineWidth(context, _gridsLineWidth);
+            if (SYChartGridsTypeGridDotted == _gridsType || SYChartGridsTypeHorizontalDotted == _gridsType)
+            {
+                // 虚线类型
+                CGContextSetLineCap(context, kCGLineCapRound);
+                CGFloat dash[] = {6, 5};
+                CGContextSetLineDash(context, 0.0, dash, 2);
+            }
+            CGContextAddLineToPoint(context, (CGRectGetWidth(self.bounds) - SYChart_LINE_CHART_RIGHT_PADDING + 1), point.y);
+            CGContextStrokePath(context);
+        }
+    }
+}
+
+#pragma mark - Height/getter
 
 - (CGFloat)normalizedHeightForRawHeight:(NSNumber *)rawHeight
 {
     CGFloat value = [rawHeight floatValue];
     CGFloat maxHeight = [self.maxValue floatValue];
-    return value/maxHeight * _chartHeight;
+    CGFloat height = (value / maxHeight * _chartHeight);
+    return height;
 }
 
 - (id)maxValue
@@ -183,6 +250,12 @@ CGFloat static const kSYChartLineUndefinedCachedHeight = -1.0f;
     return _cachedMaxHeight;
 }
 
+- (CGFloat)heightYStep
+{
+    CGFloat height = (_chartHeight / _numberOfYAxis);
+    return height;
+}
+
 #pragma mark - Reload Data
 
 - (void)reloadData
@@ -193,7 +266,7 @@ CGFloat static const kSYChartLineUndefinedCachedHeight = -1.0f;
 - (void)reloadDataWithAnimate:(BOOL)animate
 {
     [self reloadChartDataSource];
-    _hideYAxis ? : [self reloadChartYAxis];
+    [self reloadChartYAxis];
     [self reloadLineWithAnimate:animate];
 }
 
@@ -236,34 +309,37 @@ CGFloat static const kSYChartLineUndefinedCachedHeight = -1.0f;
         }
         [dataArray addObject:barArray];
     }
-    _scrollView.contentSize = CGSizeMake(contentWidth, 0);
+    _scrollView.contentSize = CGSizeMake(contentWidth, 0.0);
     _chartDataSource = [[NSMutableArray alloc] initWithArray:dataArray];
 }
 
 - (void)reloadChartYAxis
 {
-    for (UIView *view in self.subviews)
+    if (!_hideYAxis)
     {
-        if ([view isKindOfClass:[UILabel class]])
+        for (UIView *view in self.subviews)
         {
-            [view removeFromSuperview];
+            if ([view isKindOfClass:[UILabel class]])
+            {
+                [view removeFromSuperview];
+            }
         }
-    }
-    
-    CGFloat chartYOffset = _oppositeY ? SYChart_LINE_CHART_TOP_PADDING : _chartHeight + SYChart_LINE_CHART_TOP_PADDING;
-    CGFloat unitHeight = _chartHeight / _numberOfYAxis;
-    CGFloat unitValue = ([self.maxValue floatValue] - [_minValue floatValue]) / _numberOfYAxis;
-    for (NSInteger i = 0; i <= _numberOfYAxis; i ++)
-    {
-        UILabel *textLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, chartYOffset - 10, SYChart_LINE_CHART_LEFT_PADDING - 2, 20)];
-        textLabel.textColor = _colorOfYText;
-        textLabel.textAlignment = NSTextAlignmentRight;
-        textLabel.font = [UIFont systemFontOfSize:_yFontSize];
-        textLabel.numberOfLines = 0;
-        textLabel.text = [NSString stringWithFormat:@"%.0f%@", unitValue * i + [_minValue floatValue], _unitOfYAxis];
-        [self addSubview:textLabel];
         
-        chartYOffset += _oppositeY ? unitHeight : -unitHeight;
+        CGFloat chartYOffset = (_oppositeY ? SYChart_LINE_CHART_TOP_PADDING : (_chartHeight + SYChart_LINE_CHART_TOP_PADDING));
+        CGFloat unitHeight = (_chartHeight / _numberOfYAxis);
+        CGFloat unitValue = ([self.maxValue floatValue] - [_minValue floatValue]) / _numberOfYAxis;
+        for (NSInteger i = 0; i <= _numberOfYAxis; i ++)
+        {
+            UILabel *textLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, (chartYOffset - SYChart_LINE_CHART_YTITLELABEL_HEIGHT / 2), (SYChart_LINE_CHART_LEFT_PADDING - 2), SYChart_LINE_CHART_YTITLELABEL_HEIGHT)];
+            textLabel.textColor = _colorOfYText;
+            textLabel.textAlignment = NSTextAlignmentRight;
+            textLabel.font = [UIFont systemFontOfSize:_yFontSize];
+            textLabel.numberOfLines = 0;
+            textLabel.text = [NSString stringWithFormat:@"%.0f%@", (unitValue * i + [_minValue floatValue]), _unitOfYAxis];
+            [self addSubview:textLabel];
+            
+            chartYOffset += (_oppositeY ? unitHeight : -unitHeight);
+        }
     }
 }
 
@@ -306,8 +382,8 @@ CGFloat static const kSYChartLineUndefinedCachedHeight = -1.0f;
             pointLayer.lineWidth = SYChart_LINE_WIDTH_DEFAULT;
         }
         
-        CGFloat xOffset = _dotPadding / 2;
-        CGFloat chartYOffset = _oppositeY ? SYChart_LINE_CHART_TOP_PADDING : _chartHeight + SYChart_LINE_CHART_TOP_PADDING;
+        CGFloat xOffset = (_dotPadding / 2);
+        CGFloat chartYOffset = (_oppositeY ? SYChart_LINE_CHART_TOP_PADDING : (_chartHeight + SYChart_LINE_CHART_TOP_PADDING));
         UIBezierPath *lineBezierPath = [UIBezierPath bezierPath];
         UIBezierPath *pointBezierPath = [UIBezierPath bezierPath];
         for (NSInteger index = 0; index < array.count; index ++)
@@ -324,14 +400,14 @@ CGFloat static const kSYChartLineUndefinedCachedHeight = -1.0f;
                 }
                 else
                 {
-                    [pointBezierPath moveToPoint:CGPointMake(xOffset + _dotRadius, yOffset)];
-                    [pointBezierPath addArcWithCenter:CGPointMake(xOffset, yOffset) radius:_dotRadius startAngle:0 endAngle:2 * M_PI clockwise:YES];
+                    [pointBezierPath moveToPoint:CGPointMake((xOffset + _dotRadius), yOffset)];
+                    [pointBezierPath addArcWithCenter:CGPointMake(xOffset, yOffset) radius:_dotRadius startAngle:0 endAngle:(2 * M_PI) clockwise:YES];
                 }
             }
             else
             {
                 [pointBezierPath moveToPoint:CGPointMake(xOffset + _dotRadius, yOffset)];
-                [pointBezierPath addArcWithCenter:CGPointMake(xOffset, yOffset) radius:_dotRadius startAngle:0 endAngle:2 * M_PI clockwise:YES];
+                [pointBezierPath addArcWithCenter:CGPointMake(xOffset, yOffset) radius:_dotRadius startAngle:0 endAngle:(2 * M_PI) clockwise:YES];
             }
             
             if (index == 0)
@@ -378,7 +454,6 @@ CGFloat static const kSYChartLineUndefinedCachedHeight = -1.0f;
                 }
             }
             
-//            NSTimeInterval delay = animate ? (array.count + 1) * 0.4 : 0.0;
             NSTimeInterval delay = (animate ? ((array.count + 1) * _animationTime) : 0.0);
             if ([self.delegate respondsToSelector:@selector(lineChartView:hintViewOfDotInLineNumber:index:)])
             {
@@ -388,6 +463,7 @@ CGFloat static const kSYChartLineUndefinedCachedHeight = -1.0f;
                     hintView.center = CGPointMake(xOffset, yOffset - CGRectGetHeight(hintView.bounds) / 2 - _dotRadius);
                     hintView.alpha = 0.0;
                     [_scrollView addSubview:hintView];
+                    
                     [UIView animateWithDuration:0.5 delay:delay options:UIViewAnimationOptionCurveEaseInOut animations:^{
                         hintView.alpha = 1.0;
                     } completion:nil];
@@ -411,14 +487,59 @@ CGFloat static const kSYChartLineUndefinedCachedHeight = -1.0f;
             
             if (lineNumber == 0 && [self.delegate respondsToSelector:@selector(lineChartView:titleAtLineNumber:)])
             {
-                UILabel *textLabel = [[UILabel alloc] initWithFrame:CGRectMake(xOffset - _dotPadding/2 + 4, _chartHeight + SYChart_LINE_CHART_TOP_PADDING, _dotPadding - 8, SYChart_LINE_CHART_TEXT_HEIGHT)];
+                UILabel *textLabel = [[UILabel alloc] initWithFrame:CGRectMake((xOffset - _dotPadding / 2 + 4), (_chartHeight + SYChart_LINE_CHART_TOP_PADDING), (_dotPadding - 8), SYChart_LINE_CHART_TEXT_HEIGHT)];
                 textLabel.textColor = _colorOfXText;
                 textLabel.numberOfLines = 0;
                 textLabel.textAlignment = NSTextAlignmentCenter;
                 textLabel.font = [UIFont systemFontOfSize:_xFontSize];
                 textLabel.numberOfLines = 0;
                 textLabel.text = [self.dataSource lineChartView:self titleAtLineNumber:index];
+                textLabel.backgroundColor = [UIColor clearColor];
+                textLabel.tag = (index + tagTextLabel);
+                
                 [_scrollView addSubview:textLabel];
+            }
+            
+            if (0 == lineNumber)
+            {
+                // X坐标轴刻度
+                UILabel *textLabel = (UILabel *)[_scrollView viewWithTag:(index + tagTextLabel)];
+                
+                UIBezierPath *xScaleBezierPath = [UIBezierPath bezierPath];
+                [xScaleBezierPath moveToPoint:CGPointMake((textLabel.frame.origin.x + CGRectGetWidth(textLabel.frame) / 2), (_chartHeight + SYChart_LINE_CHART_TOP_PADDING + 1))];
+                [xScaleBezierPath addLineToPoint:CGPointMake((textLabel.frame.origin.x + CGRectGetWidth(textLabel.frame) / 2), (_chartHeight + SYChart_LINE_CHART_TOP_PADDING) + 1 - 3)];
+                
+                CAShapeLayer *xScaleLayer = [[CAShapeLayer alloc] init];
+                xScaleLayer.path = xScaleBezierPath.CGPath;
+                xScaleLayer.strokeColor = _colorOfXAxis.CGColor;
+                xScaleLayer.fillColor = _colorOfXAxis.CGColor;
+                
+                [_scrollView.layer addSublayer:xScaleLayer];
+                
+                if (SYChartGridsTypeGridDotted == _gridsType || SYChartGridsTypeGridSolid == _gridsType || SYChartGridsTypeVerticalDotted == _gridsType || SYChartGridsTypeVerticalSolid == _gridsType)
+                {
+                    UIBezierPath *gridsVerticalBezierPath = [UIBezierPath bezierPath];
+                    [gridsVerticalBezierPath moveToPoint:CGPointMake((textLabel.frame.origin.x + CGRectGetWidth(textLabel.frame) / 2), (_chartHeight + SYChart_LINE_CHART_TOP_PADDING + 1 - 3))];
+                    [gridsVerticalBezierPath addLineToPoint:CGPointMake((textLabel.frame.origin.x + CGRectGetWidth(textLabel.frame) / 2), (SYChart_LINE_CHART_TOP_PADDING))];
+                    
+                    CAShapeLayer *gridsVerticalLayer = [[CAShapeLayer alloc] init];
+                    gridsVerticalLayer.strokeColor = _gridsLineColor.CGColor;
+                    gridsVerticalLayer.fillColor = _gridsLineColor.CGColor;
+                    gridsVerticalLayer.lineWidth = _gridsLineWidth;
+                    if (SYChartGridsTypeGridDotted == _gridsType || SYChartGridsTypeVerticalDotted == _gridsType)
+                    {
+                        // 虚线类型
+                        CGFloat dash[] = {6, 5};
+                        [gridsVerticalBezierPath setLineDash:dash count:2 phase:0];
+                        
+                        gridsVerticalLayer.lineJoin = kCALineJoinRound;
+                        gridsVerticalLayer.lineCap = kCALineCapRound;
+                        gridsVerticalLayer.lineDashPattern = @[@(6), @(5)];
+                    }
+                    gridsVerticalLayer.path = gridsVerticalBezierPath.CGPath;
+                    
+                    [_scrollView.layer addSublayer:gridsVerticalLayer];
+                }
             }
             
             xOffset += _dotPadding;
@@ -436,29 +557,12 @@ CGFloat static const kSYChartLineUndefinedCachedHeight = -1.0f;
             animation.fromValue = @(0.0);
             animation.toValue = @(1.0);
             animation.repeatCount = 1.0;
-//            animation.duration = array.count * 0.4;
             animation.duration = array.count * _animationTime;
             animation.fillMode = kCAFillModeForwards;
             animation.delegate = self;
             [lineLayer addAnimation:animation forKey:@"animation"];
         }
     }
-}
-
-- (void)drawChartGridsWithContext:(CGContextRef)context
-{
-    //    CGFloat chartYOffset = ((_oppositeY ? SYChart_LINE_CHART_TOP_PADDING : _chartHeight + SYChart_LINE_CHART_TOP_PADDING) - 20.0 ) / 2;
-    //    CGFloat unitHeight = _chartHeight / _numberOfYAxis;
-    //    CGFloat unitValue = ([self.maxValue floatValue] - [_minValue floatValue]) / _numberOfYAxis;
-    //
-    //    for (NSInteger i = 0; i <= _numberOfYAxis; i ++)
-    //    {
-    //        CGContextSetLineWidth(context, _gridsLineWidth);
-    //        CGContextSetStrokeColorWithColor(context, _gridsLineColor.CGColor);
-    //        CGContextMoveToPoint(context, SYChart_LINE_CHART_LEFT_PADDING - 1, chartYOffset);
-    //        CGContextAddLineToPoint(context, SYChart_LINE_CHART_LEFT_PADDING - 1, chartYOffset);
-    //        CGContextStrokePath(context);
-    //    }
 }
 
 @end

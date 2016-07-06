@@ -169,21 +169,13 @@ CGFloat static const kSYChartLineUndefinedValue = -1.0f;
 @property (nonatomic, assign) BOOL solidDot;
 /// 数据点的半径大小
 @property (nonatomic, assign) CGFloat dotRadius;
-
 /// 数据点颜色
 @property (nonatomic, strong) UIColor *dotColor;
+///// 数据点是否隐藏（默认显示，即YES）
+//@property (nonatomic, assign) BOOL showDot;
 
 /// 画线动画时间（默认0.3）
 @property (nonatomic, assign) NSTimeInterval animationTime;
-
-
-// 开发中... begin
-
-/// 曲线样式（是否平滑。默认直角）
-@property (nonatomic, assign) BOOL isSmoothLines;
-/// 曲线类型（虚线，或实线。默认YES，即是实线）
-@property (nonatomic, assign) BOOL isSolidLines;
-
 
 /**
  *
@@ -193,15 +185,20 @@ CGFloat static const kSYChartLineUndefinedValue = -1.0f;
  *
  */
 @property (nonatomic, assign) SYChartGridsType gridsType;
-/// 网络线条大小
+/// 网络线条大小（默认0.5）
 @property (nonatomic, assign) CGFloat gridsLineWidth;
-/// 网格线条颜色
+/// 网格线条颜色（默认灰色）
 @property (nonatomic, strong) UIColor *gridsLineColor;
 
-/// Y坐标值显示类型（坐标轴左侧、坐标轴右侧；默认坐标轴左侧）
-@property (nonatomic, assign) SYChartYAxisType yAxisType;
-/// Y坐标轴是否显示刻度（默认不显示）
-@property (nonatomic, assign) BOOL showYScale;
+
+
+// 开发中... begin
+
+/// 曲线样式（是否平滑。默认直角）
+@property (nonatomic, assign) BOOL isSmoothLines;
+/// 曲线类型（虚线，或实线。默认YES，即是实线）
+@property (nonatomic, assign) BOOL isSolidLines;
+
 
 // 开发中... end
 

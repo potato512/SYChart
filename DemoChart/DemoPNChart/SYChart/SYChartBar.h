@@ -178,9 +178,6 @@
 @property (nonatomic, assign) NSTimeInterval animationTime;
 
 
-// 开发中... begin
-
-
 /**
  *
  *  网格显示类型（默认不显示）
@@ -189,17 +186,11 @@
  *
  */
 @property (nonatomic, assign) SYChartGridsType gridsType;
-/// 网络线条大小
+/// 网络线条大小（默认0.5）
 @property (nonatomic, assign) CGFloat gridsLineWidth;
-/// 网格线条颜色
+/// 网格线条颜色（默认灰色）
 @property (nonatomic, strong) UIColor *gridsLineColor;
 
-/// Y坐标值显示类型（坐标轴左侧、坐标轴右侧；默认坐标轴左侧）
-@property (nonatomic, assign) SYChartYAxisType yAxisType;
-/// Y坐标轴是否显示刻度（默认不显示）
-@property (nonatomic, assign) BOOL showYScale;
-
-// 开发中... end
 
 
 /**

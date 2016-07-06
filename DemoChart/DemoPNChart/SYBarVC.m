@@ -71,6 +71,11 @@
     
     chartBar.animationTime = 1.2;
     
+    chartBar.gridsLineColor = [UIColor brownColor];
+    chartBar.gridsType = SYChartGridsTypeGridDotted;
+    chartBar.gridsLineWidth = 0.5;
+
+    
     // 刷新数据
 //    [chartBar reloadData];
     [chartBar reloadDataWithAnimate:YES];

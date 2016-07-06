@@ -50,14 +50,15 @@
     [self.view addSubview:chartLine];
     chartLine.backgroundColor = [UIColor colorWithWhite:0.5 alpha:0.1];
     chartLine.dotRadius = 5;
-    chartLine.dotColor = [UIColor orangeColor];
+    chartLine.dotColor = [UIColor greenColor];
     chartLine.solidDot = NO;
+//    chartLine.showDot = NO;
     chartLine.oppositeY = NO;
     chartLine.dataSource = self;
     chartLine.delegate = self;
     chartLine.minValue = @0;
     chartLine.maxValue = @100;
-    chartLine.numberOfYAxis = 5;
+    chartLine.numberOfYAxis = 10;
     chartLine.colorOfXAxis = [UIColor redColor];
     chartLine.colorOfXText = [UIColor greenColor];
     chartLine.colorOfYAxis = [UIColor orangeColor];
@@ -68,10 +69,10 @@
     
     // 功能未完成
 //    chartLine.isSmoothLines = YES;
-//    
-//    chartLine.gridsLineColor = [UIColor redColor];
-//    chartLine.gridsLineType = SYChartLineGridsTypeHorizontalSolid;
-//    chartLine.gridsLineWidth = 1.0;
+    
+    chartLine.gridsLineColor = [UIColor brownColor];
+    chartLine.gridsType = SYChartGridsTypeGridDotted;
+    chartLine.gridsLineWidth = 0.5;
     
     chartLine.animationTime = 0.1;
     
