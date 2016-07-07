@@ -62,26 +62,33 @@ static NSInteger const tagTextLabel = 1000;
     self.backgroundColor = [UIColor clearColor];
     CGFloat width = self.bounds.size.width;
     _chartHeight = (self.bounds.size.height - SYChart_LINE_CHART_TOP_PADDING - SYChart_LINE_CHART_TEXT_HEIGHT);
-    _dotRadius = (SYChart_LINE_WIDTH_DEFAULT / 2 * 3);
     
-    _minValue = @0;
-    
+    _minValue = @(0);
     _unitOfYAxis = @"";
     _numberOfYAxis = 5;
-    _colorOfXAxis = _colorOfXText = [UIColor blackColor];
     _colorOfYAxis = _colorOfYText = [UIColor blackColor];
     _yFontSize = 14.0;
+    
+    _colorOfXAxis = _colorOfXText = [UIColor blackColor];
     _xFontSize = 14.0;
     
     _oppositeY = NO;
+    _hideYAxis = NO;
     
-    _isSmoothLines = NO;
+    _isSolidDot = YES;
+    _dotRadius = (SYChart_LINE_WIDTH_DEFAULT / 2 * 3);
+    _dotTitleBackgroundColor = [UIColor colorWithWhite:1.0 alpha:0.9];
+    _dotTitleColor = [UIColor colorWithWhite:0.2 alpha:1.0];
+    _dotTitleFont = [UIFont systemFontOfSize:12.0];
     
     _animationTime = 0.3;
     
     _gridsType = SYChartGridsTypeNone;
     _gridsLineWidth = 0.5;
     _gridsLineColor = [UIColor lightGrayColor];
+    
+    _isSmoothLines = NO;
+    _isSolidLines = YES;
     
     _cachedMaxHeight = kSYChartLineUndefinedCachedHeight;
     _cachedMinHeight = kSYChartLineUndefinedCachedHeight;
@@ -360,7 +367,7 @@ static NSInteger const tagTextLabel = 1000;
             lineLayer.strokeColor = color;
             lineLayer.fillColor = [UIColor clearColor].CGColor;
             pointLayer.strokeColor = (_dotColor ? _dotColor.CGColor : color);
-            pointLayer.fillColor = (_dotColor ? _dotColor.CGColor : [UIColor whiteColor].CGColor);
+            pointLayer.fillColor = (_dotColor ? _dotColor.CGColor : color);
         }
         else
         {
@@ -368,7 +375,7 @@ static NSInteger const tagTextLabel = 1000;
             lineLayer.strokeColor = color;
             lineLayer.fillColor = [UIColor clearColor].CGColor;
             pointLayer.strokeColor = (_dotColor ? _dotColor.CGColor : color);
-            pointLayer.fillColor = (_dotColor ? _dotColor.CGColor : [UIColor whiteColor].CGColor);
+            pointLayer.fillColor = (_dotColor ? _dotColor.CGColor : color);
         }
         
         if ([self.delegate respondsToSelector:@selector(lineChartView:lineWidthWithLineNumber:)])
@@ -395,6 +402,10 @@ static NSInteger const tagTextLabel = 1000;
                 UIView *view = [self.delegate lineChartView:self pointViewOfDotInLineNumber:lineNumber index:index];
                 if (view)
                 {
+                    // 重置_dotRadius大小
+                    CGFloat height = CGRectGetHeight(view.bounds) / 2;
+                    _dotRadius = height - (1.5 < height ? 1.0 : 0.0);
+                    
                     view.center = CGPointMake(xOffset, yOffset);
                     [_scrollView addSubview:view];
                 }
@@ -424,34 +435,30 @@ static NSInteger const tagTextLabel = 1000;
                 CGPoint fromPoint = CGPointMake(currentPoint.x + xDistance, currentPoint.y + yDistance);
                 CGPoint toPoint = CGPointMake(xOffset - xDistance, yOffset - yDistance);
                 
-                if (_isSmoothLines)
+                if (_isSmoothLines && 4 <= array.count)
                 {
-                    [lineBezierPath moveToPoint:fromPoint];
+                    // 平滑的线
+                    lineBezierPath.lineCapStyle = kCGLineCapRound;  // 线条拐角
+                    lineBezierPath.lineJoinStyle = kCGLineCapRound; // 终点处理
                     
-                    CGPoint midPoint = CGPointMake((fromPoint.x + toPoint.x) / 2, (fromPoint.y + toPoint.y) / 2);
-                    CGPoint controlPoint = midPoint;
-                    CGFloat diffY = abs((int) (toPoint.y - controlPoint.y));
-                    if (fromPoint.y < toPoint.y)
-                    {
-                        controlPoint.y += diffY;
-                    }
-                    else if (fromPoint.y > toPoint.y)
-                    {
-                        controlPoint.y -= diffY;
-                    }
-                    
-                    [lineBezierPath addQuadCurveToPoint:midPoint controlPoint:controlPoint];
-                    [lineBezierPath addQuadCurveToPoint:toPoint controlPoint:controlPoint];
+                    CGPoint pointBegin = fromPoint;
+                    CGPoint pointEnd = toPoint;
+                    CGPoint pointMiddle = [[self class] middlePoint:pointBegin point:pointEnd];
+                    [lineBezierPath moveToPoint:pointBegin];
+                    [lineBezierPath addQuadCurveToPoint:pointMiddle
+                                           controlPoint:[[self class] controlPoint:pointMiddle point:pointBegin]];
+                    [lineBezierPath addQuadCurveToPoint:pointEnd
+                                           controlPoint:[[self class] controlPoint:pointMiddle point:pointEnd]];
                 }
                 else
                 {
                     [lineBezierPath moveToPoint:fromPoint];
                     [lineBezierPath addLineToPoint:toPoint];
-                    
-                    [lineBezierPath moveToPoint:CGPointMake(xOffset - _dotRadius, yOffset)];
-                    [lineBezierPath addArcWithCenter:CGPointMake(xOffset, yOffset) radius:_dotRadius startAngle:-M_PI endAngle:M_PI clockwise:YES];
-                    [lineBezierPath moveToPoint:CGPointMake(xOffset, yOffset)];
                 }
+                
+                [lineBezierPath moveToPoint:CGPointMake(xOffset - _dotRadius, yOffset)];
+                [lineBezierPath addArcWithCenter:CGPointMake(xOffset, yOffset) radius:_dotRadius startAngle:-M_PI endAngle:M_PI clockwise:YES];
+                [lineBezierPath moveToPoint:CGPointMake(xOffset, yOffset)];
             }
             
             NSTimeInterval delay = (animate ? ((array.count + 1) * _animationTime) : 0.0);
@@ -477,6 +484,9 @@ static NSInteger const tagTextLabel = 1000;
                     SYChartInfromationView *informationView = [[SYChartInfromationView alloc] initWithText:information];
                     informationView.center = CGPointMake(xOffset, yOffset - CGRectGetHeight(informationView.bounds) / 2 - _dotRadius);
                     informationView.alpha = 0.0;
+                    informationView.informationViewBackgroundColor = _dotTitleBackgroundColor;
+                    informationView.informationViewTextColor = _dotTitleColor;
+                    informationView.informationViewTextFont = _dotTitleFont;
                     [_scrollView addSubview:informationView];
                     
                     [UIView animateWithDuration:0.5 delay:delay options:UIViewAnimationOptionCurveEaseInOut animations:^{
@@ -544,9 +554,18 @@ static NSInteger const tagTextLabel = 1000;
             
             xOffset += _dotPadding;
         }
+        
+        if (!_isSolidLines)
+        {
+            // 虚线类型
+            lineLayer.lineJoin = kCALineJoinRound;
+            lineLayer.lineCap = kCALineCapRound;
+            lineLayer.lineDashPattern = @[@(6), @(5)];
+        }
         lineLayer.path = lineBezierPath.CGPath;
         pointLayer.path = pointBezierPath.CGPath;
-        pointLayer.fillColor = (_solidDot ? (_dotColor ? _dotColor.CGColor : lineLayer.strokeColor) : [UIColor clearColor].CGColor);
+        CGColorRef pointFillColor = (_isSolidDot ? (_dotColor ? _dotColor.CGColor : lineLayer.strokeColor) : [UIColor clearColor].CGColor);
+        pointLayer.fillColor = pointFillColor;
         
         [_scrollView.layer insertSublayer:lineLayer atIndex:(unsigned)lineNumber];
         [_scrollView.layer insertSublayer:pointLayer above:lineLayer];
@@ -563,6 +582,38 @@ static NSInteger const tagTextLabel = 1000;
             [lineLayer addAnimation:animation forKey:@"animation"];
         }
     }
+}
+
+
++ (CGPoint)middlePoint:(CGPoint)pointBegin point:(CGPoint)pointEnd
+{
+    CGPoint point = CGPointMake((pointBegin.x + pointEnd.x) / 2, (pointBegin.y + pointEnd.y) / 2);
+    return point;
+}
+
++ (CGPoint)controlPoint:(CGPoint)pointBegin point:(CGPoint)pointEnd
+{
+    CGPoint point = [self middlePoint:pointBegin point:pointEnd];
+    CGFloat diffY = abs((int)(pointEnd.y - point.y));
+    if (pointBegin.y < pointEnd.y)
+    {
+        point.y += diffY;
+    }
+    else if (pointBegin.y > pointEnd.y)
+    {
+        point.y -= diffY;
+    }
+    
+    return point;
+}
+
+
+#pragma mark - getter
+
+- (CGFloat)widthInfoView
+{
+    CGFloat width = CGRectGetWidth(self.bounds) - SYChart_LINE_CHART_LEFT_PADDING - SYChart_LINE_CHART_RIGHT_PADDING;
+    return width;
 }
 
 @end

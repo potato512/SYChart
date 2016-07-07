@@ -24,14 +24,13 @@
  *
  *  @return Y垂直坐标曲线点个数
  */
-- (NSUInteger)lineChartView:(SYChartLine *)charLine lineCountAtLineNumber:(NSInteger)number;
+- (NSUInteger)lineChartView:(SYChartLine *)charLine lineCountAtLineNumber:(NSInteger)lineNumber;
 
 /**
  *  Y垂直坐标信息
  *
  *  @param charLine   当前曲线视图 SYChartLine
  *  @param lineNumber 当前曲线视图 SYChartLine 的线条索引
- *  @param index      当前曲线视图 SYChartLine 的索引
  *
  *  @return Y垂直坐标信息
  */
@@ -52,11 +51,11 @@
  *  X水平坐标标题
  *
  *  @param charLine   当前曲线视图 SYChartLine
- *  @param number     当前曲线视图 SYChartLine 的线条索引
+ *  @param index      当前曲线视图 SYChartLine 的线条索引
  *
  *  @return X水平坐标标题
  */
-- (NSString *)lineChartView:(SYChartLine *)charLine titleAtLineNumber:(NSInteger)number;
+- (NSString *)lineChartView:(SYChartLine *)charLine titleAtLineNumber:(NSInteger)index;
 
 @end
 
@@ -84,7 +83,7 @@
 - (CGFloat)lineChartView:(SYChartLine *)charLine lineWidthWithLineNumber:(NSInteger)lineNumber;
 
 /**
- *  曲线间隔大小
+ *  曲线数据点间距（可设置成信息不滚动样式。默认60.0）
  *
  *  @param charLine   当前曲线视图 SYChartLine
  *
@@ -133,50 +132,73 @@ CGFloat static const kSYChartLineUndefinedValue = -1.0f;
 
 @interface SYChartLine : UIView
 
+#pragma mark - 代理对象
+
 /// 数据源代理
 @property (nonatomic, weak) id<SYChartLineDataSource> dataSource;
 /// line图表代理
 @property (nonatomic, weak) id<SYChartLineDelegate> delegate;
 
-/// 最小值，默认为0
+#pragma mark - 坐标轴属性
+
+#pragma mark Y坐标轴
+
+/// 最小值（默认为0）
 @property (nonatomic, strong) id minValue;
 /// 最大值，如果未设置计算数据源中的最大值
 @property (nonatomic, strong) id maxValue;
 /// y轴数据标记个数（默认5个）
 @property (nonatomic, assign) NSInteger numberOfYAxis;
-/// y轴数据单位
+/// y轴数据单位（默认为空）
 @property (nonatomic, copy) NSString *unitOfYAxis;
-/// y轴的颜色
+/// y轴的颜色（默认黑色）
 @property (nonatomic, strong) UIColor *colorOfYAxis;
-/// y轴文本数据颜色
+/// y轴文本数据颜色（默认黑色）
 @property (nonatomic, strong) UIColor *colorOfYText;
-/// y轴文字大小
+/// y轴文字大小（默认14号）
 @property (nonatomic, assign) CGFloat yFontSize;
 
-/// y轴数据反向排列
+/// y轴数据反向排列（默认NO，即正序）
 @property (nonatomic, assign) BOOL oppositeY;
-/// 隐藏y轴
+/// 是否隐藏y轴（默认NO，即显示）
 @property (nonatomic, assign) BOOL hideYAxis;
 
-/// x轴的颜色
+#pragma mark X坐标轴
+
+/// x轴的颜色（默认黑色）
 @property (nonatomic, strong) UIColor *colorOfXAxis;
-/// x轴文本数据颜色
+/// x轴文本数据颜色（默认黑色）
 @property (nonatomic, strong) UIColor *colorOfXText;
-/// x轴文本文字大小
+/// x轴文本文字大小（默认14号）
 @property (nonatomic, assign) CGFloat xFontSize;
 
-/// 数据点是否为实心点
-@property (nonatomic, assign) BOOL solidDot;
-/// 数据点的半径大小
+#pragma mark - 数据点
+
+/// 数据点是否为实心点（默认YES，即实心）
+@property (nonatomic, assign) BOOL isSolidDot;
+/// 数据点的半径大小（默认大小3.0）
 @property (nonatomic, assign) CGFloat dotRadius;
-/// 数据点颜色
+/// 数据点颜色（默认与曲线同颜色）
 @property (nonatomic, strong) UIColor *dotColor;
-///// 数据点是否隐藏（默认显示，即YES）
-//@property (nonatomic, assign) BOOL showDot;
+/// 数据点信息标题背景颜色（默认白色）
+@property (nonatomic, strong) UIColor *dotTitleBackgroundColor;
+/// 数据点信息标题字体颜色（默认黑色）
+@property (nonatomic, strong) UIColor *dotTitleColor;
+/// 数据点信息标题字体大小（默认12号）
+@property (nonatomic, strong) UIFont *dotTitleFont;
+
+#pragma mark - 曲线
+/// 曲线类型（虚线，或实线。默认YES，即是实线）
+@property (nonatomic, assign) BOOL isSolidLines;
+/// 曲线样式（是否平滑曲线。默认NO，即直角。注：至少四个数据点有才效）
+@property (nonatomic, assign) BOOL isSmoothLines;
+
+#pragma mark - 动画时间
 
 /// 画线动画时间（默认0.3）
 @property (nonatomic, assign) NSTimeInterval animationTime;
 
+#pragma mark - 网格线
 /**
  *
  *  网格显示类型（默认不显示）
@@ -190,17 +212,12 @@ CGFloat static const kSYChartLineUndefinedValue = -1.0f;
 /// 网格线条颜色（默认灰色）
 @property (nonatomic, strong) UIColor *gridsLineColor;
 
+#pragma mark - getter属性
 
+/// 信息显示视图宽度
+@property (nonatomic, assign, readonly) CGFloat widthInfoView;
 
-// 开发中... begin
-
-/// 曲线样式（是否平滑。默认直角）
-@property (nonatomic, assign) BOOL isSmoothLines;
-/// 曲线类型（虚线，或实线。默认YES，即是实线）
-@property (nonatomic, assign) BOOL isSolidLines;
-
-
-// 开发中... end
+#pragma mark - 数据刷新
 
 /**
  *  刷新数据（默认带动画）

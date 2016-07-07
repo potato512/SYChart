@@ -31,6 +31,7 @@ CGFloat const kSYChartInfromationViewTipHeight = 5.0f;
     {
         self.backgroundColor = [UIColor clearColor];
         self.layer.cornerRadius = kSYChartInfromationViewCornerRadius;
+        self.layer.masksToBounds = YES;
         
         self.textLabel.text = text;
         [self addSubview:self.textLabel];
@@ -60,7 +61,7 @@ CGFloat const kSYChartInfromationViewTipHeight = 5.0f;
         CGContextAddLineToPoint(context, CGRectGetMidX(rect) - kSYChartInfromationViewTipWidth / 2, kSYChartInfromationViewTextHeight);
         CGContextAddLineToPoint(context, CGRectGetMidX(rect) + kSYChartInfromationViewTipWidth / 2, kSYChartInfromationViewTextHeight);
         CGContextClosePath(context);
-        CGContextSetFillColorWithColor(context, kSYChartInfromationViewColor.CGColor);
+        CGContextSetFillColorWithColor(context, _informationViewBackgroundColor.CGColor);
         CGContextFillPath(context);
     }
     CGContextRestoreGState(context);
@@ -84,6 +85,26 @@ CGFloat const kSYChartInfromationViewTipHeight = 5.0f;
     }
     
     return _textLabel;
+}
+
+#pragma mark - setter
+
+- (void)setInformationViewBackgroundColor:(UIColor *)informationViewBackgroundColor
+{
+    _informationViewBackgroundColor = informationViewBackgroundColor;
+    self.textLabel.backgroundColor = _informationViewBackgroundColor;
+}
+
+- (void)setInformationViewTextColor:(UIColor *)informationViewTextColor
+{
+    _informationViewTextColor = informationViewTextColor;
+    self.textLabel.textColor = _informationViewTextColor;
+}
+
+- (void)setInformationViewTextFont:(UIFont *)informationViewTextFont
+{
+    _informationViewTextFont = informationViewTextFont;
+    self.textLabel.font = _informationViewTextFont;
 }
 
 @end
