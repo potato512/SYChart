@@ -53,11 +53,11 @@
  *  Y轴标题
  *
  *  @param chartBar 当前柱状视图 SYChartBar
- *  @param section  当前柱状视图 SYChartBar 的线条索引
+ *  @param index  当前柱状视图 SYChartBar 的线条索引
  *
  *  @return Y轴标题
  */
-- (NSString *)barChartView:(SYChartBar *)chartBar titleOfBarInSection:(NSInteger)section;
+- (NSString *)barChartView:(SYChartBar *)chartBar titleOfBarInSection:(NSInteger)index;
 
 
 @end
@@ -149,38 +149,57 @@
 
 @interface SYChartBar : UIView
 
+#pragma mark - 代理对象
+
 /// 数据源代理
 @property (nonatomic, weak) id<SYChartBarDataSource> dataSource;
 /// bar图表对象
 @property (nonatomic, weak) id<SYChartBarDelegate> delegate;
 
+#pragma mark - 坐标轴
+
+#pragma mark Y坐标轴
+
 /// 最大值，如果未设置计算数据源中的最大值
 @property (nonatomic, strong) id maxValue;
-/// y轴数据标记个数
+/// y轴数据标记个数（默认5个）
 @property (nonatomic, assign) NSInteger numberOfYAxis;
-/// y轴数据单位
+/// y轴数据单位（默认为空）
 @property (nonatomic, copy) NSString *unitOfYAxis;
-/// y轴的颜色
+/// y轴的颜色（默认黑色）
 @property (nonatomic, strong) UIColor *colorOfYAxis;
-/// y轴文本数据颜色
+/// y轴文本数据颜色（默认黑色）
 @property (nonatomic, strong) UIColor *colorOfYText;
-/// y轴文本文字大小
+/// y轴文本文字大小（默认14号）
 @property (nonatomic, assign) CGFloat yFontSize;
 
-/// x轴的颜色
+#pragma mark X坐标轴
+
+/// x轴的颜色（默认黑色）
 @property (nonatomic, strong) UIColor *colorOfXAxis;
-/// x轴文本数据颜色
+/// x轴文本数据颜色（默认黑色）
 @property (nonatomic, strong) UIColor *colorOfXText;
-/// x轴文本文字大小
+/// x轴文本文字大小（默认14号）
 @property (nonatomic, assign) CGFloat xFontSize;
+
+#pragma mark - 数据点
+
+/// 数据点信息标题背景颜色（默认白色）
+@property (nonatomic, strong) UIColor *dotTitleBackgroundColor;
+/// 数据点信息标题字体颜色（默认黑色）
+@property (nonatomic, strong) UIColor *dotTitleColor;
+/// 数据点信息标题字体大小（默认12号）
+@property (nonatomic, strong) UIFont *dotTitleFont;
+
+#pragma mark - 动画时间
 
 /// bar动画时间（默认0.6）
 @property (nonatomic, assign) NSTimeInterval animationTime;
 
-
+#pragma mark - 网格线
 /**
  *
- *  网格显示类型（默认不显示）
+ *  网格显示类型（默认不显示。注意：只有水平虚线，或水平实线）
  *  样式：网络栅格、水平虚线、水平实线、垂直虚线、垂直实线
  *  显示X轴水平条数与 numberOfYAxis 个数有关
  *
@@ -191,7 +210,7 @@
 /// 网格线条颜色（默认灰色）
 @property (nonatomic, strong) UIColor *gridsLineColor;
 
-
+#pragma mark - 刷新数据
 
 /**
  *  刷新数据（默认动画模式）

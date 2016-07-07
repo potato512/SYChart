@@ -62,15 +62,22 @@ static NSInteger const tagTextLabel = 1000;
     self.opaque = NO;
     self.backgroundColor = [UIColor clearColor];
     CGFloat width = self.bounds.size.width;
-    _chartHeight = self.bounds.size.height - SYChart_BAR_CHART_TOP_PADDING - SYChart_BAR_CHART_TEXT_HEIGHT;
+    _chartHeight = (self.bounds.size.height - SYChart_BAR_CHART_TOP_PADDING - SYChart_BAR_CHART_TEXT_HEIGHT);
     
     _unitOfYAxis = @"";
     _numberOfYAxis = 5;
     _cachedMaxHeight = kSYChartBarUndefinedCachedHeight;
     _cachedMinHeight = kSYChartBarUndefinedCachedHeight;
     
+    _colorOfYAxis = _colorOfYText = [UIColor blackColor];
     _yFontSize = 14.0;
+    
+    _colorOfXAxis = _colorOfXText = [UIColor blackColor];
     _xFontSize = 14.0;
+    
+    _dotTitleBackgroundColor = [UIColor colorWithWhite:1.0 alpha:0.9];
+    _dotTitleColor = [UIColor colorWithWhite:0.2 alpha:1.0];
+    _dotTitleFont = [UIFont systemFontOfSize:12.0];
     
     _animationTime = 0.6;
     
@@ -78,7 +85,7 @@ static NSInteger const tagTextLabel = 1000;
     _gridsLineWidth = 0.5;
     _gridsLineColor = [UIColor lightGrayColor];
     
-    _scrollView = [[UIScrollView alloc] initWithFrame:CGRectMake(SYChart_BAR_CHART_LEFT_PADDING, 0, width - SYChart_BAR_CHART_RIGHT_PADDING - SYChart_BAR_CHART_LEFT_PADDING, CGRectGetHeight(self.bounds))];
+    _scrollView = [[UIScrollView alloc] initWithFrame:CGRectMake(SYChart_BAR_CHART_LEFT_PADDING, 0, (width - SYChart_BAR_CHART_RIGHT_PADDING - SYChart_BAR_CHART_LEFT_PADDING), CGRectGetHeight(self.bounds))];
     _scrollView.backgroundColor = [UIColor clearColor];
     _scrollView.contentInset = UIEdgeInsetsMake(0, 0, 0, 0);
     _scrollView.showsHorizontalScrollIndicator = NO;
@@ -144,15 +151,15 @@ static NSInteger const tagTextLabel = 1000;
     CGContextAddLineToPoint(context, (width - SYChart_LINE_CHART_RIGHT_PADDING + 1 - 3), (SYChart_LINE_CHART_TOP_PADDING + _chartHeight + 1 + 3));
     CGContextStrokePath(context);
     
-    // X坐标轴刻度 在数据刷新方法" - (void)reloadDataWithAnimate:(BOOL)animate "中处理
+    // X坐标轴刻度 无
 }
 
-// 绘制网络（注意：只绘制水平线，垂直线在数据刷新方法" - (void)reloadDataWithAnimate:(BOOL)animate "中处理）
+// 绘制网络（注意：只绘制Y坐标轴水平线，垂直线无）
 - (void)drawChartGridsWithContext:(CGContextRef)context
 {
     CGPoint point;
     
-    if (SYChartGridsTypeGridDotted == _gridsType || SYChartGridsTypeGridSolid == _gridsType || SYChartGridsTypeHorizontalDotted == _gridsType || SYChartGridsTypeHorizontalSolid == _gridsType)
+    if (SYChartGridsTypeHorizontalDotted == _gridsType || SYChartGridsTypeHorizontalSolid == _gridsType)
     {
         CGContextSetStrokeColorWithColor(context, _gridsLineColor.CGColor);
         
@@ -182,7 +189,8 @@ static NSInteger const tagTextLabel = 1000;
 {
     CGFloat value = [rawHeight floatValue];
     CGFloat maxHeight = [self.maxValue floatValue];
-    return value/maxHeight * _chartHeight;
+    CGFloat height = value / maxHeight * _chartHeight;
+    return height;
 }
 
 - (id)maxValue
@@ -294,7 +302,7 @@ static NSInteger const tagTextLabel = 1000;
     {
         NSUInteger barCount = [self.dataSource barChartView:self numberOfBarsInSection:i];
         
-        contentWidth += barCount * _barWidth + (barCount - 1) * _paddingBar;
+        contentWidth += (barCount * _barWidth + (barCount - 1) * _paddingBar);
         contentWidth += _paddingSection;
         
         NSMutableArray *barArray = [NSMutableArray arrayWithCapacity:barCount];
@@ -319,12 +327,12 @@ static NSInteger const tagTextLabel = 1000;
         }
     }
     
-    CGFloat chartYOffset = _chartHeight + SYChart_BAR_CHART_TOP_PADDING;
-    CGFloat unitHeight = _chartHeight / _numberOfYAxis;
-    CGFloat unitValue = [self.maxValue floatValue] / _numberOfYAxis;
+    CGFloat chartYOffset = (_chartHeight + SYChart_BAR_CHART_TOP_PADDING);
+    CGFloat unitHeight = (_chartHeight / _numberOfYAxis);
+    CGFloat unitValue = ([self.maxValue floatValue] / _numberOfYAxis);
     for (NSInteger i = 0; i <= _numberOfYAxis; i ++)
     {
-        UILabel *textLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, chartYOffset - unitHeight * i - 10, SYChart_BAR_CHART_LEFT_PADDING - 2, 20)];
+        UILabel *textLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, (chartYOffset - unitHeight * i - 10), (SYChart_BAR_CHART_LEFT_PADDING - 2), 20)];
         textLabel.textColor = _colorOfYText;
         textLabel.textAlignment = NSTextAlignmentRight;
         textLabel.font = [UIFont systemFontOfSize:_yFontSize];
@@ -341,8 +349,8 @@ static NSInteger const tagTextLabel = 1000;
     [_scrollView.layer.sublayers makeObjectsPerformSelector:@selector(removeFromSuperlayer)];
     
     CGFloat xSection = _paddingSection;
-    CGFloat xOffset = _paddingSection + _barWidth / 2;
-    CGFloat chartYOffset = _chartHeight + SYChart_BAR_CHART_TOP_PADDING;
+    CGFloat xOffset = (_paddingSection + _barWidth / 2);
+    CGFloat chartYOffset = (_chartHeight + SYChart_BAR_CHART_TOP_PADDING);
     for (NSInteger section = 0; section < _sections; section ++)
     {
         NSArray *array = _chartDataSource[section];
@@ -352,7 +360,7 @@ static NSInteger const tagTextLabel = 1000;
             
             UIBezierPath *bezierPath = [UIBezierPath bezierPath];
             [bezierPath moveToPoint:CGPointMake(xOffset, chartYOffset)];
-            [bezierPath addLineToPoint:CGPointMake(xOffset, chartYOffset - height)];
+            [bezierPath addLineToPoint:CGPointMake(xOffset, (chartYOffset - height))];
             CAShapeLayer *shapeLayer = [[CAShapeLayer alloc] init];
             shapeLayer.lineWidth = _barWidth;
             shapeLayer.path = bezierPath.CGPath;
@@ -373,7 +381,7 @@ static NSInteger const tagTextLabel = 1000;
                 animation.fromValue = @(0.0);
                 animation.toValue = @(1.0);
                 animation.repeatCount = 1.0;
-                animation.duration = height / _chartHeight * _animationTime;
+                animation.duration = (height / _chartHeight * _animationTime);
                 animation.fillMode = kCAFillModeForwards;
                 animation.delegate = self;
                 [shapeLayer addAnimation:animation forKey:@"animation"];
@@ -385,7 +393,7 @@ static NSInteger const tagTextLabel = 1000;
                 UIView *hintView = [self.delegate barChartView:self hintViewOfBarInSection:section index:index];
                 if (hintView)
                 {
-                    hintView.center = CGPointMake(xOffset, chartYOffset - height - CGRectGetHeight(hintView.bounds)/2);
+                    hintView.center = CGPointMake(xOffset, (chartYOffset - height - CGRectGetHeight(hintView.bounds) / 2));
                     hintView.alpha = 0.0;
                     [_scrollView addSubview:hintView];
                     
@@ -400,8 +408,12 @@ static NSInteger const tagTextLabel = 1000;
                 if (information)
                 {
                     SYChartInfromationView *informationView = [[SYChartInfromationView alloc] initWithText:information];
-                    informationView.center = CGPointMake(xOffset, chartYOffset - height - CGRectGetHeight(informationView.bounds)/2);
+                    informationView.center = CGPointMake(xOffset, (chartYOffset - height - CGRectGetHeight(informationView.bounds) / 2));
                     informationView.alpha = 0.0;
+                    informationView.informationViewBackgroundColor = _dotTitleBackgroundColor;
+                    informationView.informationViewTextColor = _dotTitleColor;
+                    informationView.informationViewTextFont = _dotTitleFont;
+                    
                     [_scrollView addSubview:informationView];
                     
                     [UIView animateWithDuration:0.5 delay:delay options:UIViewAnimationOptionCurveEaseInOut animations:^{
@@ -410,17 +422,24 @@ static NSInteger const tagTextLabel = 1000;
                 }
             }
             
-            xOffset += _barWidth + (index == array.count - 1 ? 0 : _paddingBar);
+            xOffset += (_barWidth + (index == array.count - 1 ? 0 : _paddingBar));
         }
         
         if ([self.delegate respondsToSelector:@selector(barChartView:titleOfBarInSection:)])
         {
-            UILabel *textLabel = [[UILabel alloc] initWithFrame:CGRectMake(xSection - _paddingSection / 2, _chartHeight + SYChart_BAR_CHART_TOP_PADDING, xOffset - xSection + _paddingSection, SYChart_BAR_CHART_TEXT_HEIGHT)];
+            CGFloat originXBar = xOffset - 0.0 / 2;
+            CGFloat originYBar = (_chartHeight + SYChart_BAR_CHART_TOP_PADDING);
+            CGFloat widthBar = (array.count * _barWidth + (array.count - 1) * _paddingBar);
+            CGFloat heightBar = SYChart_BAR_CHART_TEXT_HEIGHT;
+            UILabel *textLabel = [[UILabel alloc] initWithFrame:CGRectMake(originXBar, originYBar, widthBar, heightBar)];
+//            UILabel *textLabel = [[UILabel alloc] initWithFrame:CGRectMake((xSection - _paddingSection / 2), (_chartHeight + SYChart_BAR_CHART_TOP_PADDING), (xOffset - xSection + _paddingSection), SYChart_BAR_CHART_TEXT_HEIGHT)];            
             textLabel.textColor = _colorOfXText;
             textLabel.textAlignment = NSTextAlignmentCenter;
             textLabel.font = [UIFont systemFontOfSize:_xFontSize];
             textLabel.numberOfLines = 0;
             textLabel.text = [self.dataSource barChartView:self titleOfBarInSection:section];
+            textLabel.backgroundColor = [UIColor greenColor];
+            
             [_scrollView addSubview:textLabel];
         }
         xOffset += _paddingSection;

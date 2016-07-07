@@ -61,7 +61,7 @@ CGFloat const kSYChartInfromationViewTipHeight = 5.0f;
         CGContextAddLineToPoint(context, CGRectGetMidX(rect) - kSYChartInfromationViewTipWidth / 2, kSYChartInfromationViewTextHeight);
         CGContextAddLineToPoint(context, CGRectGetMidX(rect) + kSYChartInfromationViewTipWidth / 2, kSYChartInfromationViewTextHeight);
         CGContextClosePath(context);
-        CGContextSetFillColorWithColor(context, _informationViewBackgroundColor.CGColor);
+        CGContextSetFillColorWithColor(context, (_informationViewBackgroundColor ? _informationViewBackgroundColor.CGColor : kSYChartInfromationViewColor.CGColor));
         CGContextFillPath(context);
     }
     CGContextRestoreGState(context);

@@ -69,6 +69,7 @@
     // 无效？
 //    barChart.isGradientShow = YES;
 //    barChart.showLabel = YES;
+    barChart.showLevelLine = YES;
     
     // 坐标轴显示位置设置
     barChart.chartMarginLeft = 25.0;
