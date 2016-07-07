@@ -50,9 +50,9 @@
     [self.view addSubview:chartLine];
     chartLine.backgroundColor = [UIColor colorWithWhite:0.5 alpha:0.1];
     // 数据点设置
-//    chartLine.dotRadius = 5.0;
-//    chartLine.dotColor = [UIColor orangeColor];
-//    chartLine.isSolidDot = NO;
+    chartLine.dotRadius = 5.0;
+    chartLine.dotColor = [UIColor orangeColor];
+    chartLine.isSolidDot = NO;
     // 代理设置
     chartLine.dataSource = self;
     chartLine.delegate = self;
