@@ -124,6 +124,24 @@
  */
 - (UIView *)lineChartView:(SYChartLine *)charLine pointViewOfDotInLineNumber:(NSInteger)lineNumber index:(NSInteger)index;
 
+/**
+ *  曲线点点击事件
+ *
+ *  @param chartLine  当前曲线视图 SYChartLine
+ *  @param lineNumber 当前曲线视图 SYChartLine 的线条索引
+ *  @param index      当前曲线视图 SYChartLine 的索引
+ */
+- (void)lineChartView:(SYChartLine *)chartLine didSelectedPointViewOfDotInLineNumber:(NSInteger)lineNumber index:(NSInteger)index;
+
+/**
+ *  曲线点信息视图点击事件
+ *
+ *  @param chartLine  当前曲线视图 SYChartLine
+ *  @param lineNumber 当前曲线视图 SYChartLine 的线条索引
+ *  @param index      当前曲线视图 SYChartLine 的索引
+ */
+- (void)lineChartView:(SYChartLine *)chartLine didSelectedOfDotInLineNumber:(NSInteger)lineNumber index:(NSInteger)index;
+
 @end
 
 ////////////////////////////////////////////////////////////////////////////////////////////

@@ -10,6 +10,7 @@
 #import "SYChartBar.h"
 #import "SYChartInfromationView.h"
 #import "SYChartLayer.h"
+#import "UIView+SYChart.h"
 
 #ifndef SYChart_h
 #define SYChart_h

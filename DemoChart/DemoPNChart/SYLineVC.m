@@ -74,7 +74,7 @@
     chartLine.gridsType = SYChartGridsTypeGridDotted;
     chartLine.gridsLineWidth = 0.5;
     // 动画时间设置
-    chartLine.animationTime = 1.0;
+    chartLine.animationTime = 0.3;
     // 曲线样式设置
     chartLine.isSolidLines = YES;
     chartLine.isSmoothLines = YES;
@@ -253,19 +253,17 @@
     label.layer.cornerRadius = (CGRectGetHeight(label.bounds) / 2);
     label.layer.masksToBounds = YES;
     
-    UITapGestureRecognizer *tapRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tapClick:)];
-    label.userInteractionEnabled = YES;
-    label.tag = index;
-    [label addGestureRecognizer:tapRecognizer];
-    
     return label;
 }
 
-- (void)tapClick:(UITapGestureRecognizer *)recognizer
+- (void)lineChartView:(SYChartLine *)chartLine didSelectedPointViewOfDotInLineNumber:(NSInteger)lineNumber index:(NSInteger)index
 {
-    UIView *view = recognizer.view;
-    NSInteger index = view.tag;
-    NSLog(@"index click %@", @(index));
+    NSLog(@"你点击了第 %@ 条线的第 %@ 个点", @(lineNumber), @(index));
+}
+
+- (void)lineChartView:(SYChartLine *)chartLine didSelectedOfDotInLineNumber:(NSInteger)lineNumber index:(NSInteger)index
+{
+    NSLog(@"你点击了第 %@ 条线的第 %@ 个点的信息视图", @(lineNumber), @(index));
 }
 
 @end

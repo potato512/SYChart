@@ -45,6 +45,8 @@
         [self setEdgesForExtendedLayout:UIRectEdgeNone];
     }
     
+//    UITableViewDataSource UITableViewDelegate
+    
     self.vcArray = @[[LineVC class], [BarVC class], [PieVC class], [CycleVC class], [ScatterVC class], [SYLineVC class], [SYBarVC class]];
     CGFloat originY = 10.0;
     for (int i = 0; i < self.vcArray.count; i++)
@@ -75,56 +77,3 @@
 }
 
 @end
-
-/*
- https://github.com/kevinzhow/PNChart
- http://www.tuicool.com/articles/QNrIVvA
- 
- 
- 
- 饼状图
- 
- Objective-C
- 
- PNPieChart *pieChart = [[PNPieChartalloc]initWithFrame:CGRectMake(40.0,155.0,240.0,240.0)items:items];
- //饼状图文字颜色
- pieChart.descriptionTextColor = [UIColorwhiteColor];
- pieChart.descriptionTextFont  = [UIFontfontWithName:@"Avenir-Medium"size:14.0];
- //绘制
- [pieChart strokeChart];
- 
- //加载在视图上
- [self.windowaddSubview:pieChart];
- PNPieChart*pieChart=[[PNPieChartalloc]initWithFrame:CGRectMake(40.0,155.0,240.0,240.0)items:items];
- //饼状图文字颜色
- pieChart.descriptionTextColor=[UIColorwhiteColor];
- pieChart.descriptionTextFont  =[UIFontfontWithName:@"Avenir-Medium"size:14.0];
- //绘制
- [pieChartstrokeChart];
- 
- //加载在视图上
- [self.windowaddSubview:pieChart];
- 
- 圆形进度条
- 
- Objective-C
- 
- // total参数是进度条的总数据量，current是当前的数据量，closewise是绘制方向，YES是从左到右，NO为从右到左
- PNCircleChart *circleChart = [[PNCircleChartalloc]initWithFrame:CGRectMake(40.0,155.0,240.0,240.0)total:@100current:@30clockwise:NO];
- 
- //绘制图形
- [circleChart strokeChart];
- 
- //加载在视图上
- [self.windowaddSubview:circleChart];
- // total参数是进度条的总数据量，current是当前的数据量，closewise是绘制方向，YES是从左到右，NO为从右到左
- PNCircleChart*circleChart=[[PNCircleChartalloc]initWithFrame:CGRectMake(40.0,155.0,240.0,240.0)total:@100current:@30clockwise:NO];
- 
- //绘制图形
- [circleChartstrokeChart];
- 
- //加载在视图上
- [self.windowaddSubview:circleChart];
- 
- 
-*/

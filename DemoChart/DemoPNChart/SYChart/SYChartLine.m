@@ -30,6 +30,10 @@ static NSInteger const tagTextLabel = 1000;
 // 刻度递增值
 @property (nonatomic, assign, readonly) CGFloat heightYStep;
 
+// 用于设置数据点，或数据点信息视图对应的第几条线，第几个点字典信息
+@property (nonatomic, strong) NSMutableDictionary *pointViewDict;
+@property (nonatomic, strong) NSMutableDictionary *dotViewDict;
+
 @end
 
 @implementation SYChartLine
@@ -355,6 +359,9 @@ static NSInteger const tagTextLabel = 1000;
     [_scrollView.subviews makeObjectsPerformSelector:@selector(removeFromSuperview)];
     [_scrollView.layer.sublayers makeObjectsPerformSelector:@selector(removeFromSuperlayer)];
     
+    [self.pointViewDict removeAllObjects];
+    [self.dotViewDict removeAllObjects];
+    
     for (NSInteger lineNumber = 0; lineNumber < _lineCount; lineNumber ++)
     {
         NSArray *array = _chartDataSource[lineNumber];
@@ -408,11 +415,26 @@ static NSInteger const tagTextLabel = 1000;
                     
                     view.center = CGPointMake(xOffset, yOffset);
                     [_scrollView addSubview:view];
+                    // 点击事件
+                    UITapGestureRecognizer *tapRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(pointTapClick:)];
+                    view.userInteractionEnabled = YES;
+                    view.indexPath = [NSIndexPath indexPathForRow:index inSection:lineNumber];
+                    [view addGestureRecognizer:tapRecognizer];
                 }
                 else
                 {
                     [pointBezierPath moveToPoint:CGPointMake((xOffset + _dotRadius), yOffset)];
                     [pointBezierPath addArcWithCenter:CGPointMake(xOffset, yOffset) radius:_dotRadius startAngle:0 endAngle:(2 * M_PI) clockwise:YES];
+                    
+                    UIView *pointView = [[UIView alloc] initWithFrame:CGRectMake(0.0, 0.0, _dotRadius, _dotRadius)];
+                    pointView.backgroundColor = [UIColor clearColor];
+                    pointView.center = CGPointMake(xOffset, yOffset);
+                    [_scrollView addSubview:pointView];
+                    // 点击事件
+                    UITapGestureRecognizer *tapRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(pointTapClick:)];
+                    pointView.userInteractionEnabled = YES;
+                    pointView.indexPath = [NSIndexPath indexPathForRow:index inSection:lineNumber];
+                    [pointView addGestureRecognizer:tapRecognizer];
                 }
             }
             else
@@ -470,6 +492,11 @@ static NSInteger const tagTextLabel = 1000;
                     hintView.center = CGPointMake(xOffset, yOffset - CGRectGetHeight(hintView.bounds) / 2 - _dotRadius);
                     hintView.alpha = 0.0;
                     [_scrollView addSubview:hintView];
+                    // 点击事件
+                    UITapGestureRecognizer *tapRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(dotTapClick:)];
+                    hintView.userInteractionEnabled = YES;
+                    hintView.indexPath = [NSIndexPath indexPathForRow:index inSection:lineNumber];
+                    [hintView addGestureRecognizer:tapRecognizer];
                     
                     [UIView animateWithDuration:0.5 delay:delay options:UIViewAnimationOptionCurveEaseInOut animations:^{
                         hintView.alpha = 1.0;
@@ -488,6 +515,11 @@ static NSInteger const tagTextLabel = 1000;
                     informationView.informationViewTextColor = _dotTitleColor;
                     informationView.informationViewTextFont = _dotTitleFont;
                     [_scrollView addSubview:informationView];
+                    // 点击事件
+                    UITapGestureRecognizer *tapRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(dotTapClick:)];
+                    informationView.userInteractionEnabled = YES;
+                    informationView.indexPath = [NSIndexPath indexPathForRow:index inSection:lineNumber];
+                    [informationView addGestureRecognizer:tapRecognizer];
                     
                     [UIView animateWithDuration:0.5 delay:delay options:UIViewAnimationOptionCurveEaseInOut animations:^{
                         informationView.alpha = 1.0;
@@ -607,6 +639,31 @@ static NSInteger const tagTextLabel = 1000;
     return point;
 }
 
+#pragma mark - 响应事件
+
+- (void)pointTapClick:(UITapGestureRecognizer *)recognizer
+{
+    if (self.delegate && [self.delegate respondsToSelector:@selector(lineChartView:didSelectedPointViewOfDotInLineNumber:index:)])
+    {
+        UIView *view = recognizer.view;
+        NSIndexPath *indexPath = view.indexPath;
+        NSInteger number = indexPath.section;
+        NSInteger index = indexPath.row;
+        [self.delegate lineChartView:self didSelectedPointViewOfDotInLineNumber:number index:index];
+    }
+}
+
+- (void)dotTapClick:(UITapGestureRecognizer *)recognizer
+{
+    if (self.delegate && [self.delegate respondsToSelector:@selector(lineChartView:didSelectedOfDotInLineNumber:index:)])
+    {
+        UIView *view = recognizer.view;
+        NSIndexPath *indexPath = view.indexPath;
+        NSInteger number = indexPath.section;
+        NSInteger index = indexPath.row;
+        [self.delegate lineChartView:self didSelectedOfDotInLineNumber:number index:index];
+    }
+}
 
 #pragma mark - getter
 
@@ -614,6 +671,26 @@ static NSInteger const tagTextLabel = 1000;
 {
     CGFloat width = CGRectGetWidth(self.bounds) - SYChart_LINE_CHART_LEFT_PADDING - SYChart_LINE_CHART_RIGHT_PADDING;
     return width;
+}
+
+- (NSMutableDictionary *)pointViewDict
+{
+    if (_pointViewDict == nil)
+    {
+        _pointViewDict = [[NSMutableDictionary alloc] init];
+    }
+    
+    return _pointViewDict;
+}
+
+- (NSMutableDictionary *)dotViewDict
+{
+    if (_dotViewDict == nil)
+    {
+        _dotViewDict = [[NSMutableDictionary alloc] init];
+    }
+    
+    return _dotViewDict;
 }
 
 @end

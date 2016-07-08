@@ -44,6 +44,7 @@
 		A734B4A51D1CC13800AAB560 /* CycleVC.m in Sources */ = {isa = PBXBuildFile; fileRef = A734B4A41D1CC13800AAB560 /* CycleVC.m */; };
 		A734B4A81D1CC7A200AAB560 /* ScatterVC.m in Sources */ = {isa = PBXBuildFile; fileRef = A734B4A71D1CC7A200AAB560 /* ScatterVC.m */; };
 		A734B4BC1D1D31A100AAB560 /* SYChartHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = A734B4BB1D1D31A100AAB560 /* SYChartHelper.m */; };
+		A74BC55F1D2F814300290559 /* UIView+SYChart.m in Sources */ = {isa = PBXBuildFile; fileRef = A74BC55E1D2F814300290559 /* UIView+SYChart.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -141,6 +142,8 @@
 		A734B4A71D1CC7A200AAB560 /* ScatterVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ScatterVC.m; sourceTree = "<group>"; };
 		A734B4BA1D1D31A100AAB560 /* SYChartHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SYChartHelper.h; sourceTree = "<group>"; };
 		A734B4BB1D1D31A100AAB560 /* SYChartHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SYChartHelper.m; sourceTree = "<group>"; };
+		A74BC55D1D2F814300290559 /* UIView+SYChart.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+SYChart.h"; sourceTree = "<group>"; };
+		A74BC55E1D2F814300290559 /* UIView+SYChart.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+SYChart.m"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -306,6 +309,8 @@
 				A70B211A1D1BCA4C0067B8C2 /* SYChartLayer.m */,
 				A734B4BA1D1D31A100AAB560 /* SYChartHelper.h */,
 				A734B4BB1D1D31A100AAB560 /* SYChartHelper.m */,
+				A74BC55D1D2F814300290559 /* UIView+SYChart.h */,
+				A74BC55E1D2F814300290559 /* UIView+SYChart.m */,
 			);
 			path = SYChart;
 			sourceTree = "<group>";
@@ -473,6 +478,7 @@
 				A701E86D1D1A97CF006C4901 /* PNCircleChart.m in Sources */,
 				A701E87C1D1A9898006C4901 /* UICountingLabel.m in Sources */,
 				A701E8731D1A97CF006C4901 /* PNPieChart.m in Sources */,
+				A74BC55F1D2F814300290559 /* UIView+SYChart.m in Sources */,
 				A701E86F1D1A97CF006C4901 /* PNGenericChart.m in Sources */,
 				A70B21121D1BBF130067B8C2 /* SYChartLine.m in Sources */,
 			);
