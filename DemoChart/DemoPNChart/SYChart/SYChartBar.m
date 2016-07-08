@@ -10,7 +10,6 @@
 #import "SYChart.h"
 
 CGFloat static const kSYChartBarUndefinedCachedHeight = -1.0f;
-static NSInteger const tagTextLabel = 1000;
 
 @interface SYChartBar ()
 {
@@ -151,15 +150,15 @@ static NSInteger const tagTextLabel = 1000;
     CGContextAddLineToPoint(context, (width - SYChart_LINE_CHART_RIGHT_PADDING + 1 - 3), (SYChart_LINE_CHART_TOP_PADDING + _chartHeight + 1 + 3));
     CGContextStrokePath(context);
     
-    // X坐标轴刻度 无
+    // X坐标轴刻度 在数据刷新方法" - (void)reloadDataWithAnimate:(BOOL)animate "中处理
 }
 
-// 绘制网络（注意：只绘制Y坐标轴水平线，垂直线无）
+// 绘制网络（注意：只绘制水平线，垂直线在数据刷新方法" - (void)reloadDataWithAnimate:(BOOL)animate "中处理）
 - (void)drawChartGridsWithContext:(CGContextRef)context
 {
     CGPoint point;
     
-    if (SYChartGridsTypeHorizontalDotted == _gridsType || SYChartGridsTypeHorizontalSolid == _gridsType)
+    if (SYChartGridsTypeGridDotted == _gridsType || SYChartGridsTypeGridSolid == _gridsType || SYChartGridsTypeHorizontalDotted == _gridsType || SYChartGridsTypeHorizontalSolid == _gridsType)
     {
         CGContextSetStrokeColorWithColor(context, _gridsLineColor.CGColor);
         
@@ -276,7 +275,7 @@ static NSInteger const tagTextLabel = 1000;
         _sections = [self.dataSource numberOfSectionsInBarChartView:self];
     }
     
-    NSAssert([self.dataSource respondsToSelector:@selector(barChartView:numberOfBarsInSection:)], @"BarChartView // delegate must implement barChartView:numberOfBarsInSection:");
+    NSAssert([self.dataSource respondsToSelector:@selector(barChartView:numberOfBarsForSection:)], @"BarChartView // delegate must implement barChartView:numberOfBarsForSection:");
     
     _paddingSection = SYChart_PADDING_SECTION_DEFAULT;
     if ([self.delegate respondsToSelector:@selector(paddingForSectionInBarChartView:)])
@@ -294,13 +293,13 @@ static NSInteger const tagTextLabel = 1000;
         _barWidth = [self.delegate barWidthInBarChartView:self];
     }
     
-    NSAssert(([self.dataSource respondsToSelector:@selector(barChartView:valueOfBarInSection:index:)]), @"MCBarChartView // delegate must implement - (CGFloat)barChartView:(MCBarChartView *)barChartView valueOfBarsInSection:(NSUInteger)section index:(NSUInteger)index");
+    NSAssert(([self.dataSource respondsToSelector:@selector(barChartView:valueOfBarAtIndexPath:)]), @"MCBarChartView // delegate must implement - (CGFloat)barChartView:(MCBarChartView *)barChartView valueOfBarAtIndexPath:(NSIndexPath *)indexPath");
     
     NSMutableArray *dataArray = [NSMutableArray arrayWithCapacity:_sections];
     CGFloat contentWidth = _paddingSection;
     for (NSUInteger i = 0; i < _sections; i ++)
     {
-        NSUInteger barCount = [self.dataSource barChartView:self numberOfBarsInSection:i];
+        NSUInteger barCount = [self.dataSource barChartView:self numberOfBarsForSection:i];
         
         contentWidth += (barCount * _barWidth + (barCount - 1) * _paddingBar);
         contentWidth += _paddingSection;
@@ -308,7 +307,8 @@ static NSInteger const tagTextLabel = 1000;
         NSMutableArray *barArray = [NSMutableArray arrayWithCapacity:barCount];
         for (NSInteger j = 0; j < barCount; j ++)
         {
-            id value = [self.dataSource barChartView:self valueOfBarInSection:i index:j];
+            NSIndexPath *indexPath = [NSIndexPath indexPathForRow:j inSection:i];
+            id value = [self.dataSource barChartView:self valueOfBarAtIndexPath:indexPath];
             [barArray addObject:value];
         }
         [dataArray addObject:barArray];
@@ -365,9 +365,10 @@ static NSInteger const tagTextLabel = 1000;
             shapeLayer.lineWidth = _barWidth;
             shapeLayer.path = bezierPath.CGPath;
             
-            if ([self.delegate respondsToSelector:@selector(barChartView:colorOfBarInSection:index:)])
+            if ([self.delegate respondsToSelector:@selector(barChartView:colorOfBarAtIndexPath:)])
             {
-                shapeLayer.strokeColor = [self.delegate barChartView:self colorOfBarInSection:section index:index].CGColor;
+                NSIndexPath *indexPath = [NSIndexPath indexPathForRow:index inSection:section];
+                shapeLayer.strokeColor = [self.delegate barChartView:self colorOfBarAtIndexPath:indexPath].CGColor;
             }
             else
             {
@@ -388,9 +389,10 @@ static NSInteger const tagTextLabel = 1000;
             }
             
             NSTimeInterval delay = (animate ? _animationTime : 0.0);
-            if ([self.delegate respondsToSelector:@selector(barChartView:hintViewOfBarInSection:index:)])
+            if ([self.delegate respondsToSelector:@selector(barChartView:hintViewOfBarAtIndexPath:)])
             {
-                UIView *hintView = [self.delegate barChartView:self hintViewOfBarInSection:section index:index];
+                NSIndexPath *indexPath = [NSIndexPath indexPathForRow:index inSection:section];
+                UIView *hintView = [self.delegate barChartView:self hintViewOfBarAtIndexPath:indexPath];
                 if (hintView)
                 {
                     hintView.center = CGPointMake(xOffset, (chartYOffset - height - CGRectGetHeight(hintView.bounds) / 2));
@@ -402,9 +404,10 @@ static NSInteger const tagTextLabel = 1000;
                     } completion:nil];
                 }
             }
-            else if ([self.delegate respondsToSelector:@selector(barChartView:informationOfBarInSection:index:)])
+            else if ([self.delegate respondsToSelector:@selector(barChartView:informationOfBarAtIndexPath:)])
             {
-                NSString *information = [self.delegate barChartView:self informationOfBarInSection:section index:index];
+                NSIndexPath *indexPath = [NSIndexPath indexPathForRow:index inSection:section];
+                NSString *information = [self.delegate barChartView:self informationOfBarAtIndexPath:indexPath];
                 if (information)
                 {
                     SYChartInfromationView *informationView = [[SYChartInfromationView alloc] initWithText:information];
@@ -425,23 +428,62 @@ static NSInteger const tagTextLabel = 1000;
             xOffset += (_barWidth + (index == array.count - 1 ? 0 : _paddingBar));
         }
         
-        if ([self.delegate respondsToSelector:@selector(barChartView:titleOfBarInSection:)])
+        if ([self.delegate respondsToSelector:@selector(barChartView:titleOfBarForSection:)])
         {
-            CGFloat originXBar = xOffset - 0.0 / 2;
             CGFloat originYBar = (_chartHeight + SYChart_BAR_CHART_TOP_PADDING);
-            CGFloat widthBar = (array.count * _barWidth + (array.count - 1) * _paddingBar);
+            CGFloat widthBar = (array.count * _barWidth + (array.count - 1) * _paddingBar + _paddingSection);
             CGFloat heightBar = SYChart_BAR_CHART_TEXT_HEIGHT;
+            CGFloat originXBar = (xOffset - widthBar);
+            
             UILabel *textLabel = [[UILabel alloc] initWithFrame:CGRectMake(originXBar, originYBar, widthBar, heightBar)];
-//            UILabel *textLabel = [[UILabel alloc] initWithFrame:CGRectMake((xSection - _paddingSection / 2), (_chartHeight + SYChart_BAR_CHART_TOP_PADDING), (xOffset - xSection + _paddingSection), SYChart_BAR_CHART_TEXT_HEIGHT)];            
             textLabel.textColor = _colorOfXText;
             textLabel.textAlignment = NSTextAlignmentCenter;
             textLabel.font = [UIFont systemFontOfSize:_xFontSize];
             textLabel.numberOfLines = 0;
-            textLabel.text = [self.dataSource barChartView:self titleOfBarInSection:section];
-            textLabel.backgroundColor = [UIColor greenColor];
+            textLabel.text = [self.dataSource barChartView:self titleOfBarForSection:section];
             
             [_scrollView addSubview:textLabel];
+            
+            {
+                // X坐标轴刻度
+                UIBezierPath *xScaleBezierPath = [UIBezierPath bezierPath];
+                [xScaleBezierPath moveToPoint:CGPointMake((textLabel.frame.origin.x + CGRectGetWidth(textLabel.frame) / 2), (_chartHeight + SYChart_LINE_CHART_TOP_PADDING + 1))];
+                [xScaleBezierPath addLineToPoint:CGPointMake((textLabel.frame.origin.x + CGRectGetWidth(textLabel.frame) / 2), (_chartHeight + SYChart_LINE_CHART_TOP_PADDING) + 1 - 3)];
+                
+                CAShapeLayer *xScaleLayer = [[CAShapeLayer alloc] init];
+                xScaleLayer.path = xScaleBezierPath.CGPath;
+                xScaleLayer.strokeColor = _colorOfXAxis.CGColor;
+                xScaleLayer.fillColor = _colorOfXAxis.CGColor;
+                
+                [_scrollView.layer addSublayer:xScaleLayer];
+                
+                if (SYChartGridsTypeGridDotted == _gridsType || SYChartGridsTypeGridSolid == _gridsType || SYChartGridsTypeVerticalDotted == _gridsType || SYChartGridsTypeVerticalSolid == _gridsType)
+                {
+                    UIBezierPath *gridsVerticalBezierPath = [UIBezierPath bezierPath];
+                    [gridsVerticalBezierPath moveToPoint:CGPointMake((textLabel.frame.origin.x + CGRectGetWidth(textLabel.frame) / 2), (_chartHeight + SYChart_LINE_CHART_TOP_PADDING + 1 - 3))];
+                    [gridsVerticalBezierPath addLineToPoint:CGPointMake((textLabel.frame.origin.x + CGRectGetWidth(textLabel.frame) / 2), (SYChart_LINE_CHART_TOP_PADDING))];
+                    
+                    CAShapeLayer *gridsVerticalLayer = [[CAShapeLayer alloc] init];
+                    gridsVerticalLayer.strokeColor = _gridsLineColor.CGColor;
+                    gridsVerticalLayer.fillColor = _gridsLineColor.CGColor;
+                    gridsVerticalLayer.lineWidth = _gridsLineWidth;
+                    if (SYChartGridsTypeGridDotted == _gridsType || SYChartGridsTypeVerticalDotted == _gridsType)
+                    {
+                        // 虚线类型
+                        CGFloat dash[] = {6, 5};
+                        [gridsVerticalBezierPath setLineDash:dash count:2 phase:0];
+                        
+                        gridsVerticalLayer.lineJoin = kCALineJoinRound;
+                        gridsVerticalLayer.lineCap = kCALineCapRound;
+                        gridsVerticalLayer.lineDashPattern = @[@(6), @(5)];
+                    }
+                    gridsVerticalLayer.path = gridsVerticalBezierPath.CGPath;
+                    
+                    [_scrollView.layer addSublayer:gridsVerticalLayer];
+                }
+            }
         }
+
         xOffset += _paddingSection;
         xSection = xOffset;
     }

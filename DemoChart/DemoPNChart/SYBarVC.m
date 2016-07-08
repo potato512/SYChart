@@ -76,7 +76,7 @@
     chartBar.animationTime = 0.6;
     // 网格
     chartBar.gridsLineColor = [UIColor brownColor];
-    chartBar.gridsType = SYChartGridsTypeHorizontalSolid;
+    chartBar.gridsType = SYChartGridsTypeGridSolid;
     chartBar.gridsLineWidth = 0.5;
     // 刷新数据
     [chartBar reloadDataWithAnimate:YES];
@@ -84,7 +84,7 @@
 
 // SYChartBarDataSource
 
-- (NSInteger)barChartView:(SYChartBar *)chartBar numberOfBarsInSection:(NSInteger)section
+- (NSInteger)barChartView:(SYChartBar *)chartBar numberOfBarsForSection:(NSInteger)section
 {
     // 每个X轴标题对应的bar个数
     // 1个bar
@@ -94,14 +94,14 @@
     return [_datas[section] count];
 }
 
-- (id)barChartView:(SYChartBar *)chartBar valueOfBarInSection:(NSInteger)section index:(NSInteger)index
+- (id)barChartView:(SYChartBar *)chartBar valueOfBarAtIndexPath:(NSIndexPath *)indexPath
 {
     // 每个X轴标题对应的每个Y轴的信息
     // 1个bar
-//    return _datas[section];
+//    return _datas[indexPath.section];
     
     // 多个bar
-    return _datas[section][index];
+    return _datas[indexPath.section][indexPath.row];
 }
 
 - (NSInteger)numberOfSectionsInBarChartView:(SYChartBar *)chartBar
@@ -110,7 +110,7 @@
     return [_datas count];
 }
 
-- (NSString *)barChartView:(SYChartBar *)chartBar titleOfBarInSection:(NSInteger)index
+- (NSString *)barChartView:(SYChartBar *)chartBar titleOfBarForSection:(NSInteger)index
 {
     // Y轴标题
     return _titles[index];
@@ -118,7 +118,7 @@
 
 // SYChartBarDelegate
 
-- (UIColor *)barChartView:(SYChartBar *)chartBar colorOfBarInSection:(NSInteger)section index:(NSInteger)index
+- (UIColor *)barChartView:(SYChartBar *)chartBar colorOfBarAtIndexPath:(NSIndexPath *)indexPath
 {
     // bar的颜色设置
     if (chartBar.tag == 111)
@@ -127,7 +127,7 @@
     }
     else
     {
-        if (index == 0)
+        if (indexPath.row == 0)
         {
             return [UIColor colorWithRed:105/255.0 green:105/255.0 blue:147/255.0 alpha:1.0];
         }
@@ -158,21 +158,21 @@
 //    
 //}
 
-- (NSString *)barChartView:(SYChartBar *)chartBar informationOfBarInSection:(NSInteger)section index:(NSInteger)index
+- (NSString *)barChartView:(SYChartBar *)chartBar informationOfBarAtIndexPath:(NSIndexPath *)indexPath
 {
     // bar顶端信息标题
     // 1个bar
 //    if (chartBar.tag == 111)
 //    {
-//        if ([_datas[section] floatValue] >= 130)
+//        if ([_datas[indexPath.section] floatValue] >= 130)
 //        {
 //            return @"优秀";
 //        }
-//        else if ([_datas[section] floatValue] >= 110)
+//        else if ([_datas[indexPath.section] floatValue] >= 110)
 //        {
 //            return @"良好";
 //        }
-//        else if ([_datas[section] floatValue] >= 90)
+//        else if ([_datas[indexPath.section] floatValue] >= 90)
 //        {
 //            return @"及格";
 //        }
@@ -185,15 +185,15 @@
     // 多个bar
     if (chartBar.tag == 111)
     {
-        if ([_datas[section][index] floatValue] >= 130)
+        if ([_datas[indexPath.section][indexPath.row] floatValue] >= 130)
         {
             return @"优秀";
         }
-        else if ([_datas[section][index] floatValue] >= 110)
+        else if ([_datas[indexPath.section][indexPath.row] floatValue] >= 110)
         {
             return @"良好";
         }
-        else if ([_datas[section][index] floatValue] >= 90)
+        else if ([_datas[indexPath.section][indexPath.row] floatValue] >= 90)
         {
             return @"及格";
         }
@@ -206,25 +206,51 @@
     return nil;
 }
 
-- (UIView *)barChartView:(SYChartBar *)chartBar hintViewOfBarInSection:(NSInteger)section index:(NSInteger)index
+- (UIView *)barChartView:(SYChartBar *)chartBar hintViewOfBarAtIndexPath:(NSIndexPath *)indexPath;
 {
+    // 单个bar
+//    NSString *text = [NSString stringWithFormat:@"%@分", _datas[indexPath.row]];
+//    SYChartInfromationView *informationView = [[SYChartInfromationView alloc] initWithText:text];
+//    informationView.frame = CGRectMake(0.0, 0.0, 40.0, 25.0);
+//    if (indexPath.row == 0)
+//    {
+//        informationView.informationViewBackgroundColor = [UIColor purpleColor];
+//        informationView.informationViewTextColor = [UIColor greenColor];
+//        informationView.informationViewTextFont = [UIFont systemFontOfSize:8.0];
+//    }
+//    else if (indexPath.row == 1)
+//    {
+//        informationView.informationViewBackgroundColor = [UIColor lightGrayColor];
+//        informationView.informationViewTextColor = [UIColor brownColor];
+//        informationView.informationViewTextFont = [UIFont systemFontOfSize:12.0];
+//    }
+//    else if (indexPath.row == 2)
+//    {
+//        informationView.informationViewBackgroundColor = [UIColor redColor];
+//        informationView.informationViewTextColor = [UIColor orangeColor];
+//        informationView.informationViewTextFont = [UIFont systemFontOfSize:10.0];
+//    }
+//    
+//    return informationView;
+    
+    // 多个bar
     // bar顶端信息自定义视图
-    NSString *text = [NSString stringWithFormat:@"%@分", _datas[section][index]];
+    NSString *text = [NSString stringWithFormat:@"%@分", _datas[indexPath.section][indexPath.row]];
     SYChartInfromationView *informationView = [[SYChartInfromationView alloc] initWithText:text];
     informationView.frame = CGRectMake(0.0, 0.0, 40.0, 25.0);
-    if (section == 0)
+    if (indexPath.section == 0)
     {
         informationView.informationViewBackgroundColor = [UIColor purpleColor];
         informationView.informationViewTextColor = [UIColor greenColor];
         informationView.informationViewTextFont = [UIFont systemFontOfSize:8.0];
     }
-    else if (section == 1)
+    else if (indexPath.section == 1)
     {
         informationView.informationViewBackgroundColor = [UIColor lightGrayColor];
         informationView.informationViewTextColor = [UIColor brownColor];
         informationView.informationViewTextFont = [UIFont systemFontOfSize:12.0];
     }
-    else if (section == 2)
+    else if (indexPath.section == 2)
     {
         informationView.informationViewBackgroundColor = [UIColor redColor];
         informationView.informationViewTextColor = [UIColor orangeColor];

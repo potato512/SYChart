@@ -26,18 +26,17 @@
  *
  *  @return 每个X轴标题对应的bar个数
  */
-- (NSInteger)barChartView:(SYChartBar *)chartBar numberOfBarsInSection:(NSInteger)section;
+- (NSInteger)barChartView:(SYChartBar *)chartBar numberOfBarsForSection:(NSInteger)section;
 
 /**
  *  每个X轴标题对应的每个Y轴的信息
  *
  *  @param chartBar 当前柱状视图 SYChartBar
- *  @param section  当前柱状视图 SYChartBar 的线条索引
- *  @param index    当前曲线视图 SYChartBar 的索引
+ *  @param indexPath  当前柱状视图 SYChartBar 的线条索引
  *
  *  @return 每个X轴标题对应的每个Y轴的信息
  */
-- (id)barChartView:(SYChartBar *)chartBar valueOfBarInSection:(NSInteger)section index:(NSInteger)index;
+- (id)barChartView:(SYChartBar *)chartBar valueOfBarAtIndexPath:(NSIndexPath *)indexPath;
 
 @optional
 /**
@@ -57,7 +56,7 @@
  *
  *  @return Y轴标题
  */
-- (NSString *)barChartView:(SYChartBar *)chartBar titleOfBarInSection:(NSInteger)index;
+- (NSString *)barChartView:(SYChartBar *)chartBar titleOfBarForSection:(NSInteger)index;
 
 
 @end
@@ -104,12 +103,11 @@
  *  bar的颜色设置
  *
  *  @param chartBar 当前柱状视图 SYChartBar
- *  @param section  当前柱状视图 SYChartBar 的线条索引
- *  @param index    当前曲线视图 SYChartBar 的索引
+ *  @param indexPath  当前柱状视图 SYChartBar 的线条索引
  *
  *  @return bar的颜色设置
  */
-- (UIColor *)barChartView:(SYChartBar *)chartBar colorOfBarInSection:(NSInteger)section index:(NSInteger)index;
+- (UIColor *)barChartView:(SYChartBar *)chartBar colorOfBarAtIndexPath:(NSIndexPath *)indexPath;
 
 /**
  *  <#Description#>
@@ -130,7 +128,7 @@
  *
  *  @return bar顶端信息标题
  */
-- (NSString *)barChartView:(SYChartBar *)chartBar informationOfBarInSection:(NSInteger)section index:(NSInteger)index;
+- (NSString *)barChartView:(SYChartBar *)chartBar informationOfBarAtIndexPath:(NSIndexPath *)indexPath;
 
 /**
  *  bar顶端信息自定义视图
@@ -141,7 +139,7 @@
  *
  *  @return bar顶端信息自定义视图
  */
-- (UIView *)barChartView:(SYChartBar *)chartBar hintViewOfBarInSection:(NSInteger)section index:(NSInteger)index;
+- (UIView *)barChartView:(SYChartBar *)chartBar hintViewOfBarAtIndexPath:(NSIndexPath *)indexPath;
 
 @end
 
@@ -197,9 +195,10 @@
 @property (nonatomic, assign) NSTimeInterval animationTime;
 
 #pragma mark - 网格线
+
 /**
  *
- *  网格显示类型（默认不显示。注意：只有水平虚线，或水平实线）
+ *  网格显示类型（默认不显示）
  *  样式：网络栅格、水平虚线、水平实线、垂直虚线、垂直实线
  *  显示X轴水平条数与 numberOfYAxis 个数有关
  *
