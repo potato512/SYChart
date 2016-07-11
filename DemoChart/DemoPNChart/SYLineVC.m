@@ -78,6 +78,8 @@
     // 曲线样式设置
     chartLine.isSolidLines = YES;
     chartLine.isSmoothLines = YES;
+    // 填充色
+//    chartLine.showFillColor = YES;
     // 刷新数据
     [chartLine reloadDataWithAnimate:YES];
 }
@@ -152,24 +154,24 @@
     return padding;
 }
 
-- (UIColor *)lineChartView:(SYChartLine *)charLine lineColorWithLineNumber:(NSInteger)lineNumber
-{
-    // 曲线颜色
-    if (lineNumber == 0)
-    {
-        return [UIColor purpleColor];
-    }
-    else if (lineNumber == 1)
-    {
-        return [UIColor lightGrayColor];
-    }
-    else if (lineNumber == 2)
-    {
-        return [UIColor redColor];
-    }
-
-    return [UIColor yellowColor];
-}
+//- (UIColor *)lineChartView:(SYChartLine *)charLine lineColorWithLineNumber:(NSInteger)lineNumber
+//{
+//    // 曲线颜色
+//    if (lineNumber == 0)
+//    {
+//        return [UIColor purpleColor];
+//    }
+//    else if (lineNumber == 1)
+//    {
+//        return [UIColor lightGrayColor];
+//    }
+//    else if (lineNumber == 2)
+//    {
+//        return [UIColor redColor];
+//    }
+//
+//    return [UIColor yellowColor];
+//}
 
 - (NSString *)lineChartView:(SYChartLine *)charLine informationOfDotInLineNumber:(NSInteger)lineNumber index:(NSInteger)index
 {

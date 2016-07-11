@@ -210,6 +210,8 @@ CGFloat static const kSYChartLineUndefinedValue = -1.0f;
 @property (nonatomic, assign) BOOL isSolidLines;
 /// 曲线样式（是否平滑曲线。默认NO，即直角。注：至少四个数据点有才效）
 @property (nonatomic, assign) BOOL isSmoothLines;
+/// 曲线颜色（默认淡蓝色）
+@property (nonatomic, strong) UIColor *lineColor;
 
 #pragma mark - 动画时间
 
@@ -229,6 +231,12 @@ CGFloat static const kSYChartLineUndefinedValue = -1.0f;
 @property (nonatomic, assign) CGFloat gridsLineWidth;
 /// 网格线条颜色（默认灰色）
 @property (nonatomic, strong) UIColor *gridsLineColor;
+
+#pragma mark - 填充
+/// 是否显示填充色（默认NO，即不显示）
+@property (nonatomic, assign) BOOL showFillColor;
+/// 填充色（默认淡蓝色）
+@property (nonatomic, strong) UIColor *fillColor;
 
 #pragma mark - getter属性
 

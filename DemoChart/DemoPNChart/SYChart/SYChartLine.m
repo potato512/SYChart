@@ -27,12 +27,10 @@ static NSInteger const tagTextLabel = 1000;
 @property (nonatomic, assign) CGFloat cachedMaxHeight;
 @property (nonatomic, assign) CGFloat cachedMinHeight;
 
+@property (nonatomic, strong) NSMutableArray *labelArray;
+
 // 刻度递增值
 @property (nonatomic, assign, readonly) CGFloat heightYStep;
-
-// 用于设置数据点，或数据点信息视图对应的第几条线，第几个点字典信息
-@property (nonatomic, strong) NSMutableDictionary *pointViewDict;
-@property (nonatomic, strong) NSMutableDictionary *dotViewDict;
 
 @end
 
@@ -93,6 +91,10 @@ static NSInteger const tagTextLabel = 1000;
     
     _isSmoothLines = NO;
     _isSolidLines = YES;
+    _lineColor = SYChart_colorLightBlue;
+    
+    _showFillColor = NO;
+    _fillColor = [_lineColor colorWithAlphaComponent:0.25];
     
     _cachedMaxHeight = kSYChartLineUndefinedCachedHeight;
     _cachedMinHeight = kSYChartLineUndefinedCachedHeight;
@@ -359,8 +361,7 @@ static NSInteger const tagTextLabel = 1000;
     [_scrollView.subviews makeObjectsPerformSelector:@selector(removeFromSuperview)];
     [_scrollView.layer.sublayers makeObjectsPerformSelector:@selector(removeFromSuperlayer)];
     
-    [self.pointViewDict removeAllObjects];
-    [self.dotViewDict removeAllObjects];
+    [self.labelArray removeAllObjects];
     
     for (NSInteger lineNumber = 0; lineNumber < _lineCount; lineNumber ++)
     {
@@ -378,7 +379,7 @@ static NSInteger const tagTextLabel = 1000;
         }
         else
         {
-            CGColorRef color = [UIColor redColor].CGColor;
+            CGColorRef color = _lineColor.CGColor;
             lineLayer.strokeColor = color;
             lineLayer.fillColor = [UIColor clearColor].CGColor;
             pointLayer.strokeColor = (_dotColor ? _dotColor.CGColor : color);
@@ -540,6 +541,7 @@ static NSInteger const tagTextLabel = 1000;
                 textLabel.tag = (index + tagTextLabel);
                 
                 [_scrollView addSubview:textLabel];
+                [self.labelArray addObject:textLabel];
             }
             
             if (0 == lineNumber)
@@ -613,6 +615,56 @@ static NSInteger const tagTextLabel = 1000;
             animation.delegate = self;
             [lineLayer addAnimation:animation forKey:@"animation"];
         }
+        
+        if (_showFillColor)
+        {
+            CGFloat minBound = self.cachedMinHeight;
+            CGFloat maxBound = self.cachedMaxHeight;
+            CGFloat spread = maxBound - minBound;
+            CGFloat scale = 0;
+            
+            if (spread != 0)
+            {
+                scale = _chartHeight / spread;
+            }
+            
+            UIBezierPath *noFill = [self getLinePath:0 withSmoothing:_isSmoothLines close:YES];
+            UIBezierPath *fill = [self getLinePath:scale withSmoothing:_isSmoothLines close:YES];
+            
+            UILabel *labelFirst = self.labelArray.firstObject;
+            UILabel *labelLast = self.labelArray.lastObject;
+            CGFloat width = labelLast.frame.origin.x + labelLast.frame.size.width / 2 - (labelFirst.frame.origin.x - labelFirst.frame.size.width / 2);
+            
+            CAShapeLayer *fillLayer = [CAShapeLayer layer];
+            fillLayer.frame = CGRectMake(_scrollView.bounds.origin.x, SYChart_LINE_CHART_TOP_PADDING + 100.0, width, _chartHeight);
+//            fillLayer.bounds = _scrollView.bounds;
+            fillLayer.path = fill.CGPath;
+            fillLayer.strokeColor = nil;
+            fillLayer.fillColor = _fillColor.CGColor;
+            fillLayer.lineWidth = 0;
+            fillLayer.lineJoin = kCALineJoinRound;
+            
+            [_scrollView.layer addSublayer:fillLayer];
+            
+            
+            if (animate)
+            {
+//                CABasicAnimation *pathAnimation = [CABasicAnimation animationWithKeyPath:@"path"];
+//                pathAnimation.duration = array.count * _animationTime;
+//                pathAnimation.timingFunction = [CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionEaseInEaseOut];
+//                pathAnimation.fromValue = (__bridge id)(noPath.CGPath);
+//                pathAnimation.toValue = (__bridge id)(path.CGPath);
+//                [pathLayer addAnimation:pathAnimation forKey:@"path"];
+                
+                CABasicAnimation *fillAnimation = [CABasicAnimation animationWithKeyPath:@"path"];
+                fillAnimation.duration = array.count * _animationTime;
+                fillAnimation.timingFunction = [CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionEaseInEaseOut];
+                fillAnimation.fillMode = kCAFillModeForwards;
+                fillAnimation.fromValue = (id)noFill.CGPath;
+                fillAnimation.toValue = (id)fill.CGPath;
+                [fillLayer addAnimation:fillAnimation forKey:@"path"];
+            }
+        }
     }
 }
 
@@ -637,6 +689,115 @@ static NSInteger const tagTextLabel = 1000;
     }
     
     return point;
+}
+
+- (CGPoint)getPointForIndex:(NSUInteger)idx withScale:(CGFloat)scale
+{
+    if (idx >= _chartDataSource.count)
+    {
+        return CGPointZero;
+    }
+    
+    // Compute the point position in the view from the data with a set scale value
+    NSNumber *number = _chartDataSource[idx];
+    number = [NSNumber numberWithInt:arc4random() % 50];
+    
+    if (_chartDataSource.count < 2)
+    {
+        return CGPointMake(30.0, self.heightYStep + 30.0 - [number floatValue] * scale);
+    }
+    else
+    {
+        return CGPointMake(30.0 + idx * (50.0 / (_chartDataSource.count - 1)), self.heightYStep + 30.0 - [number floatValue] * scale);
+    }
+}
+
+- (UIBezierPath *)getLinePath:(float)scale withSmoothing:(BOOL)smoothed close:(BOOL)closed
+{
+    UIBezierPath *path = [UIBezierPath bezierPath];
+    
+    if (smoothed)
+    {
+        for (int i = 0; i < _chartDataSource.count - 1; i++)
+        {
+            CGPoint controlPoint[2];
+            CGPoint p = [self getPointForIndex:i withScale:scale];
+            
+            // Start the path drawing
+            if (i == 0)
+            {
+                [path moveToPoint:p];
+            }
+            
+            CGPoint nextPoint, previousPoint, m;
+            
+            // First control point
+            nextPoint = [self getPointForIndex:i + 1 withScale:scale];
+            previousPoint = [self getPointForIndex:i - 1 withScale:scale];
+            m = CGPointZero;
+            
+            if (i > 0)
+            {
+                m.x = (nextPoint.x - previousPoint.x) / 2;
+                m.y = (nextPoint.y - previousPoint.y) / 2;
+            }
+            else
+            {
+                m.x = (nextPoint.x - p.x) / 2;
+                m.y = (nextPoint.y - p.y) / 2;
+            }
+            
+            controlPoint[0].x = p.x + m.x * 0.2;
+            controlPoint[0].y = p.y + m.y * 0.2;
+            
+            // Second control point
+            nextPoint = [self getPointForIndex:i + 2 withScale:scale];
+            previousPoint = [self getPointForIndex:i withScale:scale];
+            p = [self getPointForIndex:i + 1 withScale:scale];
+            m = CGPointZero;
+            
+            if(i < _chartDataSource.count - 2)
+            {
+                m.x = (nextPoint.x - previousPoint.x) / 2;
+                m.y = (nextPoint.y - previousPoint.y) / 2;
+            }
+            else
+            {
+                m.x = (p.x - previousPoint.x) / 2;
+                m.y = (p.y - previousPoint.y) / 2;
+            }
+            
+            controlPoint[1].x = p.x - m.x * 0.2;
+            controlPoint[1].y = p.y - m.y * 0.2;
+            
+            [path addCurveToPoint:p controlPoint1:controlPoint[0] controlPoint2:controlPoint[1]];
+        }
+    }
+    else
+    {
+        for (int i = 0; i < _chartDataSource.count; i++)
+        {
+            if (i > 0)
+            {
+                [path addLineToPoint:[self getPointForIndex:i withScale:scale]];
+            }
+            else
+            {
+                [path moveToPoint:[self getPointForIndex:i withScale:scale]];
+            }
+        }
+    }
+    
+    if (closed)
+    {
+        // Closing the path for the fill drawing
+        [path addLineToPoint:[self getPointForIndex:_chartDataSource.count - 1 withScale:scale]];
+        [path addLineToPoint:[self getPointForIndex:_chartDataSource.count - 1 withScale:0]];
+        [path addLineToPoint:[self getPointForIndex:0 withScale:0]];
+        [path addLineToPoint:[self getPointForIndex:0 withScale:scale]];
+    }
+    
+    return path;
 }
 
 #pragma mark - 响应事件
@@ -673,24 +834,14 @@ static NSInteger const tagTextLabel = 1000;
     return width;
 }
 
-- (NSMutableDictionary *)pointViewDict
+- (NSMutableArray *)labelArray
 {
-    if (_pointViewDict == nil)
+    if (!_labelArray)
     {
-        _pointViewDict = [[NSMutableDictionary alloc] init];
+        _labelArray = [[NSMutableArray alloc] init];
     }
     
-    return _pointViewDict;
-}
-
-- (NSMutableDictionary *)dotViewDict
-{
-    if (_dotViewDict == nil)
-    {
-        _dotViewDict = [[NSMutableDictionary alloc] init];
-    }
-    
-    return _dotViewDict;
+    return _labelArray;
 }
 
 @end

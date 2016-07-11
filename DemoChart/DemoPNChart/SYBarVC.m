@@ -153,11 +153,6 @@
     return 5.0;
 }
 
-//- (NSArray *)barChartView:(SYChartBar *)chartBar selectionColorForBarInSection:(NSUInteger)section
-//{
-//    
-//}
-
 - (NSString *)barChartView:(SYChartBar *)chartBar informationOfBarAtIndexPath:(NSIndexPath *)indexPath
 {
     // bar顶端信息标题
@@ -260,11 +255,14 @@
     return informationView;
 }
 
-- (void)barChartView:(SYChartBar *)chartBar didSelectBarAtIndex:(NSUInteger)index
+- (void)barChartView:(SYChartBar *)chartBar didSelectBarDotViewAtIndexPath:(NSIndexPath *)indexPath
 {
-    // 被点击选中bar
-    NSLog(@"你点击了 %@", @(index));
+    NSLog(@"你点击了第 %@ 个section的第 %@ 个bar的顶端信息视图", @(indexPath.section), @(indexPath.row));
 }
 
+- (void)barChartView:(SYChartBar *)chartBar didSelectBarAtIndexPath:(NSIndexPath *)indexPath
+{
+    NSLog(@"你点击了第 %@ 个section的第 %@ 个bar", @(indexPath.section), @(indexPath.row));
+}
 
 @end

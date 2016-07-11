@@ -31,8 +31,8 @@
 /**
  *  每个X轴标题对应的每个Y轴的信息
  *
- *  @param chartBar 当前柱状视图 SYChartBar
- *  @param indexPath  当前柱状视图 SYChartBar 的线条索引
+ *  @param chartBar  当前柱状视图 SYChartBar
+ *  @param indexPath 索引
  *
  *  @return 每个X轴标题对应的每个Y轴的信息
  */
@@ -64,13 +64,6 @@
 @protocol SYChartBarDelegate <NSObject>
 
 @optional
-/**
- *  被点击选中bar
- *
- *  @param chartBar 当前柱状视图 SYChartBar
- *  @param index    当前曲线视图 SYChartBar 的索引
- */
-- (void)barChartView:(SYChartBar *)chartBar didSelectBarAtIndex:(NSUInteger)index;
 
 /**
  *  bar的宽度
@@ -102,29 +95,18 @@
 /**
  *  bar的颜色设置
  *
- *  @param chartBar 当前柱状视图 SYChartBar
- *  @param indexPath  当前柱状视图 SYChartBar 的线条索引
+ *  @param chartBar  当前柱状视图 SYChartBar
+ *  @param indexPath 索引
  *
  *  @return bar的颜色设置
  */
 - (UIColor *)barChartView:(SYChartBar *)chartBar colorOfBarAtIndexPath:(NSIndexPath *)indexPath;
 
 /**
- *  <#Description#>
- *
- *  @param chartBar 当前柱状视图 SYChartBar
- *  @param section  当前柱状视图 SYChartBar 的线条索引
- *
- *  @return <#return value description#>
- */
-- (NSArray *)barChartView:(SYChartBar *)chartBar selectionColorForBarInSection:(NSUInteger)section;
-
-/**
  *  bar顶端信息标题
  *
- *  @param chartBar 当前柱状视图 SYChartBar
- *  @param section  当前柱状视图 SYChartBar 的线条索引
- *  @param index    当前曲线视图 SYChartBar 的索引
+ *  @param chartBar  当前柱状视图 SYChartBar
+ *  @param indexPath 索引
  *
  *  @return bar顶端信息标题
  */
@@ -133,13 +115,28 @@
 /**
  *  bar顶端信息自定义视图
  *
- *  @param chartBar 当前柱状视图 SYChartBar
- *  @param section  当前柱状视图 SYChartBar 的线条索引
- *  @param index    当前曲线视图 SYChartBar 的索引
+ *  @param chartBar  当前柱状视图 SYChartBar
+ *  @param indexPath 索引
  *
  *  @return bar顶端信息自定义视图
  */
 - (UIView *)barChartView:(SYChartBar *)chartBar hintViewOfBarAtIndexPath:(NSIndexPath *)indexPath;
+
+/**
+ *  bar点击事件
+ *
+ *  @param chartBar  当前柱状视图 SYChartBar
+ *  @param indexPath 索引
+ */
+- (void)barChartView:(SYChartBar *)chartBar didSelectBarAtIndexPath:(NSIndexPath *)indexPath;
+
+/**
+ *  bar顶端视图的点击事件
+ *
+ *  @param chartBar  当前柱状视图 SYChartBar
+ *  @param indexPath 索引
+ */
+- (void)barChartView:(SYChartBar *)chartBar didSelectBarDotViewAtIndexPath:(NSIndexPath *)indexPath;
 
 @end
 

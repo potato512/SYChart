@@ -356,6 +356,8 @@ CGFloat static const kSYChartBarUndefinedCachedHeight = -1.0f;
         NSArray *array = _chartDataSource[section];
         for (NSInteger index = 0; index < array.count; index ++)
         {
+            NSIndexPath *indexPath = [NSIndexPath indexPathForRow:index inSection:section];
+            
             CGFloat height = [self normalizedHeightForRawHeight:array[index]];
             
             UIBezierPath *bezierPath = [UIBezierPath bezierPath];
@@ -367,7 +369,6 @@ CGFloat static const kSYChartBarUndefinedCachedHeight = -1.0f;
             
             if ([self.delegate respondsToSelector:@selector(barChartView:colorOfBarAtIndexPath:)])
             {
-                NSIndexPath *indexPath = [NSIndexPath indexPathForRow:index inSection:section];
                 shapeLayer.strokeColor = [self.delegate barChartView:self colorOfBarAtIndexPath:indexPath].CGColor;
             }
             else
@@ -375,6 +376,14 @@ CGFloat static const kSYChartBarUndefinedCachedHeight = -1.0f;
                 shapeLayer.strokeColor = [UIColor redColor].CGColor;
             }
             [_scrollView.layer addSublayer:shapeLayer];
+            // 点击事件
+            UIView *tapView = [[UIView alloc] initWithFrame:CGRectMake((xOffset - _barWidth / 2), (chartYOffset - height), _barWidth, height)];
+            [_scrollView addSubview:tapView];
+            tapView.backgroundColor = [UIColor clearColor];
+            tapView.userInteractionEnabled = YES;
+            tapView.indexPath = indexPath;
+            UITapGestureRecognizer *tapRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(barTapClick:)];
+            [tapView addGestureRecognizer:tapRecognizer];
             
             if (animate)
             {
@@ -391,13 +400,17 @@ CGFloat static const kSYChartBarUndefinedCachedHeight = -1.0f;
             NSTimeInterval delay = (animate ? _animationTime : 0.0);
             if ([self.delegate respondsToSelector:@selector(barChartView:hintViewOfBarAtIndexPath:)])
             {
-                NSIndexPath *indexPath = [NSIndexPath indexPathForRow:index inSection:section];
                 UIView *hintView = [self.delegate barChartView:self hintViewOfBarAtIndexPath:indexPath];
                 if (hintView)
                 {
                     hintView.center = CGPointMake(xOffset, (chartYOffset - height - CGRectGetHeight(hintView.bounds) / 2));
                     hintView.alpha = 0.0;
                     [_scrollView addSubview:hintView];
+                    // 点击事件
+                    UITapGestureRecognizer *tapRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(dotTapClick:)];
+                    hintView.indexPath = indexPath;
+                    hintView.userInteractionEnabled = YES;
+                    [hintView addGestureRecognizer:tapRecognizer];
                     
                     [UIView animateWithDuration:0.5 delay:delay options:UIViewAnimationOptionCurveEaseInOut animations:^{
                         hintView.alpha = 1.0;
@@ -406,7 +419,6 @@ CGFloat static const kSYChartBarUndefinedCachedHeight = -1.0f;
             }
             else if ([self.delegate respondsToSelector:@selector(barChartView:informationOfBarAtIndexPath:)])
             {
-                NSIndexPath *indexPath = [NSIndexPath indexPathForRow:index inSection:section];
                 NSString *information = [self.delegate barChartView:self informationOfBarAtIndexPath:indexPath];
                 if (information)
                 {
@@ -416,8 +428,12 @@ CGFloat static const kSYChartBarUndefinedCachedHeight = -1.0f;
                     informationView.informationViewBackgroundColor = _dotTitleBackgroundColor;
                     informationView.informationViewTextColor = _dotTitleColor;
                     informationView.informationViewTextFont = _dotTitleFont;
-                    
                     [_scrollView addSubview:informationView];
+                    // 点击事件
+                    UITapGestureRecognizer *tapRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(dotTapClick:)];
+                    informationView.indexPath = indexPath;
+                    informationView.userInteractionEnabled = YES;
+                    [informationView addGestureRecognizer:tapRecognizer];
                     
                     [UIView animateWithDuration:0.5 delay:delay options:UIViewAnimationOptionCurveEaseInOut animations:^{
                         informationView.alpha = 1.0;
@@ -486,6 +502,28 @@ CGFloat static const kSYChartBarUndefinedCachedHeight = -1.0f;
 
         xOffset += _paddingSection;
         xSection = xOffset;
+    }
+}
+
+#pragma mark - 响应事件
+
+- (void)barTapClick:(UITapGestureRecognizer *)recognizer
+{
+    if (self.delegate && [self.delegate respondsToSelector:@selector(barChartView:didSelectBarAtIndexPath:)])
+    {
+        UIView *view = recognizer.view;
+        NSIndexPath *indexPath = view.indexPath;
+        [self.delegate barChartView:self didSelectBarAtIndexPath:indexPath];
+    }
+}
+
+- (void)dotTapClick:(UITapGestureRecognizer *)recognizer
+{
+    if (self.delegate && [self.delegate respondsToSelector:@selector(barChartView:didSelectBarDotViewAtIndexPath:)])
+    {
+        UIView *view = recognizer.view;
+        NSIndexPath *indexPath = view.indexPath;
+        [self.delegate barChartView:self didSelectBarDotViewAtIndexPath:indexPath];
     }
 }
 
