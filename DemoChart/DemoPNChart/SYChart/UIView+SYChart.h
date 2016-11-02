@@ -1,6 +1,6 @@
 //
 //  UIView+SYChart.h
-//  DemoChart
+//  zhangshaoyu
 //
 //  Created by zhangshaoyu on 16/7/8.
 //  Copyright © 2016年 zhangshaoyu. All rights reserved.

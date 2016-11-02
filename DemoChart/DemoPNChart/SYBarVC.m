@@ -201,7 +201,7 @@
     return nil;
 }
 
-- (UIView *)barChartView:(SYChartBar *)chartBar hintViewOfBarAtIndexPath:(NSIndexPath *)indexPath;
+- (UIView *)barChartView:(SYChartBar *)chartBar hintViewOfBarAtIndexPath:(NSIndexPath *)indexPath
 {
     // 单个bar
 //    NSString *text = [NSString stringWithFormat:@"%@分", _datas[indexPath.row]];
