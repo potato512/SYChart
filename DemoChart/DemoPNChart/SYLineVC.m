@@ -65,6 +65,10 @@
     chartLine.colorOfYText = [UIColor purpleColor];
     chartLine.yFontSize = 10.0;
     chartLine.unitOfYAxis = @"分";
+    // Y坐标单位
+    chartLine.yUnitText = @"单位：分";
+    // X坐标单位
+    chartLine.xUnitText = @"时间";
     // X坐标轴设置
     chartLine.colorOfXAxis = [UIColor redColor];
     chartLine.colorOfXText = [UIColor greenColor];

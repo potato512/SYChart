@@ -18,6 +18,9 @@
 #define SYChart_SCREEN_WIDTH    ([UIScreen mainScreen].bounds.size.width)
 #define SYChart_SCREEN_HEIGHT   ([UIScreen mainScreen].bounds.size.height)
 
+// 系统
+#define SYChartIOS7             ([[[UIDevice currentDevice] systemVersion] floatValue] >= 7.0)
+
 // 颜色
 #define SYChartColorRGBA(r,g,b,a)   [UIColor colorWithRed:(r / 255.0f) green:(g / 255.0f) blue:(b / 255.0f) alpha:a]
 #define SYChartColorRGB(r,g,b)      SYChartColorRGBA(r,g,b,1.0f)
@@ -95,6 +98,7 @@
  10、数据点信息视图点击代理方法——done
  11、曲线显示动画方式（点、线、信息）：逐个连线动画显示，或已连线从底部向上推出显示
  12、曲线填充颜色
+ 13、坐标轴标题（字体大小，字体颜色、标题）——done
  
  bar柱状
  1、bar边框样式：无，或虚线，或实线
@@ -107,6 +111,7 @@
  8、y轴坐标显示样式：显示刻度——done
  9、数据点点击代理方法——done
  10、数据点信息视图点击代理方法——done
+ 11、坐标轴标题（字体大小，字体颜色、标题）——done
  
 */
 

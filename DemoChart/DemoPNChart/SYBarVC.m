@@ -68,6 +68,10 @@
     chartBar.yFontSize = 12.0;
     chartBar.colorOfYAxis = [UIColor purpleColor];
     chartBar.colorOfYText = [UIColor orangeColor];
+    // Y坐标单位
+    chartBar.yUnitText = @"单位：分";
+    // X坐标单位
+    chartBar.xUnitText = @"时间";
     // X坐标轴
     chartBar.colorOfXAxis = [UIColor redColor];
     chartBar.colorOfXText = [UIColor brownColor];

@@ -71,6 +71,12 @@ CGFloat static const kSYChartBarUndefinedCachedHeight = -1.0f;
     _colorOfYAxis = _colorOfYText = [UIColor blackColor];
     _yFontSize = 14.0;
     
+    _yUnitFontSize = 12.0;
+    _yUnitColor = [UIColor blackColor];
+    
+    _xUnitFontSize = 12.0;
+    _xUnitColor = [UIColor blackColor];
+    
     _colorOfXAxis = _colorOfXText = [UIColor blackColor];
     _xFontSize = 14.0;
     
@@ -261,6 +267,7 @@ CGFloat static const kSYChartBarUndefinedCachedHeight = -1.0f;
 {
     [self reloadChartDataSource];
     [self reloadChartYAxis];
+    [self reloadChartUnit];
     [self reloadBarWithAnimate:animate];
 }
 
@@ -317,8 +324,43 @@ CGFloat static const kSYChartBarUndefinedCachedHeight = -1.0f;
     _chartDataSource = [[NSMutableArray alloc] initWithArray:dataArray];
 }
 
+- (void)reloadChartUnit
+{
+    // 刻度单位
+    if (self.yUnitText && 0 != [self.yUnitText length])
+    {
+        CGFloat width = [self.yUnitText sizeWithAttributes:@{NSFontAttributeName:[UIFont systemFontOfSize:self.yUnitFontSize]}].width;
+        width = (width >= (SYChart_BAR_CHART_LEFT_PADDING - 2) ? (width + SYChart_PADDING_SECTION_DEFAULT) : (SYChart_BAR_CHART_LEFT_PADDING - 2));
+        CGRect drawRect = CGRectMake(0.0, 0.0, width, 20.0);
+        UILabel *label = [[UILabel alloc] initWithFrame:drawRect];
+        label.backgroundColor = [UIColor clearColor];
+        label.textColor = self.yUnitColor;
+        label.textAlignment = NSTextAlignmentRight;
+        label.font = [UIFont systemFontOfSize:self.yUnitFontSize];
+        label.text = self.yUnitText;
+        
+        [self addSubview:label];
+    }
+    
+    if (self.xUnitText && 0 != [self.xUnitText length])
+    {
+        CGFloat width = [self.xUnitText sizeWithAttributes:@{NSFontAttributeName:[UIFont systemFontOfSize:self.xUnitFontSize]}].width;
+        width = (width >= (SYChart_BAR_CHART_LEFT_PADDING - 2) ? (width + SYChart_PADDING_SECTION_DEFAULT) : (SYChart_BAR_CHART_LEFT_PADDING - 2));
+        CGRect drawRect = CGRectMake((CGRectGetWidth(self.bounds) - width), (CGRectGetHeight(self.bounds) - (SYChart_BAR_CHART_LEFT_PADDING - 2)), width, 20.0);
+        UILabel *label = [[UILabel alloc] initWithFrame:drawRect];
+        label.backgroundColor = [UIColor clearColor];
+        label.textColor = self.xUnitColor;
+        label.textAlignment = NSTextAlignmentCenter;
+        label.font = [UIFont systemFontOfSize:self.xUnitFontSize];
+        label.text = self.xUnitText;
+        
+        [self addSubview:label];
+    }
+}
+
 - (void)reloadChartYAxis
 {
+    // Y 刻度
     for (UIView *view in self.subviews)
     {
         if ([view isKindOfClass:[UILabel class]])

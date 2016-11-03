@@ -168,6 +168,14 @@
 /// y轴文本文字大小（默认14号）
 @property (nonatomic, assign) CGFloat yFontSize;
 
+#pragma mark Y坐标轴标题
+/// Y坐标轴标题内容（默认无）
+@property (nonatomic, strong) NSString *yUnitText;
+/// Y坐标轴标题颜色（默认黑色）
+@property (nonatomic, strong) UIColor *yUnitColor;
+/// Y坐标轴标题文字大小（默认14号）
+@property (nonatomic, assign) CGFloat yUnitFontSize;
+
 #pragma mark X坐标轴
 
 /// x轴的颜色（默认黑色）
@@ -176,6 +184,14 @@
 @property (nonatomic, strong) UIColor *colorOfXText;
 /// x轴文本文字大小（默认14号）
 @property (nonatomic, assign) CGFloat xFontSize;
+
+#pragma mark X坐标轴标题
+/// X坐标轴标题内容（默认无）
+@property (nonatomic, strong) NSString *xUnitText;
+/// X坐标轴标题颜色（默认黑色）
+@property (nonatomic, strong) UIColor *xUnitColor;
+/// X坐标轴标题文字大小（默认14号）
+@property (nonatomic, assign) CGFloat xUnitFontSize;
 
 #pragma mark - 数据点
 

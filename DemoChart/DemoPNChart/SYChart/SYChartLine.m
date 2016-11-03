@@ -68,10 +68,18 @@ static NSInteger const tagTextLabel = 1000;
     _minValue = @(0);
     _unitOfYAxis = @"";
     _numberOfYAxis = 5;
-    _colorOfYAxis = _colorOfYText = [UIColor blackColor];
+    _colorOfYAxis = [UIColor blackColor];
+    _colorOfYText = [UIColor blackColor];
     _yFontSize = 14.0;
     
-    _colorOfXAxis = _colorOfXText = [UIColor blackColor];
+    _yUnitFontSize = 12.0;
+    _yUnitColor = [UIColor blackColor];
+    
+    _xUnitFontSize = 12.0;
+    _xUnitColor = [UIColor blackColor];
+
+    _colorOfXText = [UIColor blackColor];
+    _colorOfXAxis = [UIColor blackColor];
     _xFontSize = 14.0;
     
     _oppositeY = NO;
@@ -280,6 +288,7 @@ static NSInteger const tagTextLabel = 1000;
 {
     [self reloadChartDataSource];
     [self reloadChartYAxis];
+    [self reloadChartUnit];
     [self reloadLineWithAnimate:animate];
 }
 
@@ -326,8 +335,43 @@ static NSInteger const tagTextLabel = 1000;
     _chartDataSource = [[NSMutableArray alloc] initWithArray:dataArray];
 }
 
+- (void)reloadChartUnit
+{
+    // 刻度单位
+    if (self.yUnitText && 0 != [self.yUnitText length])
+    {
+        CGFloat width = [self.yUnitText sizeWithAttributes:@{NSFontAttributeName:[UIFont systemFontOfSize:self.yUnitFontSize]}].width;
+        width = (width >= (SYChart_LINE_CHART_LEFT_PADDING - 2) ? (width + SYChart_LINE_CHART_YTITLELABEL_HEIGHT / 2) : (SYChart_LINE_CHART_LEFT_PADDING - 2));
+        CGRect drawRect = CGRectMake(0.0, 0.0, width, SYChart_LINE_CHART_YTITLELABEL_HEIGHT);
+        UILabel *label = [[UILabel alloc] initWithFrame:drawRect];
+        label.backgroundColor = [UIColor clearColor];
+        label.textColor = self.yUnitColor;
+        label.textAlignment = NSTextAlignmentRight;
+        label.font = [UIFont systemFontOfSize:self.yUnitFontSize];
+        label.text = self.yUnitText;
+        
+        [self addSubview:label];
+    }
+    
+    if (self.xUnitText && 0 != [self.xUnitText length])
+    {
+        CGFloat width = [self.xUnitText sizeWithAttributes:@{NSFontAttributeName:[UIFont systemFontOfSize:self.xUnitFontSize]}].width;
+        width = (width >= (SYChart_LINE_CHART_LEFT_PADDING - 2) ? (width + SYChart_LINE_CHART_YTITLELABEL_HEIGHT / 2) : (SYChart_LINE_CHART_LEFT_PADDING - 2));
+        CGRect drawRect = CGRectMake((CGRectGetWidth(self.bounds) - width), (CGRectGetHeight(self.bounds) - (SYChart_LINE_CHART_LEFT_PADDING - 2)), width, SYChart_LINE_CHART_YTITLELABEL_HEIGHT);
+        UILabel *label = [[UILabel alloc] initWithFrame:drawRect];
+        label.backgroundColor = [UIColor clearColor];
+        label.textColor = self.xUnitColor;
+        label.textAlignment = NSTextAlignmentCenter;
+        label.font = [UIFont systemFontOfSize:self.xUnitFontSize];
+        label.text = self.xUnitText;
+        
+        [self addSubview:label];
+    }
+}
+
 - (void)reloadChartYAxis
 {
+    // Y刻度
     if (!_hideYAxis)
     {
         for (UIView *view in self.subviews)
