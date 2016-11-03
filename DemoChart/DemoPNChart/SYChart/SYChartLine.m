@@ -81,6 +81,7 @@ static NSInteger const tagTextLabel = 1000;
     _colorOfXText = [UIColor blackColor];
     _colorOfXAxis = [UIColor blackColor];
     _xFontSize = 14.0;
+    _xFontSizeAuto = NO;
     
     _oppositeY = NO;
     _hideYAxis = NO;
@@ -583,6 +584,11 @@ static NSInteger const tagTextLabel = 1000;
                 textLabel.text = [self.dataSource lineChartView:self titleAtLineNumber:index];
                 textLabel.backgroundColor = [UIColor clearColor];
                 textLabel.tag = (index + tagTextLabel);
+                if (_xFontSizeAuto)
+                {
+                    textLabel.numberOfLines = 1;
+                    textLabel.adjustsFontSizeToFitWidth = YES;
+                }
                 
                 [_scrollView addSubview:textLabel];
                 [self.labelArray addObject:textLabel];

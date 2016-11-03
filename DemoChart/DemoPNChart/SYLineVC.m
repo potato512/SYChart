@@ -42,9 +42,9 @@
     
     _titles = @[@"1week", @"2week", @"3week", @"4week", @"5week"];
     // 单条曲线
-//    _datas = @[@50, @68, @93, @66, @75];
+    _datas = @[@10, @6, @3, @1, @5];
     // 多条曲线
-    _datas = @[@[@50, @68, @93, @66, @75],@[@90, @11, @32, @91, @20],@[@19, @88, @63, @16, @41]];
+//    _datas = @[@[@50, @68, @93, @66, @75],@[@90, @11, @5, @91, @20],@[@19, @88, @63, @16, @41]];
     
     SYChartLine *chartLine = [[SYChartLine alloc] initWithFrame:CGRectMake(0, 100, [UIScreen mainScreen].bounds.size.width, 300)];
     [self.view addSubview:chartLine];
@@ -58,9 +58,9 @@
     chartLine.delegate = self;
     // Y坐标轴设置
     chartLine.minValue = @0;
-    chartLine.maxValue = @100;
+    chartLine.maxValue = @10;
     chartLine.oppositeY = NO;
-    chartLine.numberOfYAxis = 10;
+    chartLine.numberOfYAxis = 5;
     chartLine.colorOfYAxis = [UIColor orangeColor];
     chartLine.colorOfYText = [UIColor purpleColor];
     chartLine.yFontSize = 10.0;
@@ -81,7 +81,7 @@
     chartLine.animationTime = 0.3;
     // 曲线样式设置
     chartLine.isSolidLines = YES;
-    chartLine.isSmoothLines = NO;
+    chartLine.isSmoothLines = YES;
     // 填充色
 //    chartLine.showFillColor = YES;
     // 刷新数据
@@ -94,30 +94,30 @@
 {
     // Y垂直坐标曲线点个数
     // 1条曲线
-//    return [_dataSource count];
+    return [_datas count];
     
     // 多条曲线
-    return [_datas[lineNumber] count];
+//    return [_datas[lineNumber] count];
 }
 
 - (id)lineChartView:(SYChartLine *)charLine valueAtLineNumber:(NSInteger)lineNumber index:(NSInteger)index
 {
     // Y垂直坐标信息
     // 1条曲线
-//    return _dataSource[index];
+    return _datas[index];
     
     // 多条曲线
-    return _datas[lineNumber][index];
+//    return _datas[lineNumber][index];
 }
 
 - (NSUInteger)numberOfLinesInLineChartView:(SYChartLine *)charLine
 {
     // 曲线条数
     // 1条曲线
-//    return 1;
+    return 1;
     
     // 多条曲线
-    return _datas.count;
+//    return _datas.count;
 }
 
 - (NSString *)lineChartView:(SYChartLine *)charLine titleAtLineNumber:(NSInteger)index
@@ -181,15 +181,10 @@
 {
     // 曲线点数据信息标题
     // 1条曲线
-//    if (index == 0 || index == _dataSource.count - 1)
-//    {
-//        return [NSString stringWithFormat:@"%@名", _dataSource[index]];
-//    }
-//
-//    return nil;
+    return [NSString stringWithFormat:@"%@分", _datas[index]];
     
     // 多条曲线
-    return [NSString stringWithFormat:@"%@分", _datas[lineNumber][index]];
+//    return [NSString stringWithFormat:@"%@分", _datas[lineNumber][index]];
 }
 
 - (UIView *)lineChartView:(SYChartLine *)charLine hintViewOfDotInLineNumber:(NSInteger)lineNumber index:(NSInteger)index
@@ -215,7 +210,8 @@
 //    return label;
     
     // 或
-    NSString *text = [NSString stringWithFormat:@"%@分", _datas[lineNumber][index]];
+    NSString *text = [NSString stringWithFormat:@"%@分", _datas[index]]; // 1条
+//    NSString *text = [NSString stringWithFormat:@"%@分", _datas[lineNumber][index]]; // 多条
     SYChartInfromationView *informationView = [[SYChartInfromationView alloc] initWithText:text];
     informationView.frame = CGRectMake(0.0, 0.0, 40.0, 25.0);
     if (lineNumber == 0)

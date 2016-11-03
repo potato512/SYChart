@@ -197,6 +197,8 @@ CGFloat static const kSYChartLineUndefinedValue = -1.0f;
 @property (nonatomic, strong) UIColor *colorOfXText;
 /// x轴文本文字大小（默认14号）
 @property (nonatomic, assign) CGFloat xFontSize;
+/// x轴文本文字大小自适应（默认非自适应）
+@property (nonatomic, assign) BOOL xFontSizeAuto;
 
 #pragma mark X坐标轴标题
 /// X坐标轴标题内容（默认无）

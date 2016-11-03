@@ -79,6 +79,7 @@ CGFloat static const kSYChartBarUndefinedCachedHeight = -1.0f;
     
     _colorOfXAxis = _colorOfXText = [UIColor blackColor];
     _xFontSize = 14.0;
+    _xFontSizeAuto = NO;
     
     _dotTitleBackgroundColor = [UIColor colorWithWhite:1.0 alpha:0.9];
     _dotTitleColor = [UIColor colorWithWhite:0.2 alpha:1.0];
@@ -498,6 +499,11 @@ CGFloat static const kSYChartBarUndefinedCachedHeight = -1.0f;
             textLabel.textAlignment = NSTextAlignmentCenter;
             textLabel.font = [UIFont systemFontOfSize:_xFontSize];
             textLabel.numberOfLines = 0;
+            if (_xFontSizeAuto)
+            {
+                textLabel.numberOfLines = 1;
+                textLabel.adjustsFontSizeToFitWidth = YES;
+            }
             textLabel.text = [self.dataSource barChartView:self titleOfBarForSection:section];
             
             [_scrollView addSubview:textLabel];
