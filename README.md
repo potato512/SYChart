@@ -114,3 +114,13 @@ chartLine.isSmoothLines = YES;
 ![chartline02](./images/chartline02.png) 
 
  * 2 柱状图
+
+
+
+
+
+#### 修改说明
+* 20170609 
+  * 百度统计示例使用
+
+

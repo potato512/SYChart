@@ -7,7 +7,8 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "BaseViewController.h"
 
-@interface SYBarVC : UIViewController
+@interface SYBarVC : BaseViewController
 
 @end

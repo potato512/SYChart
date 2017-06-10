@@ -31,11 +31,6 @@
 
 - (void)setUI
 {
-    if ([self respondsToSelector:@selector(setEdgesForExtendedLayout:)])
-    {
-        [self setEdgesForExtendedLayout:UIRectEdgeNone];
-    }
-    
     PNCircleChart *circleChart = [[PNCircleChart alloc] initWithFrame:CGRectMake((SCREEN_WIDTH - 200.0) / 2, (SCREEN_HEIGHT - 200.0) / 2, 200.0, 200.0) total:@(100) current:@(60) clockwise:YES shadow:YES shadowColor:PNBlue displayCountingLabel:YES overrideLineWidth:@(10)];
     [self.view addSubview:circleChart];
     circleChart.backgroundColor = [UIColor colorWithWhite:0.5 alpha:0.1];

@@ -31,10 +31,7 @@
 
 - (void)setUI
 {
-    if ([self respondsToSelector:@selector(setEdgesForExtendedLayout:)])
-    {
-        [self setEdgesForExtendedLayout:UIRectEdgeNone];
-    }
+
     
 //    UIButton *button = [[UIButton alloc] init];
 //    [self.view addSubview:button];

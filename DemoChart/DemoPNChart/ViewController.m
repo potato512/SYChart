@@ -7,18 +7,14 @@
 //
 
 #import "ViewController.h"
+#import "PNChartVC.h"
+#import "SYChartVC.h"
+#import "AAChartVC.h"
 
-#import "LineVC.h"
-#import "BarVC.h"
-#import "PieVC.h"
-#import "CycleVC.h"
-#import "ScatterVC.h"
-#import "SYLineVC.h"
-#import "SYBarVC.h"
 
-@interface ViewController ()
+@interface ViewController () <UITableViewDelegate, UITableViewDataSource>
 
-@property (nonatomic, strong) NSArray *vcArray;
+@property (nonatomic, strong) NSArray *array;
 
 @end
 
@@ -30,7 +26,14 @@
     
     self.title = @"Chart";
     
-    [self setUI];
+    self.array = @[@"PNChart", @"SYChart", @"AAChart"];
+    
+    UITableView *tableView = [[UITableView alloc] initWithFrame:self.view.bounds style:UITableViewStylePlain];
+    [self.view addSubview:tableView];
+    tableView.autoresizingMask = UIViewAutoresizingFlexibleHeight;
+    tableView.tableFooterView = [UIView new];
+    tableView.delegate = self;
+    tableView.dataSource = self;
 }
 
 - (void)didReceiveMemoryWarning {
@@ -38,42 +41,43 @@
     // Dispose of any resources that can be recreated.
 }
 
-- (void)setUI
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    if ([self respondsToSelector:@selector(setEdgesForExtendedLayout:)])
-    {
-        [self setEdgesForExtendedLayout:UIRectEdgeNone];
-    }
-    
-//    UITableViewDataSource UITableViewDelegate
-    
-    self.vcArray = @[[LineVC class], [BarVC class], [PieVC class], [CycleVC class], [ScatterVC class], [SYLineVC class], [SYBarVC class]];
-    CGFloat originY = 10.0;
-    for (int i = 0; i < self.vcArray.count; i++)
-    {
-        NSString *title = NSStringFromClass(self.vcArray[i]);
-        
-        UIButton *button = [[UIButton alloc] init];
-        [self.view addSubview:button];
-        button.frame = CGRectMake(10.0, originY, (CGRectGetWidth(self.view.bounds) - 10.0 * 2), 40.0);
-        button.backgroundColor = [UIColor yellowColor];
-        [button setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
-        [button setTitleColor:[UIColor redColor] forState:UIControlStateHighlighted];
-        [button setTitle:title forState:UIControlStateNormal];
-        button.tag = i;
-        [button addTarget:self action:@selector(buttonClick:) forControlEvents:UIControlEventTouchUpInside];
-        
-        originY += (40.0 + 10.0);
-    }
+    return self.array.count;
 }
 
-- (void)buttonClick:(UIButton *)button
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    NSInteger index = button.tag;
+    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"UITableViewCell"];
+    if (cell == nil)
+    {
+        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"UITableViewCell"];
+    }
     
-    Class vcClass = self.vcArray[index];
-    UIViewController *vc = [[vcClass alloc] init];
-    [self.navigationController pushViewController:vc animated:YES];
+    cell.textLabel.text = self.array[indexPath.row];
+    
+    return cell;
+}
+
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    [tableView deselectRowAtIndexPath:indexPath animated:YES];
+    
+    UIViewController *nextVC = nil;
+    if (0 == indexPath.row)
+    {
+        nextVC = [PNChartVC new];
+    }
+    else if (1 == indexPath.row)
+    {
+        nextVC = [SYChartVC new];
+    }
+    else if (2 == indexPath.row)
+    {
+        nextVC = [AAChartVC new];
+    }
+    nextVC.title = self.array[indexPath.row];
+    [self.navigationController pushViewController:nextVC animated:YES];
 }
 
 @end

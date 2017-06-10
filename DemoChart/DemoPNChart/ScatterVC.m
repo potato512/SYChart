@@ -31,12 +31,6 @@
 
 - (void)setUI
 {
-    if ([self respondsToSelector:@selector(setEdgesForExtendedLayout:)])
-    {
-        [self setEdgesForExtendedLayout:UIRectEdgeNone];
-    }
-    
-    
     PNScatterChart *scatterChart = [[PNScatterChart alloc] initWithFrame:CGRectMake(10.0, 10.0, (SCREEN_WIDTH - 10.0 * 2), 200)];
     [self.view addSubview:scatterChart];
     

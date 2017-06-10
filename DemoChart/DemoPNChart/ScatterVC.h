@@ -7,7 +7,8 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "BaseViewController.h"
 
-@interface ScatterVC : UIViewController
+@interface ScatterVC : BaseViewController
 
 @end

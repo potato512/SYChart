@@ -34,12 +34,7 @@
 
 
 - (void)setUI
-{
-    if ([self respondsToSelector:@selector(setEdgesForExtendedLayout:)])
-    {
-        [self setEdgesForExtendedLayout:UIRectEdgeNone];
-    }
-    
+{    
     _titles = @[@"1week", @"2week", @"3week", @"4week", @"5week"];
     // 单条曲线
     _datas = @[@10, @6, @3, @1, @5];

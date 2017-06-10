@@ -34,11 +34,6 @@
 
 - (void)setUI
 {
-    if ([self respondsToSelector:@selector(setEdgesForExtendedLayout:)])
-    {
-        [self setEdgesForExtendedLayout:UIRectEdgeNone];
-    }
-    
     _titles = @[@"1月", @"2月", @"3月", @"4月", @"5月", @"6月"];
     // 单个bar
 //    _datas = [NSMutableArray arrayWithArray:@[@120, @115.0, @50, @138, @110, @100]];

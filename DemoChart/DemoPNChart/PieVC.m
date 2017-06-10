@@ -31,12 +31,6 @@
 
 - (void)setUI
 {
-    if ([self respondsToSelector:@selector(setEdgesForExtendedLayout:)])
-    {
-        [self setEdgesForExtendedLayout:UIRectEdgeNone];
-    }
-    
-    
     NSArray *items = @[[PNPieChartDataItem dataItemWithValue:10 color:PNRed],
                        [PNPieChartDataItem dataItemWithValue:20 color:PNBlue description:@"房租"],
                        [PNPieChartDataItem dataItemWithValue:40 color:PNGreen description:@"生活费"],
