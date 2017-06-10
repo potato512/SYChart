@@ -55,3 +55,50 @@
 - (void)refreshChart;
 
 @end
+
+/*
+ 使用示例：
+ 
+ 1 导入头文件
+ #import "UIChartView.h"
+ 
+ 2 实例化
+ UIChartView *chartView = [[UIChartView alloc] initWithFrame:CGRectMake(0.0, height, self.view.frame.size.width, (self.view.frame.size.height - height)) view:self.view];
+ chartView.chartModel.chartTypeSet(AAChartTypeBar); // 类型
+ chartView.chartTitle = @"编程语言热度";
+ chartView.chartSubTitle = @"虚拟数据";
+ chartView.chartXTitles = @[@"Java", @"Swift", @"Python", @"Objective-C", @"PHP", @"Go"];
+ chartView.chartYTitle = @"摄氏度";
+ NSMutableArray *array = [NSMutableArray array];
+ for (int i = 0; i < 4; i++)
+ {
+     ChartModel *model = [ChartModel new];
+     if (0 == i)
+     {
+         model.name = @"2014";
+         model.datas = @[@45, @88, @49, @43, @65, @56];
+     }
+     else if (1 == i)
+     {
+         model.name = @"2015";
+         model.datas = @[@31, @22, @33, @54, @35, @36];
+     }
+     else if (2 == i)
+     {
+         model.name = @"2016";
+         model.datas = @[@11, @12, @13, @14, @15, @16];
+     }
+     else if (3 == i)
+     {
+         model.name = @"2017";
+         model.datas = @[@21, @22, @24, @27, @25, @26];
+     }
+     
+     [array addObject:model];
+ }
+ chartView.charts = array;
+ chartView.showActivityIndicatorView = YES;
+ [chartView reloadChart];
+ 
+ */
+
