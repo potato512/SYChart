@@ -29,6 +29,7 @@
     self = [super initWithFrame:frame];
     if (self)
     {
+        self.scrollView.scrollEnabled = NO;
         self.autoresizingMask = UIViewAutoresizingFlexibleHeight;
         self.chartModel = AAObject(AAChartModel);
     }

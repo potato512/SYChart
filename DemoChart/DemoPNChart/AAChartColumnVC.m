@@ -25,7 +25,7 @@
     
     CGFloat height = 0.0;
     
-    /*
+
     //
     NSArray *segmentedArray = @[@[@"常规", @"堆叠", @"百分比堆叠"], @[@"波点", @"方块", @"钻石", @"正三角", @"倒三角"]];
     NSArray *typeLabelNameArr = @[@"堆叠类型选择", @"折线连接点形状选择"];
@@ -73,7 +73,7 @@
             height = switchView.frame.origin.y + switchView.frame.size.height + 10.0;
         }
     }
-    */
+
     
     //
     self.chartView = [[AAChartView alloc] initWithFrame:CGRectMake(0.0, height, self.view.frame.size.width, (self.view.frame.size.height - height))];
@@ -105,10 +105,10 @@
                  .dataSet(@[@21, @22, @24, @27, @25, @26, @37, @28, @49, @56, @31, @11]),
                  ]);
     // 其他属性设置
-    self.chartModel.backgroundColor = @"0x564654";
-    self.chartModel.yMax = @150;
-    self.chartModel.yMin = @0;
-    self.chartModel.yTickPositions = @[@10, @20, @30, @50, @80, @130];
+//    self.chartModel.backgroundColor = @"0x564654";
+//    self.chartModel.yMax = @150;
+//    self.chartModel.yMin = @0;
+//    self.chartModel.yTickPositions = @[@10, @20, @30, @50, @80, @130];
     // 通知
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(loadingMethord) name:AAChartNotificationStatusLoading object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(loadedSuccessMethord) name:AAChartNotificationStatusLoadedSuccess object:nil];
