@@ -39,6 +39,7 @@
 		A734B4A21D1CC11900AAB560 /* PieVC.m in Sources */ = {isa = PBXBuildFile; fileRef = A734B4A11D1CC11900AAB560 /* PieVC.m */; };
 		A734B4A51D1CC13800AAB560 /* CycleVC.m in Sources */ = {isa = PBXBuildFile; fileRef = A734B4A41D1CC13800AAB560 /* CycleVC.m */; };
 		A734B4A81D1CC7A200AAB560 /* ScatterVC.m in Sources */ = {isa = PBXBuildFile; fileRef = A734B4A71D1CC7A200AAB560 /* ScatterVC.m */; };
+		DF1AA44F1FB7EB9A008FABAE /* DrawVC.m in Sources */ = {isa = PBXBuildFile; fileRef = DF1AA44E1FB7EB9A008FABAE /* DrawVC.m */; };
 		DF4AF30C1EEB85A30040102A /* BaseViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DF4AF30B1EEB85A30040102A /* BaseViewController.m */; };
 		DF4AF30F1EEB86AF0040102A /* SYChartVC.m in Sources */ = {isa = PBXBuildFile; fileRef = DF4AF30E1EEB86AF0040102A /* SYChartVC.m */; };
 		DF4AF3121EEB88C10040102A /* PNChartVC.m in Sources */ = {isa = PBXBuildFile; fileRef = DF4AF3111EEB88C10040102A /* PNChartVC.m */; };
@@ -186,6 +187,8 @@
 		A734B4A41D1CC13800AAB560 /* CycleVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CycleVC.m; sourceTree = "<group>"; };
 		A734B4A61D1CC7A200AAB560 /* ScatterVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ScatterVC.h; sourceTree = "<group>"; };
 		A734B4A71D1CC7A200AAB560 /* ScatterVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ScatterVC.m; sourceTree = "<group>"; };
+		DF1AA44D1FB7EB9A008FABAE /* DrawVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DrawVC.h; sourceTree = "<group>"; };
+		DF1AA44E1FB7EB9A008FABAE /* DrawVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DrawVC.m; sourceTree = "<group>"; };
 		DF4AF30A1EEB85A30040102A /* BaseViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BaseViewController.h; sourceTree = "<group>"; };
 		DF4AF30B1EEB85A30040102A /* BaseViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BaseViewController.m; sourceTree = "<group>"; };
 		DF4AF30D1EEB86AF0040102A /* SYChartVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SYChartVC.h; sourceTree = "<group>"; };
@@ -358,16 +361,14 @@
 				DF4AF30B1EEB85A30040102A /* BaseViewController.m */,
 				A701E81A1D1A979A006C4901 /* ViewController.h */,
 				A701E81B1D1A979A006C4901 /* ViewController.m */,
+				DF1AA44D1FB7EB9A008FABAE /* DrawVC.h */,
+				DF1AA44E1FB7EB9A008FABAE /* DrawVC.m */,
 				DF4AF3821EEB91A30040102A /* AAChartVC */,
 				DF4AF3131EEB91850040102A /* AAChartKit */,
 				DF4AF3091EEB85650040102A /* SYChartVC */,
 				DF4AF3081EEB854A0040102A /* PNCharVC */,
 				DFA0FCE91EEAEAC7001A40C2 /* SYChart */,
 				A701E8471D1A97CF006C4901 /* PNChart */,
-				A701E81D1D1A979A006C4901 /* Main.storyboard */,
-				A701E8201D1A979A006C4901 /* Assets.xcassets */,
-				A701E8221D1A979A006C4901 /* LaunchScreen.storyboard */,
-				A701E8251D1A979A006C4901 /* Info.plist */,
 				A701E8141D1A979A006C4901 /* Supporting Files */,
 			);
 			name = DemoChart;
@@ -377,6 +378,10 @@
 		A701E8141D1A979A006C4901 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				A701E81D1D1A979A006C4901 /* Main.storyboard */,
+				A701E8201D1A979A006C4901 /* Assets.xcassets */,
+				A701E8221D1A979A006C4901 /* LaunchScreen.storyboard */,
+				A701E8251D1A979A006C4901 /* Info.plist */,
 				A701E8151D1A979A006C4901 /* main.m */,
 			);
 			name = "Supporting Files";
@@ -795,6 +800,7 @@
 				A70B21241D1BE4C60067B8C2 /* SYBarVC.m in Sources */,
 				A701E81C1D1A979A006C4901 /* ViewController.m in Sources */,
 				DF4AF39A1EEBB9AF0040102A /* AAChartScatterVC.m in Sources */,
+				DF1AA44F1FB7EB9A008FABAE /* DrawVC.m in Sources */,
 				A701E86A1D1A97CF006C4901 /* PNBar.m in Sources */,
 				DF4AF37A1EEB91850040102A /* AASpline.m in Sources */,
 				DF4AF37E1EEB91850040102A /* AATooltip.m in Sources */,

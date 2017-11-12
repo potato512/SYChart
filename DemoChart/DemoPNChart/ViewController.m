@@ -10,7 +10,7 @@
 #import "PNChartVC.h"
 #import "SYChartVC.h"
 #import "AAChartVC.h"
-
+#import "DrawVC.h"
 
 @interface ViewController () <UITableViewDelegate, UITableViewDataSource>
 
@@ -26,7 +26,7 @@
     
     self.title = @"Chart";
     
-    self.array = @[@"PNChart", @"SYChart", @"AAChart"];
+    self.array = @[@"PNChart", @"SYChart", @"AAChart", @"DrawVC"];
     
     UITableView *tableView = [[UITableView alloc] initWithFrame:self.view.bounds style:UITableViewStylePlain];
     [self.view addSubview:tableView];
@@ -75,6 +75,10 @@
     else if (2 == indexPath.row)
     {
         nextVC = [AAChartVC new];
+    }
+    else if (3 == indexPath.row)
+    {
+        nextVC = [DrawVC new];
     }
     nextVC.title = self.array[indexPath.row];
     [self.navigationController pushViewController:nextVC animated:YES];
