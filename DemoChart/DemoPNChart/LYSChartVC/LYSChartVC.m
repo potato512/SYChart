@@ -1,33 +1,29 @@
 //
-//  ViewController.m
-//  DemoPNChart
+//  LYSChartVC.m
+//  DemoChart
 //
-//  Created by zhangshaoyu on 16/6/22.
-//  Copyright © 2016年 zhangshaoyu. All rights reserved.
+//  Created by herman on 2017/11/25.
+//  Copyright © 2017年 zhangshaoyu. All rights reserved.
 //
 
-#import "ViewController.h"
-#import "PNChartVC.h"
-#import "SYChartVC.h"
-#import "AAChartVC.h"
 #import "LYSChartVC.h"
-#import "DrawVC.h"
+#import "LYSChartBarVC.h"
+#import "LYSChartLineVC.h"
+#import "LYSChartCurveLineVC.h"
 
-@interface ViewController () <UITableViewDelegate, UITableViewDataSource>
+@interface LYSChartVC () <UITableViewDelegate, UITableViewDataSource>
 
 @property (nonatomic, strong) NSArray *array;
 
 @end
 
-@implementation ViewController
+@implementation LYSChartVC
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    // Do any additional setup after loading the view, typically from a nib.
+    // Do any additional setup after loading the view.
     
-    self.title = @"Chart";
-    
-    self.array = @[@"PNChart", @"SYChart", @"AAChart", @"LYSChart", @"DrawVC"];
+    self.array = @[@"Bar Chart(条形图)", @"Areaspline Chart(曲线填充图)", @"Area Chart(折线填充图)", ];
     
     UITableView *tableView = [[UITableView alloc] initWithFrame:self.view.bounds style:UITableViewStylePlain];
     [self.view addSubview:tableView];
@@ -67,26 +63,19 @@
     UIViewController *nextVC = nil;
     if (0 == indexPath.row)
     {
-        nextVC = [PNChartVC new];
+        nextVC = [LYSChartBarVC new];
     }
     else if (1 == indexPath.row)
     {
-        nextVC = [SYChartVC new];
+        nextVC = [LYSChartCurveLineVC new];
     }
     else if (2 == indexPath.row)
     {
-        nextVC = [AAChartVC new];
-    }
-    else if (3 == indexPath.row)
-    {
-        nextVC = [LYSChartVC new];
-    }
-    else if (4 == indexPath.row)
-    {
-        nextVC = [DrawVC new];
+        nextVC = [LYSChartLineVC new];
     }
     nextVC.title = self.array[indexPath.row];
     [self.navigationController pushViewController:nextVC animated:YES];
 }
+
 
 @end

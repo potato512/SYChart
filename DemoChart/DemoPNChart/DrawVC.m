@@ -10,6 +10,8 @@
 
 @interface DrawVC ()
 
+@property (nonatomic, strong) NSArray *points;
+
 @end
 
 @implementation DrawVC
@@ -33,6 +35,14 @@
     [self drawlineQu];
 }
 
+- (NSArray *)points
+{
+    if (_points == nil)
+    {
+        _points = @[NSStringFromCGPoint(CGPointMake(10.0, 100.0)), NSStringFromCGPoint(CGPointMake(80.0, 50.0)), NSStringFromCGPoint(CGPointMake(120.0, 100.0)), NSStringFromCGPoint(CGPointMake(200.0, 135)), NSStringFromCGPoint(CGPointMake(250.0, 30.0)), NSStringFromCGPoint(CGPointMake(280.0, 90))];
+    }
+    return _points;
+}
 
 - (void)drawlineZhe
 {
@@ -64,14 +74,28 @@
      [bezierPath fill];
      */
     
+    // 画点
+    for (int i = 0; i < self.points.count; i++)
+    {
+        NSString *pointText = self.points[i];
+        CGPoint point = CGPointFromString(pointText);
+        
+        UIView *view = [[UIView alloc] initWithFrame:CGRectMake(point.x, point.y, 3.0, 3.0)];
+        [self.view addSubview:view];
+        view.layer.cornerRadius = 1.5;
+        view.layer.masksToBounds = YES;
+        view.backgroundColor = [UIColor greenColor];
+    }
+    
+    // 画填充
     
     
-    //创建出CAShapeLayer
+    // 画线
+    // 创建出CAShapeLayer
     CAShapeLayer *shapeLayer = [CAShapeLayer layer];
-    shapeLayer.frame = CGRectMake(10.0, 10.0, (self.view.frame.size.width - 20.0), (self.view.frame.size.width - 20.0));//设置shapeLayer的尺寸和位置
+    shapeLayer.frame = self.view.bounds; // 设置shapeLayer的尺寸和位置
     shapeLayer.backgroundColor = [[UIColor whiteColor] colorWithAlphaComponent:0.2].CGColor;
-    shapeLayer.position = self.view.center;
-    shapeLayer.fillColor = [UIColor clearColor].CGColor;//填充颜色为ClearColor
+    shapeLayer.fillColor = [UIColor purpleColor].CGColor; // 填充颜色为ClearColor
     // 设置线条的宽度和颜色
     shapeLayer.lineWidth = 1.0f;
     shapeLayer.strokeColor = [UIColor redColor].CGColor;
@@ -81,17 +105,19 @@
 //    // 让贝塞尔曲线与CAShapeLayer产生联系
 //    shapeLayer.path = circlePath.CGPath;
     
-    
     UIBezierPath *bezierPath = [UIBezierPath bezierPath];
+    
+    // 三个点的折线
 //    // 设置线段的起始位置
 //    [bezierPath moveToPoint:CGPointMake(10.0, 10.0)];
 //    // 添加点
 //    [bezierPath addLineToPoint:CGPointMake(100, 300)];
 //    [bezierPath addLineToPoint:CGPointMake(300, 100)];
-    NSArray *points = @[NSStringFromCGPoint(CGPointMake(0.0, 0.0)), NSStringFromCGPoint(CGPointMake(10.0, 10.0)), NSStringFromCGPoint(CGPointMake(0.0, 0.0)), NSStringFromCGPoint(CGPointMake(20.0, 40.0)), NSStringFromCGPoint(CGPointMake(50.0, 30.0)), NSStringFromCGPoint(CGPointMake(80.0, 10.0))];
-    for (int i = 0; i < points.count; i++)
+
+    // 多点折线
+    for (int i = 0; i < self.points.count; i++)
     {
-        NSString *pointText = points[i];
+        NSString *pointText = self.points[i];
         CGPoint point = CGPointFromString(pointText);
         
         if (0 == i)
@@ -100,21 +126,33 @@
         }
         [bezierPath addLineToPoint:point];
     }
-    
-    shapeLayer.path = bezierPath.CGPath;
-    
-    // 添加并显示
-    [self.view.layer addSublayer:shapeLayer];
 
+    // 添加并显示
+    shapeLayer.path = bezierPath.CGPath;
+    [self.view.layer addSublayer:shapeLayer];
 }
 
 - (void)drawlineQu
 {
+    // 画点
+    for (int i = 0; i < self.points.count; i++)
+    {
+        NSString *pointText = self.points[i];
+        CGPoint point = CGPointFromString(pointText);
+        
+        UIView *view = [[UIView alloc] initWithFrame:CGRectMake(point.x, point.y, 3.0, 3.0)];
+        [self.view addSubview:view];
+        view.layer.cornerRadius = 1.5;
+        view.layer.masksToBounds = YES;
+        view.backgroundColor = [UIColor greenColor];
+    }
+    
+    
+    // 画线
     // 创建出CAShapeLayer
     CAShapeLayer *shapeLayer = [CAShapeLayer layer];
-    shapeLayer.frame = CGRectMake(10.0, 10.0, (self.view.frame.size.width - 20.0), (self.view.frame.size.width - 20.0));//设置shapeLayer的尺寸和位置
+    shapeLayer.frame = self.view.bounds; // 设置shapeLayer的尺寸和位置
     shapeLayer.backgroundColor = [[UIColor whiteColor] colorWithAlphaComponent:0.2].CGColor;
-    shapeLayer.position = self.view.center;
     shapeLayer.fillColor = [[UIColor grayColor] colorWithAlphaComponent:0.2].CGColor;//填充颜色为ClearColor
     // 设置线条的宽度和颜色
     shapeLayer.lineWidth = 1.0;
@@ -126,27 +164,81 @@
     bezierPath.lineJoinStyle = kCGLineCapRound; // 终点处理
     
     // 两个点的曲线
-//    [aPath moveToPoint:CGPointMake(20, 100)];
-//    [aPath addQuadCurveToPoint:CGPointMake(120, 100) controlPoint:CGPointMake(70, 0)];
+//    CGPoint point1 = CGPointMake(20, 100);
+//    CGPoint point2 = CGPointMake(60, 30);
+//    CGPoint point3 = CGPointMake(100, 160);
+//    CGPoint point4 = CGPointMake(140, 60);
+//    [bezierPath moveToPoint:point1];
+//    //
+////    [bezierPath addQuadCurveToPoint:CGPointMake(120, 100) controlPoint:CGPointMake(100, 70)];
+//    //
+//    [bezierPath addCurveToPoint:point2 controlPoint1:CGPointMake(point2.x / 2, point1.y) controlPoint2:CGPointMake(point2.x / 2, point2.y)];
+//    [bezierPath addCurveToPoint:point3 controlPoint1:CGPointMake((point2.x / 2 + point2.x), point2.y) controlPoint2:CGPointMake((point2.x / 2 + point2.x), point3.y)];
+//    [bezierPath addCurveToPoint:point4 controlPoint1:CGPointMake((point2.x / 2 + point3.x), point3.y) controlPoint2:CGPointMake((point2.x / 2 + point3.x), point4.y)];
     
     // 多个点的曲线
-    NSArray *points = @[NSStringFromCGPoint(CGPointMake(10.0, 100.0)), NSStringFromCGPoint(CGPointMake(80.0, 50.0)), NSStringFromCGPoint(CGPointMake(120.0, 100.0)), NSStringFromCGPoint(CGPointMake(200.0, 240.0)), NSStringFromCGPoint(CGPointMake(250.0, 30.0)), NSStringFromCGPoint(CGPointMake(280.0, 210.0))];
-    for (int i = 0; i < points.count - 3; i++)
+    /*
+    for (int i = 0; i < self.points.count; i++)
     {
-        NSString *pointText = points[i];
-        CGPoint point = CGPointFromString(pointText);
-        
         if (0 == i)
         {
-            [bezierPath moveToPoint:point];
+            NSString *startPointText = self.points[i];
+            CGPoint startPoint = CGPointFromString(startPointText);
+            [bezierPath moveToPoint:startPoint];
         }
-        NSString *pointText2 = points[i + 1];
-        CGPoint point2 = CGPointFromString(pointText2);
-        NSString *pointText3 = points[i + 2];
-        CGPoint point3 = CGPointFromString(pointText3);
-        [bezierPath addQuadCurveToPoint:point2 controlPoint:point3];
+        else
+        {
+            NSString *startPointText = self.points[1];
+            CGPoint startPoint = CGPointFromString(startPointText);
+            if (i + 1 < self.points.count)
+            {
+                NSString *endPointText = self.points[i];
+                CGPoint endPoint = CGPointFromString(endPointText);
+                //
+                NSString *pointText1 = self.points[i - 1];
+                CGPoint point1 = CGPointFromString(pointText1);
+                CGFloat pointX = startPoint.x / 2 + point1.x;
+                point1 = CGPointMake(pointX, point1.y);
+                //
+                CGPoint point2 = CGPointMake(pointX, endPoint.y);
+                //
+                if ([startPointText isEqualToString:endPointText])
+                {
+                    point1 = CGPointMake(startPoint.x / 2, point1.y);
+                    point2 = CGPointMake(startPoint.x / 2, endPoint.y);
+                }
+                [bezierPath addCurveToPoint:endPoint controlPoint1:point1 controlPoint2:point2];
+            }
+        }
     }
-
+    */
+    
+    NSString *startPointText = self.points[0];
+    CGPoint startPoint = CGPointFromString(startPointText);
+    [bezierPath moveToPoint:startPoint];
+    for (int i = 0; i < self.points.count; i++)
+    {
+        if (i + 1 < self.points.count)
+        {
+            NSString *pointText1 = self.points[i];
+            CGPoint point1 = CGPointFromString(pointText1);
+            CGFloat pointX = startPoint.x / 2 + point1.x;
+            
+            NSString *pointText2 = self.points[i + 1];
+            CGPoint point2 = CGPointFromString(pointText2);
+            
+            if ([startPointText isEqualToString:pointText1])
+            {
+                pointX = startPoint.x / 2;
+            }
+            point1 = CGPointMake(pointX, point1.y);
+            point2 = CGPointMake(pointX, point2.y);
+            
+            CGPoint endPoint = CGPointFromString(pointText2);
+            
+            [bezierPath addCurveToPoint:endPoint controlPoint1:point1 controlPoint2:point2];
+        }
+    }
     
     
     shapeLayer.path = bezierPath.CGPath;

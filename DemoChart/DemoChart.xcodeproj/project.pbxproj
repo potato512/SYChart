@@ -39,6 +39,13 @@
 		A734B4A21D1CC11900AAB560 /* PieVC.m in Sources */ = {isa = PBXBuildFile; fileRef = A734B4A11D1CC11900AAB560 /* PieVC.m */; };
 		A734B4A51D1CC13800AAB560 /* CycleVC.m in Sources */ = {isa = PBXBuildFile; fileRef = A734B4A41D1CC13800AAB560 /* CycleVC.m */; };
 		A734B4A81D1CC7A200AAB560 /* ScatterVC.m in Sources */ = {isa = PBXBuildFile; fileRef = A734B4A71D1CC7A200AAB560 /* ScatterVC.m */; };
+		DF09B60E1FC905FF00193413 /* LYSHistogramChart.m in Sources */ = {isa = PBXBuildFile; fileRef = DF09B6091FC905FF00193413 /* LYSHistogramChart.m */; };
+		DF09B60F1FC905FF00193413 /* LYSLineChart.m in Sources */ = {isa = PBXBuildFile; fileRef = DF09B60B1FC905FF00193413 /* LYSLineChart.m */; };
+		DF09B6101FC905FF00193413 /* LYSToolObject.m in Sources */ = {isa = PBXBuildFile; fileRef = DF09B60D1FC905FF00193413 /* LYSToolObject.m */; };
+		DF09B6141FC9067C00193413 /* LYSChartBarVC.m in Sources */ = {isa = PBXBuildFile; fileRef = DF09B6131FC9067C00193413 /* LYSChartBarVC.m */; };
+		DF09B6171FC9069700193413 /* LYSChartLineVC.m in Sources */ = {isa = PBXBuildFile; fileRef = DF09B6161FC9069700193413 /* LYSChartLineVC.m */; };
+		DF09B61A1FC906BC00193413 /* LYSChartCurveLineVC.m in Sources */ = {isa = PBXBuildFile; fileRef = DF09B6191FC906BC00193413 /* LYSChartCurveLineVC.m */; };
+		DF09B61D1FC909FC00193413 /* LYSChartVC.m in Sources */ = {isa = PBXBuildFile; fileRef = DF09B61C1FC909FC00193413 /* LYSChartVC.m */; };
 		DF1AA44F1FB7EB9A008FABAE /* DrawVC.m in Sources */ = {isa = PBXBuildFile; fileRef = DF1AA44E1FB7EB9A008FABAE /* DrawVC.m */; };
 		DF4AF30C1EEB85A30040102A /* BaseViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DF4AF30B1EEB85A30040102A /* BaseViewController.m */; };
 		DF4AF30F1EEB86AF0040102A /* SYChartVC.m in Sources */ = {isa = PBXBuildFile; fileRef = DF4AF30E1EEB86AF0040102A /* SYChartVC.m */; };
@@ -187,6 +194,20 @@
 		A734B4A41D1CC13800AAB560 /* CycleVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CycleVC.m; sourceTree = "<group>"; };
 		A734B4A61D1CC7A200AAB560 /* ScatterVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ScatterVC.h; sourceTree = "<group>"; };
 		A734B4A71D1CC7A200AAB560 /* ScatterVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ScatterVC.m; sourceTree = "<group>"; };
+		DF09B6081FC905FF00193413 /* LYSHistogramChart.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LYSHistogramChart.h; sourceTree = "<group>"; };
+		DF09B6091FC905FF00193413 /* LYSHistogramChart.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LYSHistogramChart.m; sourceTree = "<group>"; };
+		DF09B60A1FC905FF00193413 /* LYSLineChart.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LYSLineChart.h; sourceTree = "<group>"; };
+		DF09B60B1FC905FF00193413 /* LYSLineChart.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LYSLineChart.m; sourceTree = "<group>"; };
+		DF09B60C1FC905FF00193413 /* LYSToolObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LYSToolObject.h; sourceTree = "<group>"; };
+		DF09B60D1FC905FF00193413 /* LYSToolObject.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LYSToolObject.m; sourceTree = "<group>"; };
+		DF09B6121FC9067C00193413 /* LYSChartBarVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LYSChartBarVC.h; sourceTree = "<group>"; };
+		DF09B6131FC9067C00193413 /* LYSChartBarVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LYSChartBarVC.m; sourceTree = "<group>"; };
+		DF09B6151FC9069700193413 /* LYSChartLineVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LYSChartLineVC.h; sourceTree = "<group>"; };
+		DF09B6161FC9069700193413 /* LYSChartLineVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LYSChartLineVC.m; sourceTree = "<group>"; };
+		DF09B6181FC906BC00193413 /* LYSChartCurveLineVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LYSChartCurveLineVC.h; sourceTree = "<group>"; };
+		DF09B6191FC906BC00193413 /* LYSChartCurveLineVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LYSChartCurveLineVC.m; sourceTree = "<group>"; };
+		DF09B61B1FC909FC00193413 /* LYSChartVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LYSChartVC.h; sourceTree = "<group>"; };
+		DF09B61C1FC909FC00193413 /* LYSChartVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LYSChartVC.m; sourceTree = "<group>"; };
 		DF1AA44D1FB7EB9A008FABAE /* DrawVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DrawVC.h; sourceTree = "<group>"; };
 		DF1AA44E1FB7EB9A008FABAE /* DrawVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DrawVC.m; sourceTree = "<group>"; };
 		DF4AF30A1EEB85A30040102A /* BaseViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BaseViewController.h; sourceTree = "<group>"; };
@@ -363,6 +384,8 @@
 				A701E81B1D1A979A006C4901 /* ViewController.m */,
 				DF1AA44D1FB7EB9A008FABAE /* DrawVC.h */,
 				DF1AA44E1FB7EB9A008FABAE /* DrawVC.m */,
+				DF09B6111FC9064200193413 /* LYSChartVC */,
+				DF09B6071FC905FF00193413 /* LYSChart */,
 				DF4AF3821EEB91A30040102A /* AAChartVC */,
 				DF4AF3131EEB91850040102A /* AAChartKit */,
 				DF4AF3091EEB85650040102A /* SYChartVC */,
@@ -448,6 +471,34 @@
 				A701E8691D1A97CF006C4901 /* PNScatterChartDataItem.m */,
 			);
 			path = PNChart;
+			sourceTree = "<group>";
+		};
+		DF09B6071FC905FF00193413 /* LYSChart */ = {
+			isa = PBXGroup;
+			children = (
+				DF09B6081FC905FF00193413 /* LYSHistogramChart.h */,
+				DF09B6091FC905FF00193413 /* LYSHistogramChart.m */,
+				DF09B60A1FC905FF00193413 /* LYSLineChart.h */,
+				DF09B60B1FC905FF00193413 /* LYSLineChart.m */,
+				DF09B60C1FC905FF00193413 /* LYSToolObject.h */,
+				DF09B60D1FC905FF00193413 /* LYSToolObject.m */,
+			);
+			path = LYSChart;
+			sourceTree = "<group>";
+		};
+		DF09B6111FC9064200193413 /* LYSChartVC */ = {
+			isa = PBXGroup;
+			children = (
+				DF09B6121FC9067C00193413 /* LYSChartBarVC.h */,
+				DF09B6131FC9067C00193413 /* LYSChartBarVC.m */,
+				DF09B6151FC9069700193413 /* LYSChartLineVC.h */,
+				DF09B6161FC9069700193413 /* LYSChartLineVC.m */,
+				DF09B6181FC906BC00193413 /* LYSChartCurveLineVC.h */,
+				DF09B6191FC906BC00193413 /* LYSChartCurveLineVC.m */,
+				DF09B61B1FC909FC00193413 /* LYSChartVC.h */,
+				DF09B61C1FC909FC00193413 /* LYSChartVC.m */,
+			);
+			path = LYSChartVC;
 			sourceTree = "<group>";
 		};
 		DF4AF3081EEB854A0040102A /* PNCharVC */ = {
@@ -789,10 +840,13 @@
 				A701E8701D1A97CF006C4901 /* PNLineChart.m in Sources */,
 				A701E86B1D1A97CF006C4901 /* PNBarChart.m in Sources */,
 				DF4AF38E1EEBB9550040102A /* AAChartAreaVC.m in Sources */,
+				DF09B60E1FC905FF00193413 /* LYSHistogramChart.m in Sources */,
 				A701E86E1D1A97CF006C4901 /* PNColor.m in Sources */,
+				DF09B61A1FC906BC00193413 /* LYSChartCurveLineVC.m in Sources */,
 				DF4AF39D1EEBB9C00040102A /* AAChartPieVC.m in Sources */,
 				DF4AF3671EEB91850040102A /* AAAnimation.m in Sources */,
 				A701E8751D1A97CF006C4901 /* PNRadarChart.m in Sources */,
+				DF09B60F1FC905FF00193413 /* LYSLineChart.m in Sources */,
 				DF4AF36E1EEB91850040102A /* AAItemStyle.m in Sources */,
 				A701E8761D1A97CF006C4901 /* PNRadarChartDataItem.m in Sources */,
 				DF4AF3691EEB91850040102A /* AAAreaspline.m in Sources */,
@@ -803,18 +857,21 @@
 				DF1AA44F1FB7EB9A008FABAE /* DrawVC.m in Sources */,
 				A701E86A1D1A97CF006C4901 /* PNBar.m in Sources */,
 				DF4AF37A1EEB91850040102A /* AASpline.m in Sources */,
+				DF09B6171FC9069700193413 /* LYSChartLineVC.m in Sources */,
 				DF4AF37E1EEB91850040102A /* AATooltip.m in Sources */,
 				DF4AF3741EEB91850040102A /* AAOptions3d.m in Sources */,
 				A701E8781D1A97CF006C4901 /* PNScatterChartData.m in Sources */,
 				DF4AF38B1EEBB9410040102A /* AAChartBarVC.m in Sources */,
 				DF4AF35F1EEB91850040102A /* AAOptionsConstructor.m in Sources */,
 				DF4AF3A61EEBB9FC0040102A /* AAChartFunnelVC.m in Sources */,
+				DF09B61D1FC909FC00193413 /* LYSChartVC.m in Sources */,
 				DF4AF3881EEB93230040102A /* AAChartColumnVC.m in Sources */,
 				DFA0FCF81EEAEAC7001A40C2 /* SYChartHelper.m in Sources */,
 				DFA0FCF91EEAEAC7001A40C2 /* SYChartInfromationView.m in Sources */,
 				A701E8721D1A97CF006C4901 /* PNLineChartDataItem.m in Sources */,
 				DF4AF3781EEB91850040102A /* AASeries.m in Sources */,
 				DF4AF35D1EEB91850040102A /* AAChartView.m in Sources */,
+				DF09B6141FC9067C00193413 /* LYSChartBarVC.m in Sources */,
 				DFA0FCFB1EEAEAC7001A40C2 /* SYChartLine.m in Sources */,
 				A733AC9E1D1B83B100A5723E /* LineVC.m in Sources */,
 				A701E86C1D1A97CF006C4901 /* PNChartLabel.m in Sources */,
@@ -856,6 +913,7 @@
 				DFA0FCFC1EEAEAC7001A40C2 /* UIView+SYChart.m in Sources */,
 				DF4AF3761EEB91850040102A /* AAPlotLinesElement.m in Sources */,
 				A701E8731D1A97CF006C4901 /* PNPieChart.m in Sources */,
+				DF09B6101FC905FF00193413 /* LYSToolObject.m in Sources */,
 				A701E86F1D1A97CF006C4901 /* PNGenericChart.m in Sources */,
 				DF4AF37D1EEB91850040102A /* AATitle.m in Sources */,
 				DF4AF3801EEB91850040102A /* AAYAxis.m in Sources */,
