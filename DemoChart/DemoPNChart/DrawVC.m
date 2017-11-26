@@ -153,7 +153,7 @@
     CAShapeLayer *shapeLayer = [CAShapeLayer layer];
     shapeLayer.frame = self.view.bounds; // 设置shapeLayer的尺寸和位置
     shapeLayer.backgroundColor = [[UIColor whiteColor] colorWithAlphaComponent:0.2].CGColor;
-    shapeLayer.fillColor = [[UIColor grayColor] colorWithAlphaComponent:0.2].CGColor;//填充颜色为ClearColor
+    shapeLayer.fillColor = [[UIColor orangeColor] colorWithAlphaComponent:0.3].CGColor;//填充颜色为ClearColor
     // 设置线条的宽度和颜色
     shapeLayer.lineWidth = 1.0;
     shapeLayer.strokeColor = [UIColor redColor].CGColor;
@@ -239,6 +239,12 @@
             [bezierPath addCurveToPoint:endPoint controlPoint1:point1 controlPoint2:point2];
         }
     }
+    
+    // 增加填充区域封装点
+    NSString *lastPointText = self.points.lastObject;
+    CGPoint lastPoint = CGPointFromString(lastPointText);
+    [bezierPath addLineToPoint:CGPointMake(lastPoint.x, lastPoint.y + 100)];
+    [bezierPath addLineToPoint:CGPointMake(startPoint.x, lastPoint.y + 100)];
     
     
     shapeLayer.path = bezierPath.CGPath;
