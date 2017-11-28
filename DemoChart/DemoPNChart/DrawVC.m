@@ -33,6 +33,8 @@
 //    [self drawlineZhe];
     
     [self drawlineQu];
+    
+//    [self drawColor];
 }
 
 - (NSArray *)points
@@ -152,8 +154,8 @@
     // 创建出CAShapeLayer
     CAShapeLayer *shapeLayer = [CAShapeLayer layer];
     shapeLayer.frame = self.view.bounds; // 设置shapeLayer的尺寸和位置
-    shapeLayer.backgroundColor = [[UIColor whiteColor] colorWithAlphaComponent:0.2].CGColor;
-    shapeLayer.fillColor = [[UIColor orangeColor] colorWithAlphaComponent:0.3].CGColor;//填充颜色为ClearColor
+    shapeLayer.backgroundColor = [UIColor clearColor].CGColor;
+    shapeLayer.fillColor = [UIColor clearColor].CGColor;// 填充颜色为ClearColor
     // 设置线条的宽度和颜色
     shapeLayer.lineWidth = 1.0;
     shapeLayer.strokeColor = [UIColor redColor].CGColor;
@@ -239,16 +241,39 @@
             [bezierPath addCurveToPoint:endPoint controlPoint1:point1 controlPoint2:point2];
         }
     }
+
+    shapeLayer.path = bezierPath.CGPath;
+    [self.view.layer addSublayer:shapeLayer];
     
+    
+    // 填充颜色，创建出CAShapeLayer
+    CAShapeLayer *maskShapeLayer = [CAShapeLayer layer];
+    [self.view.layer addSublayer:maskShapeLayer];
+    maskShapeLayer.frame = self.view.bounds;
+    maskShapeLayer.fillColor = [[UIColor greenColor] colorWithAlphaComponent:0.3].CGColor;
     // 增加填充区域封装点
     NSString *lastPointText = self.points.lastObject;
     CGPoint lastPoint = CGPointFromString(lastPointText);
     [bezierPath addLineToPoint:CGPointMake(lastPoint.x, lastPoint.y + 100)];
     [bezierPath addLineToPoint:CGPointMake(startPoint.x, lastPoint.y + 100)];
-    
-    
-    shapeLayer.path = bezierPath.CGPath;
-    [self.view.layer addSublayer:shapeLayer];
+    maskShapeLayer.path = bezierPath.CGPath;
+}
+
+- (void)drawColor
+{
+    // 为颜色设置渐变效果
+    UIView *view1 = [[UIView alloc] initWithFrame:CGRectMake(10, 10, (self.view.frame.size.width - 20.0), 180.0)];
+    [self.view addSubview:view1];
+    // 渐变色
+    CAGradientLayer *gradient1 = [CAGradientLayer layer];
+    [view1.layer addSublayer:gradient1];
+    gradient1.frame = view1.bounds;
+    //
+    gradient1.startPoint = CGPointMake(0, 0);
+    gradient1.endPoint = CGPointMake(0, 1);
+    gradient1.colors = [NSArray arrayWithObjects:(id)[UIColor redColor].CGColor,(id)[UIColor greenColor].CGColor,nil];
+    // 设置颜色分割点（范围：0-1）
+    gradient1.locations = @[@(0.0), @(1.0)];
 }
 
 @end
