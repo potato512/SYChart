@@ -27,8 +27,7 @@ CGFloat const kSYChartInfromationViewTipHeight = 5.0f;
 - (instancetype)initWithText:(NSString *)text
 {
     self = [super initWithFrame:CGRectMake(0, 0, kSYChartInfromationViewTextWidth, kSYChartInfromationViewTextHeight + kSYChartInfromationViewTipHeight)];
-    if (self)
-    {
+    if (self) {
         self.backgroundColor = [UIColor clearColor];
         self.layer.cornerRadius = kSYChartInfromationViewCornerRadius;
         self.layer.masksToBounds = YES;
@@ -71,8 +70,7 @@ CGFloat const kSYChartInfromationViewTipHeight = 5.0f;
 
 - (UILabel *)textLabel
 {
-    if (!_textLabel)
-    {
+    if (_textLabel == nil) {
         _textLabel = [[UILabel alloc] init];
         _textLabel.layer.cornerRadius = kSYChartInfromationViewCornerRadius;
         _textLabel.layer.masksToBounds = YES;

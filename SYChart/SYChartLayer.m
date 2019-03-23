@@ -16,8 +16,7 @@ static NSString *const keyAnimation = @"animation";
 - (instancetype)init
 {
     self = [super init];
-    if (self)
-    {
+    if (self) {
         _radarFillColor = [UIColor clearColor].CGColor;
         _pointRadius = 3.0;
         _progress = 1.0;
@@ -28,8 +27,7 @@ static NSString *const keyAnimation = @"animation";
 - (instancetype)initWithLayer:(SYChartLayer *)layer
 {
     self = [super initWithLayer:layer];
-    if (self)
-    {
+    if (self) {
         _radarFillColor = layer.radarFillColor;
         _pointRadius = layer.pointRadius;
         _lineWidth = layer.lineWidth;
@@ -43,8 +41,7 @@ static NSString *const keyAnimation = @"animation";
 
 + (BOOL)needsDisplayForKey:(NSString *)key
 {
-    if ([key isEqualToString:keyProgress])
-    {
+    if ([key isEqualToString:keyProgress]) {
         return YES;
     }
     return [super needsDisplayForKey:key];
@@ -60,8 +57,7 @@ static NSString *const keyAnimation = @"animation";
     CGPoint point = [self pointAtIndex:0 radius:layerRadius];
     CGContextMoveToPoint(ctx, point.x, point.y);
     
-    for (NSInteger index = 1; index < _radius.count; index ++)
-    {
+    for (NSInteger index = 1; index < _radius.count; index ++) {
         CGFloat layerRadius = [_radius[index] floatValue] * _progress;
         CGPoint point = [self pointAtIndex:index radius:layerRadius];
         CGContextAddLineToPoint(ctx, point.x, point.y);
@@ -69,13 +65,11 @@ static NSString *const keyAnimation = @"animation";
     CGContextClosePath(ctx);
     CGContextDrawPath(ctx, kCGPathFillStroke);
     
-    if (_pointRadius > 0)
-    {
+    if (_pointRadius > 0) {
         CGContextSetLineWidth(ctx, _lineWidth);
         CGContextSetFillColorWithColor(ctx, _radarFillColor);
         CGContextSetStrokeColorWithColor(ctx, _strokeColor);
-        for (NSInteger index = 0; index < _radius.count; index ++)
-        {
+        for (NSInteger index = 0; index < _radius.count; index ++) {
             CGFloat layerRadius = [_radius[index] floatValue] * _progress;
             CGPoint point = [self pointAtIndex:index radius:layerRadius];
             CGContextMoveToPoint(ctx, point.x + _pointRadius, point.y);
@@ -102,19 +96,16 @@ static NSString *const keyAnimation = @"animation";
 
 - (void)reloadRadiusWithAnimate:(BOOL)animate duration:(CFTimeInterval)duration
 {
-    if (animate)
-    {
+    if (animate) {
         CABasicAnimation *animation = [CABasicAnimation animationWithKeyPath:keyProgress];
         animation.fromValue = @(0.0);
         animation.toValue = @(1.0);
         animation.repeatCount = 1.0;
         animation.duration = duration;
         animation.fillMode = kCAFillModeForwards;
-        animation.delegate = self;
+        animation.delegate = (id)self;
         [self addAnimation:animation forKey:keyAnimation];
-    }
-    else
-    {
+    } else {
         [self setNeedsDisplay];
     }
 }

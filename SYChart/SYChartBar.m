@@ -39,8 +39,7 @@ CGFloat static const kSYChartBarUndefinedCachedHeight = -1.0f;
 - (instancetype)initWithCoder:(NSCoder *)coder
 {
     self = [super initWithCoder:coder];
-    if (self)
-    {
+    if (self) {
         [self initialization];
     }
     return self;
@@ -49,8 +48,7 @@ CGFloat static const kSYChartBarUndefinedCachedHeight = -1.0f;
 - (instancetype)initWithFrame:(CGRect)frame
 {
     self = [super initWithFrame:frame];
-    if (self)
-    {
+    if (self) {
         [self initialization];
     }
     return self;
@@ -103,8 +101,7 @@ CGFloat static const kSYChartBarUndefinedCachedHeight = -1.0f;
 {
     [super drawRect:rect];
     
-    if (self.chartDataSource == nil)
-    {
+    if (self.chartDataSource == nil) {
         [self reloadData];
     }
     
@@ -135,8 +132,7 @@ CGFloat static const kSYChartBarUndefinedCachedHeight = -1.0f;
     // Y坐标轴刻度
     CGPoint point = CGPointZero;
     CGContextSetStrokeColorWithColor(context, _colorOfYAxis.CGColor);
-    for (int i = 0; i < _numberOfYAxis; i++)
-    {
+    for (int i = 0; i < _numberOfYAxis; i++) {
         point.x = (SYChart_LINE_CHART_LEFT_PADDING - 1);
         point.y = (i * self.heightYStep + SYChart_LINE_CHART_TOP_PADDING);
         CGContextMoveToPoint(context, point.x, point.y);
@@ -165,19 +161,16 @@ CGFloat static const kSYChartBarUndefinedCachedHeight = -1.0f;
 {
     CGPoint point;
     
-    if (SYChartGridsTypeGridDotted == _gridsType || SYChartGridsTypeGridSolid == _gridsType || SYChartGridsTypeHorizontalDotted == _gridsType || SYChartGridsTypeHorizontalSolid == _gridsType)
-    {
+    if (SYChartGridsTypeGridDotted == _gridsType || SYChartGridsTypeGridSolid == _gridsType || SYChartGridsTypeHorizontalDotted == _gridsType || SYChartGridsTypeHorizontalSolid == _gridsType) {
         CGContextSetStrokeColorWithColor(context, _gridsLineColor.CGColor);
         
-        for (NSUInteger i = 0; i < _numberOfYAxis; i++)
-        {
+        for (NSUInteger i = 0; i < _numberOfYAxis; i++) {
             point.x = (SYChart_LINE_CHART_LEFT_PADDING - 1);
             point.y = (i * self.heightYStep + SYChart_LINE_CHART_TOP_PADDING);
             
             CGContextMoveToPoint(context, point.x, point.y);
             CGContextSetLineWidth(context, _gridsLineWidth);
-            if (SYChartGridsTypeGridDotted == _gridsType || SYChartGridsTypeHorizontalDotted == _gridsType)
-            {
+            if (SYChartGridsTypeGridDotted == _gridsType || SYChartGridsTypeHorizontalDotted == _gridsType) {
                 // 虚线类型
                 CGContextSetLineCap(context, kCGLineCapRound);
                 CGFloat dash[] = {6, 5};
@@ -201,10 +194,8 @@ CGFloat static const kSYChartBarUndefinedCachedHeight = -1.0f;
 
 - (id)maxValue
 {
-    if (_maxValue == nil)
-    {
-        if ([self cachedMaxHeight] != kSYChartBarUndefinedCachedHeight)
-        {
+    if (_maxValue == nil) {
+        if ([self cachedMaxHeight] != kSYChartBarUndefinedCachedHeight) {
             _maxValue = @([self cachedMaxHeight]);
         }
     }
@@ -213,16 +204,12 @@ CGFloat static const kSYChartBarUndefinedCachedHeight = -1.0f;
 
 - (CGFloat)cachedMinHeight
 {
-    if(_cachedMinHeight == kSYChartBarUndefinedCachedHeight)
-    {
+    if(_cachedMinHeight == kSYChartBarUndefinedCachedHeight) {
         NSArray *chartValues = [NSMutableArray arrayWithArray:_chartDataSource];
-        for (NSArray *array in chartValues)
-        {
-            for (NSNumber *number in array)
-            {
+        for (NSArray *array in chartValues) {
+            for (NSNumber *number in array) {
                 CGFloat height = [number floatValue];
-                if (height < _cachedMinHeight)
-                {
+                if (height < _cachedMinHeight) {
                     _cachedMinHeight = height;
                 }
             }
@@ -233,16 +220,12 @@ CGFloat static const kSYChartBarUndefinedCachedHeight = -1.0f;
 
 - (CGFloat)cachedMaxHeight
 {
-    if (_cachedMaxHeight == kSYChartBarUndefinedCachedHeight)
-    {
+    if (_cachedMaxHeight == kSYChartBarUndefinedCachedHeight) {
         NSArray *chartValues = [NSMutableArray arrayWithArray:_chartDataSource];
-        for (NSArray *array in chartValues)
-        {
-            for (NSNumber *number in array)
-            {
+        for (NSArray *array in chartValues) {
+            for (NSNumber *number in array) {
                 CGFloat height = [number floatValue];
-                if (height > _cachedMaxHeight)
-                {
+                if (height > _cachedMaxHeight) {
                     _cachedMaxHeight = height;
                 }
             }
@@ -278,26 +261,22 @@ CGFloat static const kSYChartBarUndefinedCachedHeight = -1.0f;
     _cachedMinHeight = kSYChartBarUndefinedCachedHeight;
     
     _sections = 1;
-    if ([self.dataSource respondsToSelector:@selector(numberOfSectionsInBarChartView:)])
-    {
+    if ([self.dataSource respondsToSelector:@selector(numberOfSectionsInBarChartView:)]) {
         _sections = [self.dataSource numberOfSectionsInBarChartView:self];
     }
     
     NSAssert([self.dataSource respondsToSelector:@selector(barChartView:numberOfBarsForSection:)], @"BarChartView // delegate must implement barChartView:numberOfBarsForSection:");
     
     _paddingSection = SYChart_PADDING_SECTION_DEFAULT;
-    if ([self.delegate respondsToSelector:@selector(paddingForSectionInBarChartView:)])
-    {
+    if ([self.delegate respondsToSelector:@selector(paddingForSectionInBarChartView:)]) {
         _paddingSection = [self.delegate paddingForSectionInBarChartView:self];
     }
     _paddingBar = SYChart_PADDING_BAR_DEFAULT;
-    if ([self.delegate respondsToSelector:@selector(paddingForBarInBarChartView:)])
-    {
+    if ([self.delegate respondsToSelector:@selector(paddingForBarInBarChartView:)]) {
         _paddingBar = [self.delegate paddingForBarInBarChartView:self];
     }
     _barWidth = SYChart_BAR_WIDTH_DEFAULT;
-    if ([self.delegate respondsToSelector:@selector(barWidthInBarChartView:)])
-    {
+    if ([self.delegate respondsToSelector:@selector(barWidthInBarChartView:)]) {
         _barWidth = [self.delegate barWidthInBarChartView:self];
     }
     
@@ -305,16 +284,14 @@ CGFloat static const kSYChartBarUndefinedCachedHeight = -1.0f;
     
     NSMutableArray *dataArray = [NSMutableArray arrayWithCapacity:_sections];
     CGFloat contentWidth = _paddingSection;
-    for (NSUInteger i = 0; i < _sections; i ++)
-    {
+    for (NSUInteger i = 0; i < _sections; i ++) {
         NSUInteger barCount = [self.dataSource barChartView:self numberOfBarsForSection:i];
         
         contentWidth += (barCount * _barWidth + (barCount - 1) * _paddingBar);
         contentWidth += _paddingSection;
         
         NSMutableArray *barArray = [NSMutableArray arrayWithCapacity:barCount];
-        for (NSInteger j = 0; j < barCount; j ++)
-        {
+        for (NSInteger j = 0; j < barCount; j ++) {
             NSIndexPath *indexPath = [NSIndexPath indexPathForRow:j inSection:i];
             id value = [self.dataSource barChartView:self valueOfBarAtIndexPath:indexPath];
             [barArray addObject:value];
@@ -328,8 +305,7 @@ CGFloat static const kSYChartBarUndefinedCachedHeight = -1.0f;
 - (void)reloadChartUnit
 {
     // 刻度单位
-    if (self.yUnitText && 0 != [self.yUnitText length])
-    {
+    if (self.yUnitText && 0 != [self.yUnitText length]) {
         CGFloat width = [self.yUnitText sizeWithAttributes:@{NSFontAttributeName:[UIFont systemFontOfSize:self.yUnitFontSize]}].width;
         width = (width >= (SYChart_BAR_CHART_LEFT_PADDING - 2) ? (width + SYChart_PADDING_SECTION_DEFAULT) : (SYChart_BAR_CHART_LEFT_PADDING - 2));
         CGRect drawRect = CGRectMake(0.0, 0.0, width, 20.0);
@@ -343,8 +319,7 @@ CGFloat static const kSYChartBarUndefinedCachedHeight = -1.0f;
         [self addSubview:label];
     }
     
-    if (self.xUnitText && 0 != [self.xUnitText length])
-    {
+    if (self.xUnitText && 0 != [self.xUnitText length]) {
         CGFloat width = [self.xUnitText sizeWithAttributes:@{NSFontAttributeName:[UIFont systemFontOfSize:self.xUnitFontSize]}].width;
         width = (width >= (SYChart_BAR_CHART_LEFT_PADDING - 2) ? (width + SYChart_PADDING_SECTION_DEFAULT) : (SYChart_BAR_CHART_LEFT_PADDING - 2));
         CGRect drawRect = CGRectMake((CGRectGetWidth(self.bounds) - width), (CGRectGetHeight(self.bounds) - (SYChart_BAR_CHART_LEFT_PADDING - 2)), width, 20.0);
@@ -362,10 +337,8 @@ CGFloat static const kSYChartBarUndefinedCachedHeight = -1.0f;
 - (void)reloadChartYAxis
 {
     // Y 刻度
-    for (UIView *view in self.subviews)
-    {
-        if ([view isKindOfClass:[UILabel class]])
-        {
+    for (UIView *view in self.subviews) {
+        if ([view isKindOfClass:[UILabel class]]) {
             [view removeFromSuperview];
         }
     }
@@ -373,8 +346,7 @@ CGFloat static const kSYChartBarUndefinedCachedHeight = -1.0f;
     CGFloat chartYOffset = (_chartHeight + SYChart_BAR_CHART_TOP_PADDING);
     CGFloat unitHeight = (_chartHeight / _numberOfYAxis);
     CGFloat unitValue = ([self.maxValue floatValue] / _numberOfYAxis);
-    for (NSInteger i = 0; i <= _numberOfYAxis; i ++)
-    {
+    for (NSInteger i = 0; i <= _numberOfYAxis; i ++) {
         UILabel *textLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, (chartYOffset - unitHeight * i - 10), (SYChart_BAR_CHART_LEFT_PADDING - 2), 20)];
         textLabel.textColor = _colorOfYText;
         textLabel.textAlignment = NSTextAlignmentRight;
@@ -394,11 +366,9 @@ CGFloat static const kSYChartBarUndefinedCachedHeight = -1.0f;
     CGFloat xSection = _paddingSection;
     CGFloat xOffset = (_paddingSection + _barWidth / 2);
     CGFloat chartYOffset = (_chartHeight + SYChart_BAR_CHART_TOP_PADDING);
-    for (NSInteger section = 0; section < _sections; section ++)
-    {
+    for (NSInteger section = 0; section < _sections; section ++) {
         NSArray *array = _chartDataSource[section];
-        for (NSInteger index = 0; index < array.count; index ++)
-        {
+        for (NSInteger index = 0; index < array.count; index ++) {
             NSIndexPath *indexPath = [NSIndexPath indexPathForRow:index inSection:section];
             
             CGFloat height = [self normalizedHeightForRawHeight:array[index]];
@@ -410,12 +380,9 @@ CGFloat static const kSYChartBarUndefinedCachedHeight = -1.0f;
             shapeLayer.lineWidth = _barWidth;
             shapeLayer.path = bezierPath.CGPath;
             
-            if ([self.delegate respondsToSelector:@selector(barChartView:colorOfBarAtIndexPath:)])
-            {
+            if ([self.delegate respondsToSelector:@selector(barChartView:colorOfBarAtIndexPath:)]) {
                 shapeLayer.strokeColor = [self.delegate barChartView:self colorOfBarAtIndexPath:indexPath].CGColor;
-            }
-            else
-            {
+            } else {
                 shapeLayer.strokeColor = [UIColor redColor].CGColor;
             }
             [_scrollView.layer addSublayer:shapeLayer];
@@ -428,24 +395,21 @@ CGFloat static const kSYChartBarUndefinedCachedHeight = -1.0f;
             UITapGestureRecognizer *tapRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(barTapClick:)];
             [tapView addGestureRecognizer:tapRecognizer];
             
-            if (animate)
-            {
+            if (animate) {
                 CABasicAnimation *animation = [CABasicAnimation animationWithKeyPath:@"strokeEnd"];
                 animation.fromValue = @(0.0);
                 animation.toValue = @(1.0);
                 animation.repeatCount = 1.0;
                 animation.duration = (height / _chartHeight * _animationTime);
                 animation.fillMode = kCAFillModeForwards;
-                animation.delegate = self;
+                animation.delegate = (id)self;
                 [shapeLayer addAnimation:animation forKey:@"animation"];
             }
             
             NSTimeInterval delay = (animate ? _animationTime : 0.0);
-            if ([self.delegate respondsToSelector:@selector(barChartView:hintViewOfBarAtIndexPath:)])
-            {
+            if ([self.delegate respondsToSelector:@selector(barChartView:hintViewOfBarAtIndexPath:)]) {
                 UIView *hintView = [self.delegate barChartView:self hintViewOfBarAtIndexPath:indexPath];
-                if (hintView)
-                {
+                if (hintView) {
                     hintView.center = CGPointMake(xOffset, (chartYOffset - height - CGRectGetHeight(hintView.bounds) / 2));
                     hintView.alpha = 0.0;
                     [_scrollView addSubview:hintView];
@@ -459,12 +423,9 @@ CGFloat static const kSYChartBarUndefinedCachedHeight = -1.0f;
                         hintView.alpha = 1.0;
                     } completion:nil];
                 }
-            }
-            else if ([self.delegate respondsToSelector:@selector(barChartView:informationOfBarAtIndexPath:)])
-            {
+            } else if ([self.delegate respondsToSelector:@selector(barChartView:informationOfBarAtIndexPath:)]) {
                 NSString *information = [self.delegate barChartView:self informationOfBarAtIndexPath:indexPath];
-                if (information)
-                {
+                if (information) {
                     SYChartInfromationView *informationView = [[SYChartInfromationView alloc] initWithText:information];
                     informationView.center = CGPointMake(xOffset, (chartYOffset - height - CGRectGetHeight(informationView.bounds) / 2));
                     informationView.alpha = 0.0;
@@ -487,8 +448,7 @@ CGFloat static const kSYChartBarUndefinedCachedHeight = -1.0f;
             xOffset += (_barWidth + (index == array.count - 1 ? 0 : _paddingBar));
         }
         
-        if ([self.delegate respondsToSelector:@selector(barChartView:titleOfBarForSection:)])
-        {
+        if ([self.delegate respondsToSelector:@selector(barChartView:titleOfBarForSection:)]) {
             CGFloat originYBar = (_chartHeight + SYChart_BAR_CHART_TOP_PADDING);
             CGFloat widthBar = (array.count * _barWidth + (array.count - 1) * _paddingBar + _paddingSection);
             CGFloat heightBar = SYChart_BAR_CHART_TEXT_HEIGHT;
@@ -499,8 +459,7 @@ CGFloat static const kSYChartBarUndefinedCachedHeight = -1.0f;
             textLabel.textAlignment = NSTextAlignmentCenter;
             textLabel.font = [UIFont systemFontOfSize:_xFontSize];
             textLabel.numberOfLines = 0;
-            if (_xFontSizeAuto)
-            {
+            if (_xFontSizeAuto) {
                 textLabel.numberOfLines = 1;
                 textLabel.adjustsFontSizeToFitWidth = YES;
             }
@@ -521,8 +480,7 @@ CGFloat static const kSYChartBarUndefinedCachedHeight = -1.0f;
                 
                 [_scrollView.layer addSublayer:xScaleLayer];
                 
-                if (SYChartGridsTypeGridDotted == _gridsType || SYChartGridsTypeGridSolid == _gridsType || SYChartGridsTypeVerticalDotted == _gridsType || SYChartGridsTypeVerticalSolid == _gridsType)
-                {
+                if (SYChartGridsTypeGridDotted == _gridsType || SYChartGridsTypeGridSolid == _gridsType || SYChartGridsTypeVerticalDotted == _gridsType || SYChartGridsTypeVerticalSolid == _gridsType) {
                     UIBezierPath *gridsVerticalBezierPath = [UIBezierPath bezierPath];
                     [gridsVerticalBezierPath moveToPoint:CGPointMake((textLabel.frame.origin.x + CGRectGetWidth(textLabel.frame) / 2), (_chartHeight + SYChart_LINE_CHART_TOP_PADDING + 1 - 3))];
                     [gridsVerticalBezierPath addLineToPoint:CGPointMake((textLabel.frame.origin.x + CGRectGetWidth(textLabel.frame) / 2), (SYChart_LINE_CHART_TOP_PADDING))];
@@ -531,8 +489,7 @@ CGFloat static const kSYChartBarUndefinedCachedHeight = -1.0f;
                     gridsVerticalLayer.strokeColor = _gridsLineColor.CGColor;
                     gridsVerticalLayer.fillColor = _gridsLineColor.CGColor;
                     gridsVerticalLayer.lineWidth = _gridsLineWidth;
-                    if (SYChartGridsTypeGridDotted == _gridsType || SYChartGridsTypeVerticalDotted == _gridsType)
-                    {
+                    if (SYChartGridsTypeGridDotted == _gridsType || SYChartGridsTypeVerticalDotted == _gridsType) {
                         // 虚线类型
                         CGFloat dash[] = {6, 5};
                         [gridsVerticalBezierPath setLineDash:dash count:2 phase:0];
@@ -557,8 +514,7 @@ CGFloat static const kSYChartBarUndefinedCachedHeight = -1.0f;
 
 - (void)barTapClick:(UITapGestureRecognizer *)recognizer
 {
-    if (self.delegate && [self.delegate respondsToSelector:@selector(barChartView:didSelectBarAtIndexPath:)])
-    {
+    if (self.delegate && [self.delegate respondsToSelector:@selector(barChartView:didSelectBarAtIndexPath:)]) {
         UIView *view = recognizer.view;
         NSIndexPath *indexPath = view.indexPath;
         [self.delegate barChartView:self didSelectBarAtIndexPath:indexPath];
@@ -567,8 +523,7 @@ CGFloat static const kSYChartBarUndefinedCachedHeight = -1.0f;
 
 - (void)dotTapClick:(UITapGestureRecognizer *)recognizer
 {
-    if (self.delegate && [self.delegate respondsToSelector:@selector(barChartView:didSelectBarDotViewAtIndexPath:)])
-    {
+    if (self.delegate && [self.delegate respondsToSelector:@selector(barChartView:didSelectBarDotViewAtIndexPath:)]) {
         UIView *view = recognizer.view;
         NSIndexPath *indexPath = view.indexPath;
         [self.delegate barChartView:self didSelectBarDotViewAtIndexPath:indexPath];

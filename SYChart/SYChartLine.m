@@ -662,7 +662,7 @@ static NSInteger const tagTextLabel = 1000;
             animation.repeatCount = 1.0;
             animation.duration = array.count * _animationTime;
             animation.fillMode = kCAFillModeForwards;
-            animation.delegate = self;
+            animation.delegate = (id)self;
             [lineLayer addAnimation:animation forKey:@"animation"];
         }
         
